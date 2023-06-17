@@ -20,6 +20,7 @@ pnpm add -D @ivanmaxlogiudice/eslint-config
 ## Usage
 ```js
 // eslint.config.js
+import { defineFlatConfig } from 'eslint-define-config'
 import { all } from '@ivanmaxlogiudice/eslint-config'
 
 export default defineFlatConfig(all)
