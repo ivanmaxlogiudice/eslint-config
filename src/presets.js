@@ -32,8 +32,8 @@ export const basic = [
 
 /** @type {FlatESLintConfigItem[]} */
 export const all = [
-    ...vue,
     ...basic,
+    ...vue,
 ]
 
 /** @type {(config?: FlatESLintConfigItem | FlatESLintConfigItem[], enables?: Partial<{
