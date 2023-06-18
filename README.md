@@ -29,7 +29,9 @@ export default defineFlatConfig(all)
 ### Custom Config
 
 ```js
+// eslint.config.js
 import { config } from '@ivanmaxlogiudice/eslint-config'
+
 export default config(
   [
     /* your custom config */
