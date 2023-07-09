@@ -114,6 +114,7 @@ export const typescript = [
             'antfu/generic-spacing': 'error',
             'antfu/no-cjs-exports': 'error',
             'antfu/no-ts-export-equal': 'error',
+            'antfu/no-const-enum': 'error',
             
             // off
             'import/named': 'off',
