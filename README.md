@@ -47,6 +47,27 @@ export default config(
 }
 ```
 
+### Lint Staged
+
+If you want to apply lint and auto-fix before every commit, you can add the following to your `package.json`:
+
+```json
+{
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged"
+    },
+    "lint-staged": {
+        "*": "eslint --fix"
+    }
+}
+```
+
+and then
+
+```bash
+pnpm i -D lint-staged simple-git-hooks
+```
+
 ## License
 
 [MIT](./LICENSE) License © 2022-PRESENT [Iván M. Lo Giudice](https://github.com/ivanmaxlogiudice)
