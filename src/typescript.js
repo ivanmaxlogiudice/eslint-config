@@ -120,7 +120,6 @@ export const typescript = [
             'import/named': 'off',
             
             '@typescript-eslint/no-unused-vars': 'off', // handled by unused-imports/no-unused-imports
-            '@typescript-eslint/ban-types': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-non-null-assertion': 'off',
             '@typescript-eslint/explicit-module-boundary-types': 'off',
