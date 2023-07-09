@@ -244,6 +244,7 @@ export const imports = [
                 }],
                 pathGroupsExcludedImportTypes: ['type'],
             }],
+            'import/no-self-import': 'error',
 
             // off
             'import/namespace': 'off',
