@@ -40,6 +40,14 @@ export default config(
 )
 ```
 
+### VSCode
+
+```jsonc
+{
+  "eslint.experimental.useFlatConfig": true
+}
+```
+
 ## License
 
 [MIT](./LICENSE) License © 2022-PRESENT [Iván M. Lo Giudice](https://github.com/ivanmaxlogiudice)
