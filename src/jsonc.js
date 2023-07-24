@@ -96,13 +96,13 @@ export const pkgOrder = [
                 },
                 {
                     pathPattern: '^exports.*$',
-                    order: [
-                        'types',
-                        'require',
-                        'import',
-                    ],
+                    order: ['types', 'require', 'import', 'default'],
                 },
             ],
+            'jsonc/sort-array-values': ['error', {
+                pathPattern: '^files$',
+                order: { type: 'asc' },
+            }],
         },
     },
 ]
