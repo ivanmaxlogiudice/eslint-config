@@ -48,6 +48,7 @@ export const js = [
             }],
             'comma-style': ['error', 'last'],
             'curly': ['error', 'multi-or-nest', 'consistent'],
+            'dot-notation': 'warn',
             'eqeqeq': ['error', 'smart'],
             'func-call-spacing': ['error', 'never'],
             'indent': ['error', 4, {
