@@ -311,7 +311,6 @@ export const unicorn = [
             'unicorn/no-new-array': 'error',
             'unicorn/no-new-buffer': 'error',
             'unicorn/no-unnecessary-await': 'error',
-            'unicorn/no-unsafe-regex': 'off',
             'unicorn/number-literal-case': 'error',
             'unicorn/prefer-add-event-listener': 'error',
             'unicorn/prefer-array-find': 'error',
