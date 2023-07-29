@@ -75,7 +75,7 @@ const vueCustomRules = {
     'vue/comma-style': ['error', 'last'],
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
     'vue/component-options-name-casing': ['error', 'PascalCase'],
-    'vue/component-tags-order': ['error', {
+    'vue/block-order': ['error', {
         order: ['template', 'script', 'style'],
     }],
     'vue/custom-event-name-casing': ['error', 'camelCase'],
