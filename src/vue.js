@@ -135,6 +135,7 @@ const vueCustomRules = {
     'vue/prefer-separate-static-class': 'error',
     'vue/prefer-template': 'error',
     'vue/quote-props': ['error', 'consistent-as-needed'],
+    'vue/require-typed-object-prop': ['error'],
     'vue/space-in-parens': ['error', 'never'],
     'vue/space-infix-ops': 'error',
     'vue/space-unary-ops': ['error', {
