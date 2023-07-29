@@ -130,7 +130,6 @@ export const js = [
             'no-lonely-if': 'error',
             'no-multi-spaces': 'error',
             'no-multi-str': 'error',
-            'no-return-await': 'warn',
             'no-restricted-globals': ['error', 
                 { name: 'global', message: 'Use `globalThis` instead.' }, 
                 { name: 'self', message: 'Use `globalThis` instead.' },
