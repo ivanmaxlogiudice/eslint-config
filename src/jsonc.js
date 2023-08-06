@@ -96,7 +96,7 @@ export const pkgOrder = [
                 },
                 {
                     pathPattern: '^exports.*$',
-                    order: ['types', 'require', 'import', 'default'],
+                    order: ['types', 'import', 'require', 'default'],
                 },
             ],
             'jsonc/sort-array-values': ['error', {
