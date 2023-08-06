@@ -260,7 +260,8 @@ export const imports = [
                 args: 'after-used',
                 argsIgnorePattern: '^_',
             }],
-
+            
+            'antfu/no-import-node-modules-by-path': 'error',
             'antfu/if-newline': 'error',
             'antfu/import-dedupe': 'error',
             'antfu/prefer-inline-type-import': 'error',
