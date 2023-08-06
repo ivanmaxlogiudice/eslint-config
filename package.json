@@ -21,8 +21,8 @@
     "main": "./index.js",
     "module": "./index.js",
     "exports": {
-        "require": "./index.cjs",
-        "import": "./index.js"
+        "import": "./index.js",
+        "require": "./index.cjs"
     },
     "publishConfig": {
         "access": "public"
