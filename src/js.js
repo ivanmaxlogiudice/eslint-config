@@ -272,6 +272,7 @@ export const imports = [
             `**/*config*.${GLOB_SRC_EXT}`,
             `**/views/${GLOB_SRC}`,
             `**/pages/${GLOB_SRC}`,
+            `**/server/${GLOB_SRC}`,
             '**/{index,vite,esbuild,rollup,webpack,rspack}.ts',
             '**/*.d.ts',
             `${GLOB_MARKDOWN}/**`,
