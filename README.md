@@ -35,7 +35,7 @@ export default config(
   [
     /* your custom config */
   ],
-  { vue: true, markdown: true }
+  { vue: true, markdown: true, unocss: true }
 )
 ```
 
