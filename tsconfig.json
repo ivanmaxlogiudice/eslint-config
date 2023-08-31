@@ -4,7 +4,7 @@
         "module": "ESNext",
         "strict": true,
         "esModuleInterop": true,
-        "moduleResolution": "nodenext",
+        "moduleResolution": "Bundler",
         "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
