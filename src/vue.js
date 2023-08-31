@@ -36,7 +36,7 @@ export const reactivityTransform = [
             vue: vuePlugin,
         },
         rules: {
-            'vue/no-setup-props-destructure': 'off',
+            'vue/no-setup-props-reactivity-loss': 'off',
         },
     },
 ]
