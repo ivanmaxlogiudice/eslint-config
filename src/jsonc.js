@@ -95,6 +95,14 @@ export const pkgOrder = [
                     order: { type: 'asc' },
                 },
                 {
+                    pathPattern: '^resolutions$',
+                    order: { type: 'asc' },
+                },
+                {
+                    pathPattern: '^pnpm.overrides$',
+                    order: { type: 'asc' },
+                },
+                {
                     pathPattern: '^exports.*$',
                     order: ['types', 'import', 'require', 'default'],
                 },
