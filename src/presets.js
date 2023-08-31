@@ -4,6 +4,7 @@ import { eslintComments } from './eslint-comments.js'
 import { imports, js, jsx, unicorn } from './js.js'
 import { jsonc, pkgOrder } from './jsonc.js'
 import { typescript } from './typescript.js'
+import { unocss } from './unocss.js'
 import { markdown } from './markdown.js'
 import { yml } from './yml.js'
 import { vue } from './vue.js'
@@ -34,17 +35,20 @@ export const basic = [
 export const all = [
     ...basic,
     ...vue,
+    ...unocss,
 ]
 
 /** @type {(config?: FlatESLintConfigItem | FlatESLintConfigItem[], enables?: Partial<{
  * vue: boolean
  * markdown: boolean
+ * unocss: boolean
  * }>) => FlatESLintConfigItem[]} */
 export function config(
     config = [],
     {
         vue: enableVue = true,
         markdown: enableMarkdown = true,
+        unocss: enableUnocss = false,
     } = {},
 ) {
     const configs = [...basic]
@@ -54,6 +58,9 @@ export function config(
   
     if (enableMarkdown !== false) 
         configs.push(...markdown)
+
+    if (enableUnocss !== false)
+        configs.push(...unocss)
   
     if (Object.keys(config).length > 0) 
         configs.push(...(Array.isArray(config) ? config : [config]))
