@@ -5,4 +5,5 @@ export default defineConfig({
     format: ['cjs'],
     outDir: '.',
     target: 'esnext',
+    minify: true,
 })
