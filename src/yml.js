@@ -14,7 +14,7 @@ export const yml = [
         },
         rules: {
             ...configs.standard.rules,
-            
+
             'yml/no-empty-document': 'off',
             'yml/no-empty-mapping-value': 'off',
             'yml/quotes': ['error', {

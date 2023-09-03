@@ -15,10 +15,10 @@
         "noImplicitThis": true,
         "allowSyntheticDefaultImports": true,
         "allowJs": true,
-      
+
         "lib": ["ESNext"],
         "types": ["node"],
-      
+
         "declaration": true,
         "emitDeclarationOnly": true
     },

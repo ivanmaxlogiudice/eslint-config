@@ -20,7 +20,7 @@ export const typescript = [
         rules: {
             ...tsPlugin.configs['eslint-recommended'].overrides[0].rules,
             ...tsPlugin.configs.strict.rules,
-            
+
             '@typescript-eslint/ban-ts-comment': ['error', {
                 'ts-ignore': 'allow-with-description',
             }],
@@ -29,8 +29,8 @@ export const typescript = [
                 fixStyle: 'inline-type-imports',
             }],
             '@typescript-eslint/prefer-as-const': 'warn',
-            '@typescript-eslint/member-delimiter-style': ['error', { 
-                multiline: { delimiter: 'none' }, 
+            '@typescript-eslint/member-delimiter-style': ['error', {
+                multiline: { delimiter: 'none' },
             }],
             '@typescript-eslint/type-annotation-spacing': 'error',
             '@typescript-eslint/no-require-imports': 'error',
@@ -56,8 +56,8 @@ export const typescript = [
             }],
 
             'brace-style': 'off',
-            '@typescript-eslint/brace-style': ['error', 'stroustrup', { 
-                allowSingleLine: true, 
+            '@typescript-eslint/brace-style': ['error', 'stroustrup', {
+                allowSingleLine: true,
             }],
 
             'comma-dangle': 'off',
@@ -88,15 +88,15 @@ export const typescript = [
             '@typescript-eslint/space-infix-ops': 'error',
 
             'keyword-spacing': 'off',
-            '@typescript-eslint/keyword-spacing': ['error', { 
-                before: true, 
-                after: true, 
+            '@typescript-eslint/keyword-spacing': ['error', {
+                before: true,
+                after: true,
             }],
 
             'comma-spacing': 'off',
-            '@typescript-eslint/comma-spacing': ['error', { 
-                before: false, 
-                after: true, 
+            '@typescript-eslint/comma-spacing': ['error', {
+                before: false,
+                after: true,
             }],
 
             'no-extra-parens': 'off',
@@ -106,8 +106,8 @@ export const typescript = [
             '@typescript-eslint/no-loss-of-precision': 'error',
 
             'lines-between-class-members': 'off',
-            '@typescript-eslint/lines-between-class-members': ['error', 'always', { 
-                exceptAfterSingleLine: true, 
+            '@typescript-eslint/lines-between-class-members': ['error', 'always', {
+                exceptAfterSingleLine: true,
             }],
 
             // antfu
@@ -116,10 +116,10 @@ export const typescript = [
             'antfu/no-ts-export-equal': 'error',
             'antfu/no-const-enum': 'error',
             'antfu/named-tuple-spacing': 'error',
-            
+
             // off
             'import/named': 'off',
-            
+
             '@typescript-eslint/no-unused-vars': 'off', // handled by unused-imports/no-unused-imports
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-non-null-assertion': 'off',

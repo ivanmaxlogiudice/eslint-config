@@ -19,23 +19,23 @@ export const jsonc = [
             'jsonc/comma-dangle': 'error',
             'jsonc/comma-style': ['error', 'last'],
             'jsonc/indent': ['error', 4],
-            'jsonc/key-spacing': ['error', { 
-                beforeColon: false, 
-                afterColon: true, 
+            'jsonc/key-spacing': ['error', {
+                beforeColon: false,
+                afterColon: true,
             }],
             'jsonc/no-octal-escape': 'error',
-            'jsonc/object-curly-newline': ['error', { 
-                multiline: true, 
-                consistent: true, 
+            'jsonc/object-curly-newline': ['error', {
+                multiline: true,
+                consistent: true,
             }],
             'jsonc/object-curly-spacing': ['error', 'always'],
-            'jsonc/object-property-newline': ['error', { 
-                allowMultiplePropertiesPerLine: true, 
+            'jsonc/object-property-newline': ['error', {
+                allowMultiplePropertiesPerLine: true,
             }],
         },
     },
 ]
-  
+
 /** @type {import('eslint-define-config').FlatESLintConfigItem[]} */
 export const pkgOrder = [
     {

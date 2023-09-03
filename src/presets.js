@@ -52,19 +52,18 @@ export function config(
     } = {},
 ) {
     const configs = [...basic]
-    
-    if (enableVue !== false) 
+
+    if (enableVue !== false)
         configs.push(...vue)
-  
-    if (enableMarkdown !== false) 
+
+    if (enableMarkdown !== false)
         configs.push(...markdown)
 
     if (enableUnocss !== false)
         configs.push(...unocss)
-  
-    if (Object.keys(config).length > 0) 
+
+    if (Object.keys(config).length > 0)
         configs.push(...(Array.isArray(config) ? config : [config]))
-  
 
     return configs
 }

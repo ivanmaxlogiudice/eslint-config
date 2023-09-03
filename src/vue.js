@@ -10,10 +10,10 @@ export { vueParser, vuePlugin }
 
 export function getVueVersion() {
     const pkg = getPackageInfoSync('vue', { paths: [process.cwd()] })
-    
-    if (pkg && typeof pkg.version === 'string' && !Number.isNaN(+pkg.version[0])) 
+
+    if (pkg && typeof pkg.version === 'string' && !Number.isNaN(+pkg.version[0]))
         return +pkg.version[0]
-  
+
     return 3
 }
 const isVue3 = getVueVersion() === 3
