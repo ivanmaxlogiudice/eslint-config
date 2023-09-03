@@ -391,7 +391,7 @@ export const imports = [
             },
         },
         rules: {
-            'import/export': 'error',
+            // 'import/export': 'error',
             'import/first': 'error',
             'import/newline-after-import': ['error', {
                 considerComments: true,
