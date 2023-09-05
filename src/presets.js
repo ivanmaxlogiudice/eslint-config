@@ -5,9 +5,10 @@ import { imports, js, jsx, unicorn } from './js.js'
 import { jsonc, pkgOrder } from './jsonc.js'
 import { typescript } from './typescript.js'
 import { unocss } from './unocss.js'
-import { markdown } from './markdown.js'
 import { yml } from './yml.js'
 import { vue } from './vue.js'
+
+// import { markdown } from './markdown.js'
 
 import { GLOB_EXCLUDE } from './shared.js'
 
@@ -47,7 +48,7 @@ export function config(
     config = [],
     {
         vue: enableVue = true,
-        markdown: enableMarkdown = true,
+        // markdown: enableMarkdown = true,
         unocss: enableUnocss = false,
     } = {},
 ) {
@@ -56,8 +57,8 @@ export function config(
     if (enableVue !== false)
         configs.push(...vue)
 
-    if (enableMarkdown !== false)
-        configs.push(...markdown)
+    // if (enableMarkdown !== false)
+    //     configs.push(...markdown)
 
     if (enableUnocss !== false)
         configs.push(...unocss)

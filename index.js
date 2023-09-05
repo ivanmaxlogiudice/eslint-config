@@ -1,7 +1,7 @@
 export * from './src/eslint-comments.js'
 export * from './src/js.js'
 export * from './src/jsonc.js'
-export * from './src/markdown.js'
+// export * from './src/markdown.js'
 export * from './src/presets.js'
 export * from './src/shared.js'
 export * from './src/typescript.js'
