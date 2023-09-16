@@ -2,7 +2,7 @@
 
 import { eslintComments } from './eslint-comments.js'
 import { imports, js, jsx, unicorn } from './js.js'
-import { jsonc, pkgOrder } from './jsonc.js'
+import { jsonc, pkgOrder, tsconfigOrder } from './jsonc.js'
 import { typescript } from './typescript.js'
 import { unocss } from './unocss.js'
 import { yml } from './yml.js'
@@ -28,6 +28,7 @@ export const basic = [
     ...unicorn,
     ...jsonc,
     ...pkgOrder,
+    ...tsconfigOrder,
     ...yml,
     ...eslintComments,
 ]
