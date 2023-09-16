@@ -1,26 +1,26 @@
 {
     "compilerOptions": {
         "target": "ESNext",
-        "module": "ESNext",
-        "strict": true,
-        "esModuleInterop": true,
-        "moduleResolution": "Bundler",
-        "resolveJsonModule": true,
-        "forceConsistentCasingInFileNames": true,
-        "skipLibCheck": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitAny": false,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "allowSyntheticDefaultImports": true,
-        "allowJs": true,
 
         "lib": ["ESNext"],
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
         "types": ["node"],
+        "resolveJsonModule": true,
+        "allowJs": true,
 
         "declaration": true,
-        "emitDeclarationOnly": true
+        "emitDeclarationOnly": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "noImplicitReturns": true
     },
     "include": ["*.js", "src"]
 }
