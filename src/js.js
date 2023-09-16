@@ -353,7 +353,7 @@ export const js = [
     },
     {
         plugins: {
-            noOnlyTest: noOnlyTestsPlugin,
+            'no-only-tests': noOnlyTestsPlugin,
         },
         files: ['**/*.{test,spec}.{js?(x),ts}'],
         rules: {
