@@ -24,6 +24,10 @@ export const typescript = [
             '@typescript-eslint/ban-ts-comment': ['error', {
                 'ts-ignore': 'allow-with-description',
             }],
+            '@typescript-eslint/consistent-type-assertions': ['error', {
+                assertionStyle: 'as',
+                objectLiteralTypeAssertions: 'allow-as-parameter',
+            }],
             '@typescript-eslint/consistent-type-imports': ['error', {
                 disallowTypeAnnotations: false,
                 fixStyle: 'inline-type-imports',
