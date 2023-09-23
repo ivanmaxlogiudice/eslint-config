@@ -5,22 +5,16 @@
         "lib": ["ESNext"],
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        "types": ["node"],
-        "resolveJsonModule": true,
-        "allowJs": true,
 
-        "declaration": true,
-        "emitDeclarationOnly": true,
-        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "noImplicitAny": false,
-        "noImplicitThis": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "skipLibCheck": true,
-        "noImplicitReturns": true
+        "skipLibCheck": true
     },
-    "include": ["*.js", "src"]
+    "include": [
+        "**/*.ts"
+    ],
+    "exclude": [
+        "./fixtures/**/*.*"
+    ]
 }

@@ -1,9 +1,20 @@
-import { defineFlatConfig } from 'eslint-define-config'
-import { all } from './index.js'
+import sortKeys from 'eslint-plugin-sort-keys'
+import config from '@ivanmaxlogiudice/eslint-config'
 
-export default defineFlatConfig([
-    ...all,
+export default config(
     {
-        ignores: ['index.cjs'],
+        ignores: [
+            'fixtures',
+            '_fixtures',
+        ],
     },
-])
+    {
+        files: ['src/**/*.ts'],
+        plugins: {
+            'sort-keys': sortKeys,
+        },
+        rules: {
+            'sort-keys/sort-keys-fix': 'error',
+        },
+    },
+)
