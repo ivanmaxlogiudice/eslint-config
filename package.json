@@ -4,6 +4,9 @@
     "packageManager": "pnpm@8.7.5",
     "description": "Personal ESLint config",
     "type": "module",
+    "keywords": [
+        "eslint-config"
+    ],
     "license": "MIT",
     "homepage": "https://github.com/ivanmaxlogiudice/eslint-config#readme",
     "bugs": {
@@ -14,38 +17,47 @@
         "url": "git+https://github.com/ivanmaxlogiudice/eslint-config.git"
     },
     "files": [
-        "index.cjs",
-        "index.js",
-        "src"
+        "dist"
     ],
-    "main": "./index.js",
-    "module": "./index.js",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
-        "import": "./index.js",
-        "require": "./index.cjs"
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
     },
     "publishConfig": {
         "access": "public"
     },
     "scripts": {
-        "build": "tsup",
-        "lint": "eslint . --fix",
+        "build": "tsup src/index.ts --format esm,cjs --clean --dts",
+        "stub": "tsup src/index.ts --format esm",
+        "lint": "pnpm run stub && eslint .",
+        "lint:fix": "pnpm run lint --fix",
         "release": "bumpp && pnpm publish",
-        "prepublishOnly": "pnpm run build"
+        "prepublishOnly": "pnpm run build",
+        "test": "vitest",
+        "prepare": "simple-git-hooks",
+        "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
-        "eslint": "^8.0.0"
+        "eslint": ">=8.0.0"
     },
     "dependencies": {
-        "@eslint/js": "^8.49.0",
-        "@typescript-eslint/eslint-plugin": "^6.7.0",
-        "@typescript-eslint/parser": "^6.7.0",
-        "@unocss/eslint-plugin": "^0.55.7",
+        "@eslint/js": "^8.50.0",
+        "@stylistic/eslint-plugin": "^0.0.5",
+        "@typescript-eslint/eslint-plugin": "^6.7.3",
+        "@typescript-eslint/parser": "^6.7.3",
+        "@unocss/eslint-plugin": "^0.56.4",
+        "eslint-config-flat-gitignore": "^0.1.0",
         "eslint-define-config": "^1.23.0",
-        "eslint-plugin-antfu": "^0.42.0",
+        "eslint-plugin-antfu": "^1.0.0-beta.7",
         "eslint-plugin-eslint-comments": "^3.2.0",
-        "eslint-plugin-import": "^2.28.1",
+        "eslint-plugin-i": "^2.28.1",
+        "eslint-plugin-jsdoc": "^46.8.2",
         "eslint-plugin-jsonc": "^2.9.0",
+        "eslint-plugin-markdown": "^3.0.1",
         "eslint-plugin-n": "^16.1.0",
         "eslint-plugin-no-only-tests": "^3.1.0",
         "eslint-plugin-promise": "^6.1.1",
@@ -53,20 +65,35 @@
         "eslint-plugin-unused-imports": "^3.0.0",
         "eslint-plugin-vue": "^9.17.0",
         "eslint-plugin-yml": "^1.9.0",
-        "globals": "^13.21.0",
+        "globals": "^13.22.0",
         "jsonc-eslint-parser": "^2.3.0",
         "local-pkg": "^0.4.3",
         "vue-eslint-parser": "^9.3.1",
         "yaml-eslint-parser": "^1.2.2"
     },
     "devDependencies": {
-        "@types/node": "^20.6.2",
+        "@ivanmaxlogiudice/eslint-config": "workspace:*",
+        "@types/fs-extra": "^11.0.2",
+        "@types/node": "^20.7.1",
         "bumpp": "^9.2.0",
-        "eslint": "^8.49.0",
+        "eslint": "^8.50.0",
+        "eslint-plugin-sort-keys": "^2.3.5",
+        "execa": "^8.0.1",
+        "fast-glob": "^3.3.1",
+        "fs-extra": "^11.1.1",
+        "lint-staged": "^14.0.1",
+        "simple-git-hooks": "^2.9.0",
         "tsup": "^7.2.0",
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "vitest": "^0.34.5"
     },
     "engines": {
         "node": ">=16.14.0"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged"
+    },
+    "lint-staged": {
+        "*": "eslint --fix"
     }
 }

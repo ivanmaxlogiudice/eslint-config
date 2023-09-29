@@ -1,5 +1,3 @@
-// @ts-check
-
 export const GLOB_SRC_EXT = '?([cm])[jt]s?(x)'
 export const GLOB_SRC = '**/*.?([cm])[jt]s?(x)'
 
@@ -23,7 +21,15 @@ export const GLOB_VUE = '**/*.vue'
 export const GLOB_YAML = '**/*.y?(a)ml'
 export const GLOB_HTML = '**/*.htm?(l)'
 
-export const GLOB_ALL_SRC = /** @type {const} */ ([
+export const GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`
+
+export const GLOB_TESTS = [
+    `**/__tests__/**/*.${GLOB_SRC_EXT}`,
+    `**/*.spec.${GLOB_SRC_EXT}`,
+    `**/*.test.${GLOB_SRC_EXT}`,
+]
+
+export const GLOB_ALL_SRC = [
     GLOB_SRC,
     GLOB_STYLE,
     GLOB_JSON,
@@ -32,16 +38,17 @@ export const GLOB_ALL_SRC = /** @type {const} */ ([
     GLOB_VUE,
     GLOB_YAML,
     GLOB_HTML,
-])
+]
 
-export const GLOB_NODE_MODULES = /** @type {const} */ ('**/node_modules')
-export const GLOB_DIST = /** @type {const} */ ('**/dist')
-export const GLOB_LOCKFILE = /** @type {const} */ ([
+export const GLOB_NODE_MODULES = '**/node_modules' as const
+export const GLOB_DIST = '**/dist' as const
+export const GLOB_LOCKFILE = [
     '**/package-lock.json',
     '**/yarn.lock',
     '**/pnpm-lock.yaml',
-])
-export const GLOB_EXCLUDE = /** @type {const} */ ([
+]
+
+export const GLOB_EXCLUDE = [
     GLOB_NODE_MODULES,
     GLOB_DIST,
     ...GLOB_LOCKFILE,
@@ -64,4 +71,4 @@ export const GLOB_EXCLUDE = /** @type {const} */ ([
     '**/__snapshots__',
     '**/auto-import?(s).d.ts',
     '**/components.d.ts',
-])
+]
