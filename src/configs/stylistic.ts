@@ -16,6 +16,7 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
             rules: {
                 'antfu/consistent-list-newline': 'error',
                 'antfu/if-newline': 'error',
+                'antfu/top-level-function': 'error',
 
                 'curly': ['error', 'multi-or-nest', 'consistent'],
 
@@ -37,7 +38,9 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                 'style/computed-property-spacing': ['error', 'never', {
                     enforceForClassMembers: true,
                 }],
+
                 'style/dot-location': ['error', 'property'],
+                'style/eol-last': 'error',
                 'style/func-call-spacing': ['error', 'never'],
                 'style/indent': ['error', 4, {
                     ArrayExpression: 1,
@@ -88,12 +91,26 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                 'style/lines-between-class-members': ['error', 'always', {
                     exceptAfterSingleLine: true,
                 }],
+                'style/max-statements-per-line': ['error', {
+                    max: 1,
+                }],
                 'style/member-delimiter-style': ['error', {
                     multiline: {
                         delimiter: 'none',
                     },
                 }],
                 'style/multiline-ternary': ['error', 'always-multiline'],
+                'style/new-parens': 'error',
+                'style/no-extra-parens': ['error', 'functions'],
+                'style/no-floating-decimal': 'error',
+                'style/no-mixed-operators': ['error', {
+                    allowSamePrecedence: true,
+                    groups: [
+                        ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+                        ['&&', '||'],
+                        ['in', 'instanceof'],
+                    ],
+                }],
                 'style/no-mixed-spaces-and-tabs': 'error',
                 'style/no-multi-spaces': 'error',
                 'style/no-multiple-empty-lines': ['error', {
@@ -118,6 +135,7 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                     classes: 'never',
                     switches: 'never',
                 }],
+                'style/quote-props': ['error', 'consistent-as-needed'],
                 'style/quotes': ['error', 'single', {
                     allowTemplateLiterals: true,
                     avoidEscape: true,
@@ -154,6 +172,9 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                 'style/template-curly-spacing': 'error',
                 'style/template-tag-spacing': ['error', 'never'],
                 'style/type-annotation-spacing': 'error',
+                'style/wrap-iife': ['error', 'any', {
+                    functionPrototypeMethods: true,
+                }],
                 'style/yield-star-spacing': ['error', 'both'],
 
                 ...overrides,

@@ -1,5 +1,6 @@
 import sortKeys from 'eslint-plugin-sort-keys'
-import config from '@ivanmaxlogiudice/eslint-config'
+import styleMigrate from '@stylistic/eslint-plugin-migrate'
+import config from './dist/index.js'
 
 export default config(
     {
@@ -15,6 +16,17 @@ export default config(
         },
         rules: {
             'sort-keys/sort-keys-fix': 'error',
+        },
+    },
+    {
+        files: ['src/configs/*.ts'],
+        plugins: {
+            'style-migrate': styleMigrate,
+        },
+        rules: {
+            'style-migrate/migrate': ['error', {
+                namespaceTo: 'style',
+            }],
         },
     },
 )

@@ -81,7 +81,6 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'antfu/no-ts-export-equal': 'error',
 
                 'no-dupe-class-members': 'off',
-                'no-extra-parens': 'off',
                 'no-invalid-this': 'off',
                 'no-loss-of-precision': 'off',
                 'no-redeclare': 'off',
@@ -104,7 +103,6 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 }],
                 'ts/no-dupe-class-members': 'error',
                 'ts/no-explicit-any': 'off',
-                'ts/no-extra-parens': ['error', 'functions'],
                 'ts/no-extraneous-class': 'off',
                 'ts/no-invalid-this': 'error',
                 'ts/no-loss-of-precision': 'error',
