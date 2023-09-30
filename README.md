@@ -143,7 +143,7 @@ export default config({
 })
 ```
 
-The `config` factory functions also accepts arbitrary numbers of constom configs overrides:
+The `config` factory function also accepts any number of arbitrary custom config overrides:
 
 ```js
 // eslint.config.js
@@ -166,7 +166,7 @@ export default config(
 )
 ```
 
-Going more advanced, you can also import the very fine-grained configs and compose them as you wish:
+Going more advanced, you can also import fine-grained configs and compose them as you wish:
 
 ```js
 // eslint.config.js
@@ -225,7 +225,7 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `ts/*` | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
 | `style/*` | `@stylistic/*` | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) |
 
-When you want to overrides rules, or disable them inline, you need to update to the new prefix:
+When you want to override rules, or disable them inline, you need to update to the new prefix:
 
 ```diff
 -// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
