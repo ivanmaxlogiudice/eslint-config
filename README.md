@@ -25,11 +25,22 @@ pnpm i -D @ivanmaxlogiudice/eslint-config
 
 ### Create config file
 
+With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package.json` (recommended):
+
 ```js
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config()
+```
+
+With CJS:
+
+```js
+// eslint.config.js
+const config = require('@ivanmaxlogiudice/eslint-config').default
+
+module.exports = config()
 ```
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
