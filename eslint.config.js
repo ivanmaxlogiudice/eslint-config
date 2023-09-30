@@ -4,6 +4,8 @@ import config from './dist/index.js'
 
 export default config(
     {
+        vue: true,
+        typescript: true,
         ignores: [
             'fixtures',
             '_fixtures',
