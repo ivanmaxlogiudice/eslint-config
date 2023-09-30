@@ -105,6 +105,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'ts/no-dupe-class-members': 'error',
                 'ts/no-explicit-any': 'off',
                 'ts/no-extra-parens': ['error', 'functions'],
+                'ts/no-extraneous-class': 'off',
                 'ts/no-invalid-this': 'error',
                 'ts/no-loss-of-precision': 'error',
                 'ts/no-non-null-assertion': 'off',
@@ -116,7 +117,9 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                     functions: false,
                     variables: true,
                 }],
+                'ts/no-useless-constructor': 'off',
                 'ts/triple-slash-reference': 'off',
+                'ts/unified-signatures': 'off',
 
                 ...tsconfigPath ? typeAwareRules : {},
                 ...overrides,

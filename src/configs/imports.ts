@@ -22,7 +22,6 @@ export function imports(options: OptionsStylistic & OptionsOverrides = {}): Flat
                 'antfu/no-import-node-modules-by-path': 'error',
                 'antfu/prefer-inline-type-import': 'error',
 
-                'import/export': 'error',
                 'import/first': 'error',
                 'import/no-default-export': 'error',
                 'import/no-duplicates': 'error',
