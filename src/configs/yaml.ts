@@ -1,7 +1,6 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { GLOB_YAML } from '../globs'
 import { parserYaml, pluginYaml } from '../plugins'
-import { type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
 
 export function yaml(options: OptionsOverrides & OptionsStylistic = {}): FlatESLintConfigItem[] {
     const {
@@ -11,8 +10,9 @@ export function yaml(options: OptionsOverrides & OptionsStylistic = {}): FlatESL
 
     return [
         {
+            name: 'config:yaml:setup',
             plugins: {
-                yaml: pluginYaml,
+                yaml: pluginYaml as any,
             },
         },
         {
@@ -20,6 +20,7 @@ export function yaml(options: OptionsOverrides & OptionsStylistic = {}): FlatESL
             languageOptions: {
                 parser: parserYaml,
             },
+            name: 'config:yaml:rules',
             rules: {
                 'style/spaced-comment': 'off',
 

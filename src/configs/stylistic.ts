@@ -1,6 +1,5 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginAntfu, pluginStylistic } from '../plugins'
-import { type OptionsOverrides } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
 
 export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -9,6 +8,7 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
 
     return [
         {
+            name: 'config:stylistic',
             plugins: {
                 antfu: pluginAntfu,
                 style: pluginStylistic,

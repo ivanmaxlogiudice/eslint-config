@@ -1,6 +1,5 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginUnocss } from '../plugins'
-import { type OptionsOverrides } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
 
 export function unocss(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -9,8 +8,9 @@ export function unocss(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
 
     return [
         {
+            name: 'config:unocss',
             plugins: {
-                '@unocss': pluginUnocss,
+                '@unocss': pluginUnocss as any,
             },
             rules: {
                 ...pluginUnocss.configs.recommended.rules,

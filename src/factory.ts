@@ -2,7 +2,6 @@ import process from 'node:process'
 import fs from 'node:fs'
 import { isPackageExists } from 'local-pkg'
 import gitignore from 'eslint-config-flat-gitignore'
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import {
     comments,
     ignores,
@@ -23,7 +22,7 @@ import {
     yaml,
 } from './configs'
 import { combine } from './utils'
-import { type OptionsConfig } from './types'
+import { type FlatESLintConfigItem, type OptionsConfig } from './types'
 
 const flatConfigProps: (keyof FlatESLintConfigItem)[] = [
     'files',

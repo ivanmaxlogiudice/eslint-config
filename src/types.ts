@@ -1,6 +1,18 @@
 import { type FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import { type FlatESLintConfigItem } from 'eslint-define-config'
+import { type FlatESLintConfigItem as BaseFlatESLintConfigItem } from 'eslint-define-config'
 import { type ParserOptions } from '@typescript-eslint/parser'
+
+/**
+ * Flat ESLint Configuration.
+ *
+ * @see [Configuration Files (New)](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new)
+ */
+export interface FlatESLintConfigItem extends BaseFlatESLintConfigItem {
+    /**
+     * The name of the configuration object.
+     */
+    name?: string
+}
 
 export interface OptionsComponentExts {
     /**

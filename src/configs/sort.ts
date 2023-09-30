@@ -1,4 +1,4 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
+import { type FlatESLintConfigItem } from '../types'
 
 /**
  * Sort package.json
@@ -9,6 +9,7 @@ export function sortPackageJson(): FlatESLintConfigItem[] {
     return [
         {
             files: ['**/package.json'],
+            name: 'config:sort-package-json',
             rules: {
                 'jsonc/sort-array-values': ['error', {
                     order: { type: 'asc' },
@@ -99,6 +100,7 @@ export function sortTsconfig(): FlatESLintConfigItem[] {
     return [
         {
             files: ['**/tsconfig.json', '**/tsconfig.*.json'],
+            name: 'config:sort-tsconfig',
             rules: {
                 'jsonc/sort-keys': [
                     'error',

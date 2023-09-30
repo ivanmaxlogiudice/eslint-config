@@ -1,6 +1,5 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginJsdoc } from '../plugins'
-import { type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
 
 export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -10,6 +9,7 @@ export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): FlatES
 
     return [
         {
+            name: 'config:jsdoc',
             plugins: {
                 jsdoc: pluginJsdoc,
             },

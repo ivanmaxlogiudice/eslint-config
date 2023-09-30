@@ -1,7 +1,6 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginAntfu, pluginImport } from '../plugins'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import { type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
 
 export function imports(options: OptionsStylistic & OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -11,12 +10,11 @@ export function imports(options: OptionsStylistic & OptionsOverrides = {}): Flat
 
     return [
         {
+            name: 'config:imports',
             plugins: {
                 antfu: pluginAntfu,
                 import: pluginImport,
             },
-        },
-        {
             rules: {
                 'antfu/import-dedupe': 'error',
                 'antfu/no-import-node-modules-by-path': 'error',

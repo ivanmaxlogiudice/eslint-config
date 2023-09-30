@@ -1,8 +1,7 @@
 import globals from 'globals'
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginAntfu, pluginPromise, pluginUnusedImports } from '../plugins'
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import { type OptionsIsInEditor, type OptionsOverrides } from '../types'
+import { type FlatESLintConfigItem, type OptionsIsInEditor, type OptionsOverrides } from '../types'
 
 export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -31,6 +30,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 },
                 sourceType: 'module',
             },
+            name: 'config:javascript',
             plugins: {
                 'antfu': pluginAntfu,
                 'promise': pluginPromise,

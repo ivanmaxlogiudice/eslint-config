@@ -33,6 +33,8 @@
     "scripts": {
         "build": "tsup src/index.ts --format esm,cjs --clean --dts",
         "stub": "tsup src/index.ts --format esm",
+        "dev": "tsup src/index.ts --format esm,cjs --watch",
+        "config-view": "eslint-flat-config-viewer",
         "lint": "pnpm run stub && eslint .",
         "lint:fix": "pnpm run lint --fix",
         "release": "bumpp && pnpm publish",
@@ -80,6 +82,7 @@
         "@types/node": "^20.8.0",
         "bumpp": "^9.2.0",
         "eslint": "^8.50.0",
+        "eslint-flat-config-viewer": "^0.0.8",
         "eslint-plugin-sort-keys": "^2.3.5",
         "execa": "^8.0.1",
         "fast-glob": "^3.3.1",

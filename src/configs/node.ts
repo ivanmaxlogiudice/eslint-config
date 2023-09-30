@@ -1,6 +1,5 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginNode } from '../plugins'
-import { type OptionsOverrides } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
 
 export function node(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -9,6 +8,7 @@ export function node(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
 
     return [
         {
+            name: 'config:node',
             plugins: {
                 node: pluginNode,
             },

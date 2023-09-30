@@ -1,6 +1,6 @@
-import { type FlatESLintConfigItem, type Rules } from 'eslint-define-config'
+import { type Rules } from 'eslint-define-config'
 import { parserJsonc, pluginJsonc } from '../plugins'
-import { type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
 
 export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): FlatESLintConfigItem[] {
@@ -11,8 +11,9 @@ export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): FlatES
 
     return [
         {
+            name: 'config:jsonc:setup',
             plugins: {
-                jsonc: pluginJsonc,
+                jsonc: pluginJsonc as any,
             },
         },
         {
@@ -20,6 +21,7 @@ export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): FlatES
             languageOptions: {
                 parser: parserJsonc,
             },
+            name: 'config:jsonc:rules',
             rules: {
                 ...(pluginJsonc.configs['recommended-with-jsonc'].rules as Rules),
 

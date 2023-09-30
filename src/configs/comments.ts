@@ -1,6 +1,5 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginComments } from '../plugins'
-import { type OptionsOverrides } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
 
 export function comments(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -9,6 +8,7 @@ export function comments(options: OptionsOverrides = {}): FlatESLintConfigItem[]
 
     return [
         {
+            name: 'config:eslint-comments',
             plugins: {
                 'eslint-comments': pluginComments,
             },

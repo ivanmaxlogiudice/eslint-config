@@ -1,6 +1,5 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginUnicorn } from '../plugins'
-import { type OptionsOverrides } from '../types'
+import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
 
 export function unicorn(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
     const {
@@ -9,6 +8,7 @@ export function unicorn(options: OptionsOverrides = {}): FlatESLintConfigItem[] 
 
     return [
         {
+            name: 'config:unicorn',
             plugins: {
                 unicorn: pluginUnicorn,
             },

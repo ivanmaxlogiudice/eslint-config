@@ -1,9 +1,8 @@
 import process from 'node:process'
-import { type FlatESLintConfigItem } from 'eslint-define-config'
 import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import { renameRules } from '../utils'
-import { type OptionsComponentExts, type OptionsOverrides, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes } from '../types'
+import { type FlatESLintConfigItem, type OptionsComponentExts, type OptionsOverrides, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes } from '../types'
 
 export function typescript(options: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {}): FlatESLintConfigItem[] {
     const {
@@ -37,10 +36,11 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
 
     return [
         {
+            name: 'config:typescript:setup',
             plugins: {
                 antfu: pluginAntfu,
                 import: pluginImport,
-                ts: pluginTs,
+                ts: pluginTs as any,
             },
         },
         {
@@ -61,6 +61,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                     ...parserOptions as any,
                 },
             },
+            name: 'config:typescript:rules',
             rules: {
                 ...renameRules(
                     pluginTs.configs['eslint-recommended'].overrides![0].rules!,
