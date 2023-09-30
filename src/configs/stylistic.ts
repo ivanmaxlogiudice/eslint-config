@@ -118,7 +118,10 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                     classes: 'never',
                     switches: 'never',
                 }],
-                'style/quotes': ['error', 'single'],
+                'style/quotes': ['error', 'single', {
+                    allowTemplateLiterals: true,
+                    avoidEscape: true,
+                }],
                 'style/rest-spread-spacing': ['error', 'never'],
                 'style/semi': ['error', 'never'],
                 'style/semi-spacing': ['error', {
