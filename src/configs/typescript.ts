@@ -1,6 +1,6 @@
 import process from 'node:process'
 import { type FlatESLintConfigItem } from 'eslint-define-config'
-import { GLOB_TS, GLOB_TSX } from '../globs'
+import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import { renameRules } from '../utils'
 import { type OptionsComponentExts, type OptionsOverrides, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes } from '../types'
@@ -45,8 +45,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
         },
         {
             files: [
-                GLOB_TS,
-                GLOB_TSX,
+                GLOB_SRC,
                 ...componentExts.map(ext => `**/*.${ext}`),
             ],
             languageOptions: {
