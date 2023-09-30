@@ -20,6 +20,7 @@ export { default as pluginYaml } from 'eslint-plugin-yml'
 export { default as pluginNoOnlyTests } from 'eslint-plugin-no-only-tests'
 export { default as pluginUnocss } from '@unocss/eslint-plugin'
 export { default as pluginPromise } from 'eslint-plugin-promise'
+export { default as pluginVitest } from 'eslint-plugin-vitest'
 
 /**
  * Parsers
