@@ -90,6 +90,9 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'ts/ban-ts-comment': ['error', {
                     'ts-ignore': 'allow-with-description',
                 }],
+                'ts/ban-types': ['error', {
+                    types: { Function: false },
+                }],
                 'ts/consistent-type-assertions': ['error', {
                     assertionStyle: 'as',
                     objectLiteralTypeAssertions: 'allow-as-parameter',
