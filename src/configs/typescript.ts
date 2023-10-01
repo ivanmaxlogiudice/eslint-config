@@ -125,6 +125,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
         },
         {
             files: ['**/*.d.ts'],
+            name: 'config:typescript:dts-overrides',
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
@@ -133,12 +134,14 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
         },
         {
             files: ['**/*.{test,spec}.ts?(x)'],
+            name: 'config:typescript:tests-overrides',
             rules: {
                 'no-unused-expressions': 'off',
             },
         },
         {
             files: ['**/*.js', '**/*.cjs'],
+            name: 'config:typescript:javascript-overrides',
             rules: {
                 'ts/no-require-imports': 'off',
                 'ts/no-var-requires': 'off',
