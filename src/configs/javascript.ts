@@ -138,6 +138,8 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                     'DebuggerStatement',
                     'LabeledStatement',
                     'WithStatement',
+                    'TSEnumDeclaration[const=true]',
+                    'TSExportAssignment',
                 ],
                 'no-return-assign': ['error', 'except-parens'],
                 'no-self-assign': ['error', {
