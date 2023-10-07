@@ -77,8 +77,6 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'antfu/generic-spacing': 'error',
                 'antfu/named-tuple-spacing': 'error',
                 'antfu/no-cjs-exports': 'error',
-                'antfu/no-const-enum': 'error',
-                'antfu/no-ts-export-equal': 'error',
 
                 'no-dupe-class-members': 'off',
                 'no-invalid-this': 'off',
@@ -129,6 +127,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
+                'no-restricted-syntax': 'off',
                 'unused-imports/no-unused-vars': 'off',
             },
         },
