@@ -29,7 +29,7 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config()
 ```
@@ -38,7 +38,7 @@ With CJS:
 
 ```js
 // eslint.config.js
-const config = require("@ivanmaxlogiudice/eslint-config").default
+const config = require('@ivanmaxlogiudice/eslint-config').default
 
 module.exports = config()
 ```
@@ -117,7 +117,7 @@ Normally you only need to import the `config` preset:
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config()
 ```
@@ -126,31 +126,31 @@ And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config({
-	// Enable stylistic formatting rules
-	// stylistic: true,
+    // Enable stylistic formatting rules
+    // stylistic: true,
 
-	// Or customize the stylistic rules
-	stylistic: {
-		indent: 2, // 4, or 'tab'
-		quotes: "single", // or 'double'
-	},
+    // Or customize the stylistic rules
+    stylistic: {
+        indent: 2, // 4, or 'tab'
+        quotes: 'single', // or 'double'
+    },
 
-	// TypeScript and Vue are auto-detected, you can also explicitly enable them:
-	typescript: true,
-	vue: true,
+    // TypeScript and Vue are auto-detected, you can also explicitly enable them:
+    typescript: true,
+    vue: true,
 
-	// Disable jsonc and yaml support
-	jsonc: false,
-	yaml: false,
+    // Disable jsonc and yaml support
+    jsonc: false,
+    yaml: false,
 
-	// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
-	ignores: [
-		"./fixtures",
-		// ...globs
-	]
+    // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
+    ignores: [
+        './fixtures',
+        // ...globs
+    ]
 })
 ```
 
@@ -158,22 +158,22 @@ The `config` factory function also accepts any number of arbitrary custom config
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config(
-	{
-		// Configuration
-	},
+    {
+        // Configuration
+    },
 
-	// From the second arguments they are ESLint Flat Configs
-	// you can have multiple configs
-	{
-		files: ["**/*.ts"],
-		rules: {},
-	},
-	{
-		rules: {},
-	},
+    // From the second arguments they are ESLint Flat Configs
+    // you can have multiple configs
+    {
+        files: ['**/*.ts'],
+        rules: {},
+    },
+    {
+        rules: {},
+    },
 )
 ```
 
@@ -182,43 +182,43 @@ Going more advanced, you can also import fine-grained configs and compose them a
 ```js
 // eslint.config.js
 import {
-	comments,
-	ignores,
-	imports,
-	javascript,
-	jsdoc,
-	jsonc,
-	markdown,
-	node,
-	sortPackageJson,
-	sortTsconfig,
-	stylistic,
-	test,
-	typescript,
-	unicorn,
-	unocss,
-	vue,
-	yaml,
-} from "@ivanmaxlogiudice/eslint-config"
+    comments,
+    ignores,
+    imports,
+    javascript,
+    jsdoc,
+    jsonc,
+    markdown,
+    node,
+    sortPackageJson,
+    sortTsconfig,
+    stylistic,
+    test,
+    typescript,
+    unicorn,
+    unocss,
+    vue,
+    yaml,
+} from '@ivanmaxlogiudice/eslint-config'
 
 export default [
-	...comments(),
-	...ignores(),
-	...imports(),
-	...javascript(),
-	...jsdoc(),
-	...jsonc(),
-	...markdown(),
-	...node(),
-	...sortPackageJson(),
-	...sortTsconfig(),
-	...stylistic(),
-	...test(),
-	...typescript(),
-	...unicorn(),
-	...unocss(),
-	...vue(),
-	...yaml(),
+    ...comments(),
+    ...ignores(),
+    ...imports(),
+    ...javascript(),
+    ...jsdoc(),
+    ...jsonc(),
+    ...markdown(),
+    ...node(),
+    ...sortPackageJson(),
+    ...sortTsconfig(),
+    ...stylistic(),
+    ...test(),
+    ...typescript(),
+    ...unicorn(),
+    ...unocss(),
+    ...vue(),
+    ...yaml(),
 ]
 ```
 
@@ -252,26 +252,26 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config(
-	{
-		vue: true,
-		typescript: true
-	},
-	{
-		// Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
-		files: ["**/*.vue"],
-		rules: {
-			"vue/operator-linebreak": ["error", "before"],
-		},
-	},
-	{
-		// Without `files`, they are general rules for all files
-		rules: {
-			"style/semi": ["error", "never"],
-		},
-	}
+    {
+        vue: true,
+        typescript: true
+    },
+    {
+        // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+        files: ['**/*.vue'],
+        rules: {
+            'vue/operator-linebreak': ['error', 'before'],
+        },
+    },
+    {
+        // Without `files`, they are general rules for all files
+        rules: {
+            'style/semi': ['error', 'never'],
+        },
+    }
 )
 ```
 
@@ -279,19 +279,19 @@ We also provided an `overrides` options to make it easier:
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config({
-	overrides: {
-		vue: {
-			"vue/operator-linebreak": ["error", "before"],
-		},
-		typescript: {
-			"ts/consistent-type-definitions": ["error", "interface"],
-		},
-		yaml: {},
-		// ...
-	}
+    overrides: {
+        vue: {
+            'vue/operator-linebreak': ['error', 'before'],
+        },
+        typescript: {
+            'ts/consistent-type-definitions': ['error', 'interface'],
+        },
+        yaml: {},
+        // ...
+    }
 })
 ```
 
@@ -301,12 +301,12 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import config from "@ivanmaxlogiudice/eslint-config"
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config({
-	typescript: {
-		tsconfigPath: "tsconfig.json",
-	},
+    typescript: {
+        tsconfigPath: 'tsconfig.json',
+    },
 })
 ```
 
