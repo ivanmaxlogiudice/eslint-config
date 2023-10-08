@@ -1,17 +1,54 @@
 import { type FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import { type FlatESLintConfigItem as BaseFlatESLintConfigItem } from 'eslint-define-config'
 import { type ParserOptions } from '@typescript-eslint/parser'
+import {
+    type EslintCommentsRules,
+    type EslintRules,
+    type FlatESLintConfigItem,
+    type ImportRules,
+    type JsoncRules,
+    type MergeIntersection,
+    type NRules,
+    type Prefix,
+    type RenamePrefix,
+    type RuleConfig,
+    type TypeScriptRules,
+    type UnicornRules,
+    type VitestRules,
+    type VueRules,
+    type YmlRules,
+} from '@antfu/eslint-define-config'
+import { type StylisticRules } from './generated/stylistic'
 
-/**
- * Flat ESLint Configuration.
- *
- * @see [Configuration Files (New)](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new)
- */
-export interface FlatESLintConfigItem extends BaseFlatESLintConfigItem {
+export type Rules = MergeIntersection<
+  RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
+  RenamePrefix<VitestRules, 'vitest/', 'test/'> &
+  RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
+  RenamePrefix<NRules, 'n/', 'node/'> &
+  Prefix<StylisticRules, 'style/'> &
+  ImportRules &
+  EslintRules &
+  JsoncRules &
+  VueRules &
+  UnicornRules &
+  EslintCommentsRules &
+  {
+      'test/no-only-tests': RuleConfig<[]>
+  }
+>
+
+export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
     /**
-     * The name of the configuration object.
+     * Custom name of each config item
      */
     name?: string
+
+    // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+    /**
+     * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+     *
+     * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+     */
+    plugins?: Record<string, any>
 }
 
 export interface OptionsComponentExts {
@@ -44,11 +81,16 @@ export interface OptionsHasTypeScript {
 }
 
 export interface OptionsStylistic {
-    stylistic?: boolean
+    stylistic?: boolean | StylisticConfig
+}
+
+export interface StylisticConfig {
+    indent?: number | 'tab'
+    quotes?: 'single' | 'double'
 }
 
 export interface OptionsOverrides {
-    overrides?: FlatESLintConfigItem['rules']
+    overrides?: ConfigItem['rules']
 }
 
 export interface OptionsIsInEditor {
@@ -115,7 +157,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    stylistic?: boolean
+    stylistic?: boolean | StylisticConfig
 
     /**
      * Enable unocss rules.
@@ -134,20 +176,20 @@ export interface OptionsConfig extends OptionsComponentExts {
      * Provide overrides for rules for each integration.
      */
     overrides?: {
-        comments?: FlatESLintConfigItem['rules']
-        imports?: FlatESLintConfigItem['rules']
-        javascript?: FlatESLintConfigItem['rules']
-        jsonc?: FlatESLintConfigItem['rules']
-        markdown?: FlatESLintConfigItem['rules']
-        node?: FlatESLintConfigItem['rules']
-        sort?: FlatESLintConfigItem['rules']
-        stylistic?: FlatESLintConfigItem['rules']
-        test?: FlatESLintConfigItem['rules']
-        typescript?: FlatESLintConfigItem['rules']
-        typescriptWithTypes?: FlatESLintConfigItem['rules']
-        unicorn?: FlatESLintConfigItem['rules']
-        unocss?: FlatESLintConfigItem['rules']
-        vue?: FlatESLintConfigItem['rules']
-        yaml?: FlatESLintConfigItem['rules']
+        comments?: ConfigItem['rules']
+        imports?: ConfigItem['rules']
+        javascript?: ConfigItem['rules']
+        jsdoc?: ConfigItem['rules']
+        jsonc?: ConfigItem['rules']
+        markdown?: ConfigItem['rules']
+        node?: ConfigItem['rules']
+        sort?: ConfigItem['rules']
+        stylistic?: ConfigItem['rules']
+        test?: ConfigItem['rules']
+        typescript?: ConfigItem['rules']
+        unicorn?: ConfigItem['rules']
+        unocss?: ConfigItem['rules']
+        vue?: ConfigItem['rules']
+        yaml?: ConfigItem['rules']
     }
 }

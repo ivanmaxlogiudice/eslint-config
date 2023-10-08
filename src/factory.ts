@@ -22,9 +22,9 @@ import {
     yaml,
 } from './configs'
 import { combine } from './utils'
-import { type FlatESLintConfigItem, type OptionsConfig } from './types'
+import { type ConfigItem, type OptionsConfig } from './types'
 
-const flatConfigProps: (keyof FlatESLintConfigItem)[] = [
+const flatConfigProps: (keyof ConfigItem)[] = [
     'files',
     'ignores',
     'languageOptions',
@@ -50,7 +50,7 @@ const UnocssPackages = [
 /**
  * Construct an array of ESLint flat config items.
  */
-export function config(options: OptionsConfig & FlatESLintConfigItem = {}, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]) {
+export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
     const {
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -62,7 +62,7 @@ export function config(options: OptionsConfig & FlatESLintConfigItem = {}, ...us
         componentExts = [],
     } = options
 
-    const configs: FlatESLintConfigItem[][] = []
+    const configs: ConfigItem[][] = []
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
@@ -159,7 +159,7 @@ export function config(options: OptionsConfig & FlatESLintConfigItem = {}, ...us
             acc[key] = options[key] as any
 
         return acc
-    }, {} as FlatESLintConfigItem)
+    }, {} as ConfigItem)
 
     if (Object.keys(fusedConfig).length > 0)
         configs.push([fusedConfig])

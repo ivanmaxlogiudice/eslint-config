@@ -1,7 +1,7 @@
 import { pluginNode } from '../plugins'
-import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
+import { type ConfigItem, type OptionsOverrides } from '../types'
 
-export function node(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function node(options: OptionsOverrides = {}): ConfigItem[] {
     const {
         overrides = {},
     } = options

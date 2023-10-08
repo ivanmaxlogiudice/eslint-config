@@ -1,8 +1,8 @@
 import { pluginAntfu, pluginImport } from '../plugins'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type ConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
 
-export function imports(options: OptionsStylistic & OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function imports(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
     const {
         stylistic = true,
         overrides = {},

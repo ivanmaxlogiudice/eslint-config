@@ -1,7 +1,7 @@
 import { GLOB_EXCLUDE } from '../globs'
-import { type FlatESLintConfigItem } from '../types'
+import { type ConfigItem } from '../types'
 
-export function ignores(): FlatESLintConfigItem[] {
+export function ignores(): ConfigItem[] {
     return [
         {
             ignores: GLOB_EXCLUDE,

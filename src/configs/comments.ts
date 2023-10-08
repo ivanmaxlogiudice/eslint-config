@@ -1,7 +1,7 @@
 import { pluginComments } from '../plugins'
-import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
+import { type ConfigItem, type OptionsOverrides } from '../types'
 
-export function comments(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function comments(options: OptionsOverrides = {}): ConfigItem[] {
     const {
         overrides = {},
     } = options

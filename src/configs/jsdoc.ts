@@ -1,7 +1,7 @@
 import { pluginJsdoc } from '../plugins'
-import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type ConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
 
-export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
     const {
         stylistic = true,
         overrides = {},

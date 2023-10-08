@@ -1,7 +1,7 @@
 import { pluginAntfu, pluginStylistic } from '../plugins'
-import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
+import { type ConfigItem, type OptionsOverrides } from '../types'
 
-export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function stylistic(options: OptionsOverrides = {}): ConfigItem[] {
     const {
         overrides = {},
     } = options

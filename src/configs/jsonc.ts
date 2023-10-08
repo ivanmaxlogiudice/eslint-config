@@ -1,9 +1,8 @@
-import { type Rules } from 'eslint-define-config'
 import { parserJsonc, pluginJsonc } from '../plugins'
-import { type FlatESLintConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
+import { type ConfigItem, type OptionsOverrides, type OptionsStylistic, type Rules } from '../types'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
 
-export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
     const {
         stylistic = true,
         overrides = {},

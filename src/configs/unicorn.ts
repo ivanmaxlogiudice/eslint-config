@@ -1,7 +1,7 @@
 import { pluginUnicorn } from '../plugins'
-import { type FlatESLintConfigItem, type OptionsOverrides } from '../types'
+import { type ConfigItem, type OptionsOverrides } from '../types'
 
-export function unicorn(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function unicorn(options: OptionsOverrides = {}): ConfigItem[] {
     const {
         overrides = {},
     } = options

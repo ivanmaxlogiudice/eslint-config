@@ -31,29 +31,29 @@
         "access": "public"
     },
     "scripts": {
+        "generate": "pnpx esno scripts/types.ts",
         "build": "tsup src/index.ts --format esm,cjs --clean --dts",
         "stub": "tsup src/index.ts --format esm",
         "dev": "tsup src/index.ts --format esm,cjs --watch",
         "config-view": "eslint-flat-config-viewer",
         "lint": "pnpm run stub && eslint .",
-        "lint:fix": "pnpm run lint --fix",
+        "prepack": "pnpm run build",
         "release": "bumpp && pnpm publish",
-        "prepublishOnly": "pnpm run build",
         "test": "vitest",
-        "prepare": "simple-git-hooks",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "prepare": "simple-git-hooks"
     },
     "peerDependencies": {
         "eslint": ">=8.0.0"
     },
     "dependencies": {
+        "@antfu/eslint-define-config": "1.23.0-1",
         "@eslint/js": "^8.51.0",
         "@stylistic/eslint-plugin": "^0.0.6",
         "@typescript-eslint/eslint-plugin": "^6.7.4",
         "@typescript-eslint/parser": "^6.7.4",
         "@unocss/eslint-plugin": "^0.56.5",
         "eslint-config-flat-gitignore": "^0.1.0",
-        "eslint-define-config": "^1.23.0",
         "eslint-plugin-antfu": "^1.0.0-beta.10",
         "eslint-plugin-eslint-comments": "^3.2.0",
         "eslint-plugin-i": "^2.28.1",

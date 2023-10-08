@@ -2,9 +2,9 @@ import process from 'node:process'
 import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import { renameRules } from '../utils'
-import { type FlatESLintConfigItem, type OptionsComponentExts, type OptionsOverrides, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes } from '../types'
+import { type ConfigItem, type OptionsComponentExts, type OptionsOverrides, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes } from '../types'
 
-export function typescript(options: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {}): FlatESLintConfigItem[] {
+export function typescript(options: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {}): ConfigItem[] {
     const {
         componentExts = [],
         overrides = {},
@@ -12,7 +12,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
         tsconfigPath,
     } = options
 
-    const typeAwareRules: FlatESLintConfigItem['rules'] = {
+    const typeAwareRules: ConfigItem['rules'] = {
         'dot-notation': 'off',
         'no-implied-eval': 'off',
         'no-throw-literal': 'off',
