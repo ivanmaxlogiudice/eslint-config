@@ -2,7 +2,7 @@ import process from 'node:process'
 import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import { renameRules } from '../utils'
-import { type ConfigItem, type OptionsComponentExts, type OptionsOverrides, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes } from '../types'
+import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
 
 export function typescript(options: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {}): ConfigItem[] {
     const {
@@ -102,6 +102,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'ts/no-dupe-class-members': 'error',
                 'ts/no-explicit-any': 'off',
                 'ts/no-extraneous-class': 'off',
+                'ts/no-import-type-side-effects': 'error',
                 'ts/no-invalid-this': 'error',
                 'ts/no-loss-of-precision': 'error',
                 'ts/no-non-null-assertion': 'off',

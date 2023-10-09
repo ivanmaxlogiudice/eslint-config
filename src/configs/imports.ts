@@ -1,6 +1,6 @@
 import { pluginAntfu, pluginImport } from '../plugins'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import { type ConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
+import type { ConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
 
 export function imports(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
     const {
@@ -18,7 +18,6 @@ export function imports(options: OptionsStylistic & OptionsOverrides = {}): Conf
             rules: {
                 'antfu/import-dedupe': 'error',
                 'antfu/no-import-node-modules-by-path': 'error',
-                'antfu/prefer-inline-type-import': 'error',
 
                 'import/first': 'error',
                 'import/no-default-export': 'error',
