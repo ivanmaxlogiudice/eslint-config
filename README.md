@@ -224,7 +224,7 @@ export default [
 
 Check out the [configs](https://github.com/ivanmaxlogiudice/eslint-config/blob/main/src/configs) and [factory](https://github.com/ivanmaxlogiudice/eslint-config/blob/main/src/factory.ts) for more details.
 
-## Plugins Renaming
+### Plugins Renaming
 
 Since flat config requires us to explicitly provide the plugin names (instead of mandatory convention from npm package name), we renamed some plugins to make overall scope more consistent and easier to write.
 
