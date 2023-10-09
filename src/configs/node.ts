@@ -1,5 +1,5 @@
 import { pluginNode } from '../plugins'
-import { type ConfigItem, type OptionsOverrides } from '../types'
+import type { ConfigItem, OptionsOverrides } from '../types'
 
 export function node(options: OptionsOverrides = {}): ConfigItem[] {
     const {

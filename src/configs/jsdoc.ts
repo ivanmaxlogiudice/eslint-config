@@ -1,5 +1,5 @@
 import { pluginJsdoc } from '../plugins'
-import { type ConfigItem, type OptionsOverrides, type OptionsStylistic } from '../types'
+import type { ConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
 
 export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
     const {

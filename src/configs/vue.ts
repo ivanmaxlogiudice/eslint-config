@@ -1,6 +1,6 @@
 import { GLOB_VUE } from '../globs'
 import { parserTs, parserVue, pluginVue } from '../plugins'
-import { type ConfigItem, type OptionsHasTypeScript, type OptionsOverrides, type OptionsStylistic } from '../types'
+import type { ConfigItem, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
 
 export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {}): ConfigItem[] {
     const {

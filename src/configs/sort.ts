@@ -1,4 +1,4 @@
-import { type ConfigItem } from '../types'
+import type { ConfigItem } from '../types'
 
 /**
  * Sort package.json

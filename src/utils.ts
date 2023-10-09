@@ -1,4 +1,4 @@
-import { type ConfigItem } from './types'
+import type { ConfigItem } from './types'
 
 /**
  * Combine array and non-array configs into a single array.

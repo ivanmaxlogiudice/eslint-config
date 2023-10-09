@@ -1,5 +1,5 @@
 import { pluginUnocss } from '../plugins'
-import { type ConfigItem, type OptionsOverrides } from '../types'
+import type { ConfigItem, OptionsOverrides } from '../types'
 
 export function unocss(options: OptionsOverrides = {}): ConfigItem[] {
     const {

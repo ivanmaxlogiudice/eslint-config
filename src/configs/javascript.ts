@@ -1,7 +1,7 @@
 import globals from 'globals'
 import { pluginAntfu, pluginPromise, pluginUnusedImports } from '../plugins'
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import { type ConfigItem, type OptionsIsInEditor, type OptionsOverrides } from '../types'
+import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
 
 export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
     const {

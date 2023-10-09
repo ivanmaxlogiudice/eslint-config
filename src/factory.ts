@@ -22,7 +22,7 @@ import {
     yaml,
 } from './configs'
 import { combine } from './utils'
-import { type ConfigItem, type OptionsConfig } from './types'
+import type { ConfigItem, OptionsConfig } from './types'
 
 const flatConfigProps: (keyof ConfigItem)[] = [
     'files',

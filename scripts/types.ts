@@ -5,11 +5,11 @@ const main = packages.find(i => i.shortId === 'default')!
 
 console.log(main.rules)
 
-const dts = `import {
-    type EslintRules,
-    type MergeIntersection,
-    type TypeScriptRules,
-    type Unprefix,
+const dts = `import type {
+    EslintRules,
+    MergeIntersection,
+    TypeScriptRules,
+    Unprefix,
 } from '@antfu/eslint-define-config'
 
 type MergedRules = MergeIntersection<

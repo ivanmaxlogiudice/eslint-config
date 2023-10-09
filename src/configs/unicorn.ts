@@ -1,5 +1,5 @@
 import { pluginUnicorn } from '../plugins'
-import { type ConfigItem, type OptionsOverrides } from '../types'
+import type { ConfigItem, OptionsOverrides } from '../types'
 
 export function unicorn(options: OptionsOverrides = {}): ConfigItem[] {
     const {

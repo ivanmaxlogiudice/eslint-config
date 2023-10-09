@@ -1,24 +1,24 @@
-import { type FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import { type ParserOptions } from '@typescript-eslint/parser'
-import {
-    type EslintCommentsRules,
-    type EslintRules,
-    type FlatESLintConfigItem,
-    type ImportRules,
-    type JsoncRules,
-    type MergeIntersection,
-    type NRules,
-    type Prefix,
-    type RenamePrefix,
-    type RuleConfig,
-    type TypeScriptRules,
-    type UnicornRules,
-    type VitestRules,
-    type VueRules,
-    type YmlRules,
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
+import type { ParserOptions } from '@typescript-eslint/parser'
+import type {
+    EslintCommentsRules,
+    EslintRules,
+    FlatESLintConfigItem,
+    ImportRules,
+    JsoncRules,
+    MergeIntersection,
+    NRules,
+    Prefix,
+    RenamePrefix,
+    RuleConfig,
+    TypeScriptRules,
+    UnicornRules,
+    VitestRules,
+    VueRules,
+    YmlRules,
 } from '@antfu/eslint-define-config'
-import { type Rules as AntfuRules } from 'eslint-plugin-antfu'
-import { type StylisticRules } from './generated/stylistic'
+import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
+import type { StylisticRules } from './generated/stylistic'
 
 export type Rules = MergeIntersection<
   RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &

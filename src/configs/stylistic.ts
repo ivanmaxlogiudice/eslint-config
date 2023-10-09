@@ -1,5 +1,5 @@
 import { pluginAntfu, pluginStylistic } from '../plugins'
-import { type ConfigItem, type OptionsOverrides } from '../types'
+import type { ConfigItem, OptionsOverrides } from '../types'
 
 export function stylistic(options: OptionsOverrides = {}): ConfigItem[] {
     const {
