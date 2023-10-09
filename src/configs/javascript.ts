@@ -21,6 +21,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                     navigator: 'readonly',
                     window: 'readonly',
                 },
+
                 parserOptions: {
                     ecmaFeatures: {
                         jsx: true,
@@ -29,6 +30,9 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                     sourceType: 'module',
                 },
                 sourceType: 'module',
+            },
+            linterOptions: {
+                reportUnusedDisableDirectives: true,
             },
             name: 'config:javascript',
             plugins: {
