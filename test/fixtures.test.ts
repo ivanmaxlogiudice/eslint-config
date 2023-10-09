@@ -55,7 +55,7 @@ export default config(
 
         await execa('npx', ['eslint', '.', '--fix'], {
             cwd: target,
-            stdio: 'inherit',
+            stdio: 'pipe',
         })
 
         const files = await fg('**/*', {
