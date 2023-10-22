@@ -45,7 +45,9 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                 'vue/block-order': ['error', {
                     order: ['template', 'script', 'style'],
                 }],
-                'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+                'vue/component-name-in-template-casing': ['error', 'PascalCase', {
+                    registeredComponentsOnly: false,
+                }],
                 'vue/component-options-name-casing': ['error', 'PascalCase'],
                 'vue/custom-event-name-casing': ['error', 'camelCase'],
                 'vue/define-macros-order': ['error', {
