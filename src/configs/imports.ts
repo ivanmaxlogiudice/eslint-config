@@ -1,5 +1,4 @@
 import { pluginAntfu, pluginImport } from '../plugins'
-import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 import type { ConfigItem, OptionsStylistic } from '../types'
 
 export function imports(options: OptionsStylistic = {}): ConfigItem[] {
@@ -19,7 +18,6 @@ export function imports(options: OptionsStylistic = {}): ConfigItem[] {
                 'antfu/no-import-node-modules-by-path': 'error',
 
                 'import/first': 'error',
-                'import/no-default-export': 'error',
                 'import/no-duplicates': 'error',
                 'import/no-mutable-exports': 'error',
                 'import/no-named-default': 'error',
@@ -51,19 +49,6 @@ export function imports(options: OptionsStylistic = {}): ConfigItem[] {
                             }],
                         }
                     : {},
-            },
-        },
-        {
-            files: [
-                `**/*config*.${GLOB_SRC_EXT}`,
-                `**/views/${GLOB_SRC}`,
-                `**/pages/${GLOB_SRC}`,
-                '**/{index,vite,esbuild,rollup,webpack,rspack}.ts',
-                '**/*.d.ts',
-                `${GLOB_MARKDOWN}/**`,
-            ],
-            rules: {
-                'import/no-default-export': 'off',
             },
         },
     ]
