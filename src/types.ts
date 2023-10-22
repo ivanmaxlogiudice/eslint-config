@@ -178,19 +178,11 @@ export interface OptionsConfig extends OptionsComponentExts {
      * Provide overrides for rules for each integration.
      */
     overrides?: {
-        comments?: ConfigItem['rules']
-        imports?: ConfigItem['rules']
         javascript?: ConfigItem['rules']
-        jsdoc?: ConfigItem['rules']
         jsonc?: ConfigItem['rules']
         markdown?: ConfigItem['rules']
-        node?: ConfigItem['rules']
-        sort?: ConfigItem['rules']
-        stylistic?: ConfigItem['rules']
         test?: ConfigItem['rules']
         typescript?: ConfigItem['rules']
-        unicorn?: ConfigItem['rules']
-        unocss?: ConfigItem['rules']
         vue?: ConfigItem['rules']
         yaml?: ConfigItem['rules']
     }

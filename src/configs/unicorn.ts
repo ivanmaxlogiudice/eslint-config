@@ -1,11 +1,7 @@
 import { pluginUnicorn } from '../plugins'
-import type { ConfigItem, OptionsOverrides } from '../types'
+import type { ConfigItem } from '../types'
 
-export function unicorn(options: OptionsOverrides = {}): ConfigItem[] {
-    const {
-        overrides = {},
-    } = options
-
+export function unicorn(): ConfigItem[] {
     return [
         {
             name: 'config:unicorn',
@@ -73,8 +69,6 @@ export function unicorn(options: OptionsOverrides = {}): ConfigItem[] {
                 'unicorn/prefer-top-level-await': 'error',
                 'unicorn/prefer-type-error': 'error',
                 'unicorn/throw-new-error': 'error',
-
-                ...overrides,
             },
         },
     ]

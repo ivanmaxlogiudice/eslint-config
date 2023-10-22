@@ -1,11 +1,7 @@
 import { pluginAntfu, pluginStylistic } from '../plugins'
-import type { ConfigItem, OptionsOverrides } from '../types'
+import type { ConfigItem } from '../types'
 
-export function stylistic(options: OptionsOverrides = {}): ConfigItem[] {
-    const {
-        overrides = {},
-    } = options
-
+export function stylistic(): ConfigItem[] {
     return [
         {
             name: 'config:stylistic',
@@ -176,8 +172,6 @@ export function stylistic(options: OptionsOverrides = {}): ConfigItem[] {
                     functionPrototypeMethods: true,
                 }],
                 'style/yield-star-spacing': ['error', 'both'],
-
-                ...overrides,
             },
         },
     ]

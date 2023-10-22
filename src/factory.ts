@@ -81,16 +81,15 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
             isInEditor,
             overrides: overrides.javascript,
         }),
-        comments({ overrides: overrides.comments }),
-        node({ overrides: overrides.node }),
+        comments(),
+        node(),
         jsdoc({
             stylistic: enableStylistic,
         }),
         imports({
-            overrides: overrides.imports,
             stylistic: enableStylistic,
         }),
-        unicorn({ overrides: overrides.unicorn }),
+        unicorn(),
     )
 
     if (enableVue)
@@ -107,10 +106,10 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
     }
 
     if (enableStylistic)
-        configs.push(stylistic({ overrides: overrides.stylistic }))
+        configs.push(stylistic())
 
     if (enableUnocss)
-        configs.push(unocss({ overrides: overrides.unocss }))
+        configs.push(unocss())
 
     if (options.test ?? true) {
         configs.push(test({

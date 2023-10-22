@@ -1,10 +1,9 @@
 import { pluginJsdoc } from '../plugins'
-import type { ConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
+import type { ConfigItem, OptionsStylistic } from '../types'
 
-export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
+export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
     const {
         stylistic = true,
-        overrides = {},
     } = options
 
     return [
@@ -36,8 +35,6 @@ export function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): Config
                             'jsdoc/multiline-blocks': 'warn',
                         }
                     : {},
-
-                ...overrides,
             },
         },
     ]

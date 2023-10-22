@@ -1,11 +1,7 @@
 import { pluginComments } from '../plugins'
-import type { ConfigItem, OptionsOverrides } from '../types'
+import type { ConfigItem } from '../types'
 
-export function comments(options: OptionsOverrides = {}): ConfigItem[] {
-    const {
-        overrides = {},
-    } = options
-
+export function comments(): ConfigItem[] {
     return [
         {
             name: 'config:eslint-comments',
@@ -18,8 +14,6 @@ export function comments(options: OptionsOverrides = {}): ConfigItem[] {
                 'eslint-comments/disable-enable-pair': ['error', {
                     allowWholeFile: true,
                 }],
-
-                ...overrides,
             },
         },
     ]

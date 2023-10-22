@@ -1,11 +1,7 @@
 import { pluginNode } from '../plugins'
-import type { ConfigItem, OptionsOverrides } from '../types'
+import type { ConfigItem } from '../types'
 
-export function node(options: OptionsOverrides = {}): ConfigItem[] {
-    const {
-        overrides = {},
-    } = options
-
+export function node(): ConfigItem[] {
     return [
         {
             name: 'config:node',
@@ -21,8 +17,6 @@ export function node(options: OptionsOverrides = {}): ConfigItem[] {
                 'node/prefer-global/buffer': ['error', 'never'],
                 'node/prefer-global/process': ['error', 'never'],
                 'node/process-exit-as-throw': 'error',
-
-                ...overrides,
             },
         },
     ]

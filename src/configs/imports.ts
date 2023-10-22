@@ -1,11 +1,10 @@
 import { pluginAntfu, pluginImport } from '../plugins'
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import type { ConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
+import type { ConfigItem, OptionsStylistic } from '../types'
 
-export function imports(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
+export function imports(options: OptionsStylistic = {}): ConfigItem[] {
     const {
         stylistic = true,
-        overrides = {},
     } = options
 
     return [
@@ -52,8 +51,6 @@ export function imports(options: OptionsStylistic & OptionsOverrides = {}): Conf
                             }],
                         }
                     : {},
-
-                ...overrides,
             },
         },
         {

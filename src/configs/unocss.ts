@@ -1,11 +1,7 @@
 import { pluginUnocss } from '../plugins'
-import type { ConfigItem, OptionsOverrides } from '../types'
+import type { ConfigItem } from '../types'
 
-export function unocss(options: OptionsOverrides = {}): ConfigItem[] {
-    const {
-        overrides = {},
-    } = options
-
+export function unocss(): ConfigItem[] {
     return [
         {
             name: 'config:unocss',
@@ -14,8 +10,6 @@ export function unocss(options: OptionsOverrides = {}): ConfigItem[] {
             },
             rules: {
                 ...pluginUnocss.configs.recommended.rules,
-
-                ...overrides,
             },
         },
     ]
