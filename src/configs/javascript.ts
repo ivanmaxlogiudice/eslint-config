@@ -227,10 +227,12 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
                 'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
-                'unused-imports/no-unused-vars': [
-                    'error',
-                    { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' },
-                ],
+                'unused-imports/no-unused-vars': ['error', {
+                    args: 'after-used',
+                    argsIgnorePattern: '^_',
+                    vars: 'all',
+                    varsIgnorePattern: '^_',
+                }],
                 'use-isnan': ['error', {
                     enforceForIndexOf: true,
                     enforceForSwitchCase: true,
