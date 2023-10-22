@@ -1,7 +1,12 @@
 import { pluginAntfu, pluginStylistic } from '../plugins'
-import type { ConfigItem } from '../types'
+import type { ConfigItem, StylisticConfig } from '../types'
 
-export function stylistic(): ConfigItem[] {
+export function stylistic(options: StylisticConfig): ConfigItem[] {
+    const {
+        indent = 4,
+        quotes = 'single',
+    } = options
+
     return [
         {
             name: 'config:stylistic',
@@ -38,7 +43,7 @@ export function stylistic(): ConfigItem[] {
                 'style/dot-location': ['error', 'property'],
                 'style/eol-last': 'error',
                 'style/func-call-spacing': ['error', 'never'],
-                'style/indent': ['error', 4, {
+                'style/indent': ['error', indent, {
                     ArrayExpression: 1,
                     CallExpression: { arguments: 1 },
                     FunctionDeclaration: { body: 1, parameters: 1 },
@@ -114,7 +119,7 @@ export function stylistic(): ConfigItem[] {
                     maxBOF: 0,
                     maxEOF: 0,
                 }],
-                'style/no-tabs': 'error',
+                'style/no-tabs': indent === 'tab' ? 'off' : 'error',
                 'style/no-trailing-spaces': 'error',
                 'style/no-whitespace-before-property': 'error',
                 'style/object-curly-newline': ['error', {
@@ -132,7 +137,7 @@ export function stylistic(): ConfigItem[] {
                     switches: 'never',
                 }],
                 'style/quote-props': ['error', 'consistent-as-needed'],
-                'style/quotes': ['error', 'single', {
+                'style/quotes': ['error', quotes, {
                     allowTemplateLiterals: true,
                     avoidEscape: true,
                 }],

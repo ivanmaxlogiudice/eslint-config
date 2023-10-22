@@ -8,6 +8,10 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
         stylistic = true,
     } = options
 
+    const {
+        indent = 4,
+    } = typeof stylistic === 'boolean' ? {} : stylistic
+
     return [
         {
             name: 'config:vue:setup',
@@ -52,7 +56,7 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                     allowKeywords: true,
                 }],
                 'vue/eqeqeq': ['error', 'smart'],
-                'vue/html-indent': ['error', 4],
+                'vue/html-indent': ['error', indent],
                 'vue/max-attributes-per-line': 'off',
                 'vue/multi-word-component-names': 'off',
                 'vue/no-constant-condition': 'warn',

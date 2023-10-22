@@ -8,6 +8,10 @@ export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): Config
         overrides = {},
     } = options
 
+    const {
+        indent = 4,
+    } = typeof stylistic === 'boolean' ? {} : stylistic
+
     return [
         {
             name: 'config:jsonc:setup',
@@ -31,7 +35,7 @@ export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): Config
                             'jsonc/array-bracket-spacing': ['error', 'never'],
                             'jsonc/comma-dangle': ['error', 'never'],
                             'jsonc/comma-style': ['error', 'last'],
-                            'jsonc/indent': ['error', 4],
+                            'jsonc/indent': ['error', indent],
                             'jsonc/key-spacing': ['error', {
                                 afterColon: true,
                                 beforeColon: false,

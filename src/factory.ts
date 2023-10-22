@@ -55,12 +55,17 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
         typescript: enableTypeScript = isPackageExists('typescript'),
-        stylistic: enableStylistic = true,
         unocss: enableUnocss = UnocssPackages.some(i => isPackageExists(i)),
         gitignore: enableGitignore = true,
         overrides = {},
         componentExts = [],
     } = options
+
+    const stylisticOptions = options.stylistic === false
+        ? false
+        : typeof options.stylistic === 'object'
+            ? options.stylistic
+            : {}
 
     const configs: ConfigItem[][] = []
 
@@ -84,10 +89,10 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
         comments(),
         node(),
         jsdoc({
-            stylistic: enableStylistic,
+            stylistic: stylisticOptions,
         }),
         imports({
-            stylistic: enableStylistic,
+            stylistic: stylisticOptions,
         }),
         unicorn(),
     )
@@ -105,8 +110,8 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
         }))
     }
 
-    if (enableStylistic)
-        configs.push(stylistic())
+    if (stylisticOptions)
+        configs.push(stylistic(stylisticOptions))
 
     if (enableUnocss)
         configs.push(unocss())
@@ -121,7 +126,7 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
     if (enableVue) {
         configs.push(vue({
             overrides: overrides.vue,
-            stylistic: enableStylistic,
+            stylistic: stylisticOptions,
             typescript: !!enableTypeScript,
         }))
     }
@@ -130,7 +135,7 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
         configs.push(
             jsonc({
                 overrides: overrides.jsonc,
-                stylistic: enableStylistic,
+                stylistic: stylisticOptions,
             }),
             sortPackageJson(),
             sortTsconfig(),
@@ -140,7 +145,7 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
     if (options.yaml ?? true) {
         configs.push(yaml({
             overrides: overrides.yaml,
-            stylistic: enableStylistic,
+            stylistic: stylisticOptions,
         }))
     }
 
