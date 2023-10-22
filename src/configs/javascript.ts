@@ -246,6 +246,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         },
         {
             files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+            name: 'config:scripts-overrides',
             rules: {
                 'no-console': 'off',
             },
