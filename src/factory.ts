@@ -67,6 +67,9 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
             ? options.stylistic
             : {}
 
+    if (stylisticOptions && !('jsx' in stylisticOptions))
+        stylisticOptions.jsx = options.jsx ?? true
+
     const configs: ConfigItem[][] = []
 
     if (enableGitignore) {

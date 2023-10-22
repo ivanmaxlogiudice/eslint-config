@@ -9,33 +9,43 @@ import type {
     MergeIntersection,
     NRules,
     Prefix,
+    ReactRules,
     RenamePrefix,
     RuleConfig,
     TypeScriptRules,
     UnicornRules,
+    Unprefix,
     VitestRules,
     VueRules,
     YmlRules,
 } from '@antfu/eslint-define-config'
 import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
-import type { StylisticRules } from './generated/stylistic'
+import type { UnprefixedRuleOptions } from '@stylistic/eslint-plugin'
+
+type StylisticMergedRules = MergeIntersection<
+  EslintRules &
+  Unprefix<ReactRules, 'react/'> &
+  Unprefix<TypeScriptRules, '@typescript-eslint/'>
+>
+
+type StylisticRules = Pick<StylisticMergedRules, keyof UnprefixedRuleOptions>
 
 export type Rules = MergeIntersection<
-  RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
-  RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-  RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-  RenamePrefix<NRules, 'n/', 'node/'> &
-  Prefix<StylisticRules, 'style/'> &
-  Prefix<AntfuRules, 'antfu/'> &
-  ImportRules &
-  EslintRules &
-  JsoncRules &
-  VueRules &
-  UnicornRules &
-  EslintCommentsRules &
-  {
-      'test/no-only-tests': RuleConfig<[]>
-  }
+    RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
+    RenamePrefix<VitestRules, 'vitest/', 'test/'> &
+    RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
+    RenamePrefix<NRules, 'n/', 'node/'> &
+    Prefix<StylisticRules, 'style/'> &
+    Prefix<AntfuRules, 'antfu/'> &
+    ImportRules &
+    EslintRules &
+    JsoncRules &
+    VueRules &
+    UnicornRules &
+    EslintCommentsRules &
+    {
+        'test/no-only-tests': RuleConfig<[]>
+    }
 >
 
 export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
@@ -89,6 +99,7 @@ export interface OptionsStylistic {
 export interface StylisticConfig {
     indent?: number | 'tab'
     quotes?: 'single' | 'double'
+    jsx?: boolean
 }
 
 export interface OptionsOverrides {
@@ -118,6 +129,15 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @default auto-detect based on the dependencies
      */
     typescript?: boolean | OptionsTypeScriptWithTypes
+
+    /**
+     * Enable JSX related rules.
+     *
+     * Currently only stylistic rules are included.
+     *
+     * @default true
+     */
+    jsx?: boolean
 
     /**
      * Enable test support.
