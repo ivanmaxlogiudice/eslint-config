@@ -4,13 +4,13 @@ import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import { renameRules } from '../utils'
 import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
 
-export function typescript(options: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {}): ConfigItem[] {
+export function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): ConfigItem[] {
     const {
         componentExts = [],
         overrides = {},
         parserOptions = {},
         tsconfigPath,
-    } = options
+    } = options ?? {}
 
     const typeAwareRules: ConfigItem['rules'] = {
         'dot-notation': 'off',
@@ -83,7 +83,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'no-loss-of-precision': 'off',
                 'no-redeclare': 'off',
                 'no-use-before-define': 'off',
-
+                'no-useless-constructor': 'off',
                 'ts/ban-ts-comment': ['error', {
                     'ts-ignore': 'allow-with-description',
                 }],
@@ -97,13 +97,15 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                 'ts/consistent-type-definitions': ['error', 'interface'],
                 'ts/consistent-type-imports': ['error', {
                     disallowTypeAnnotations: false,
-                    fixStyle: 'inline-type-imports',
+                    prefer: 'type-imports',
                 }],
                 'ts/no-dupe-class-members': 'error',
+                'ts/no-dynamic-delete': 'off',
                 'ts/no-explicit-any': 'off',
                 'ts/no-extraneous-class': 'off',
                 'ts/no-import-type-side-effects': 'error',
                 'ts/no-invalid-this': 'error',
+                'ts/no-invalid-void-type': 'off',
                 'ts/no-loss-of-precision': 'error',
                 'ts/no-non-null-assertion': 'off',
                 'ts/no-redeclare': 'error',
@@ -115,6 +117,7 @@ export function typescript(options: OptionsComponentExts & OptionsOverrides & Op
                     variables: true,
                 }],
                 'ts/no-useless-constructor': 'off',
+                'ts/prefer-ts-expect-error': 'error',
                 'ts/triple-slash-reference': 'off',
                 'ts/unified-signatures': 'off',
 
