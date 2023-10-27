@@ -75,7 +75,7 @@ Add the following settings to your `settings.json`:
 
     // Auto fix
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
+        "source.fixAll.eslint": "explicit",
         "source.organizeImports": "never"
     },
 
