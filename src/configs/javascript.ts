@@ -191,7 +191,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'no-useless-rename': 'error',
                 'no-useless-return': 'error',
                 'no-var': 'error',
-                'no-void': 'error',
                 'no-with': 'error',
                 'object-shorthand': ['error', 'always', {
                     avoidQuotes: true,
