@@ -55,7 +55,7 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: ConfigIte
 
         await fs.writeFile(join(target, 'eslint.config.js'), `
 // @eslint-disable
-import config from '@ivanmaxlogiudice/eslint-config'
+import config from '../../dist/index.js'
 
 export default config(
   ${JSON.stringify(configs)},

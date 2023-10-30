@@ -75,7 +75,6 @@
     },
     "devDependencies": {
         "@antfu/ni": "^0.21.8",
-        "@ivanmaxlogiudice/eslint-config": "workspace:*",
         "@stylistic/eslint-plugin-migrate": "^0.1.2",
         "@types/eslint": "^8.44.6",
         "@types/fs-extra": "^11.0.3",
@@ -92,6 +91,9 @@
         "typescript": "^5.2.2",
         "vitest": "^0.34.6"
     },
+    "workspaces": [
+        "fixtures/*"
+    ],
     "engines": {
         "node": ">=18.12.0"
     },
