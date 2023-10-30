@@ -215,9 +215,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'prefer-spread': 'error',
                 'prefer-template': 'error',
                 'require-await': 'error',
-                'style/arrow-parens': ['error', 'as-needed', {
-                    requireForBlockBody: true,
-                }],
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
                 'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',

@@ -24,6 +24,9 @@ export function stylistic(options: StylisticConfig): ConfigItem[] {
                 'curly': ['error', 'multi-or-nest', 'consistent'],
 
                 'style/array-bracket-spacing': ['error', 'never'],
+                'style/arrow-parens': ['error', 'as-needed', {
+                    requireForBlockBody: true,
+                }],
                 'style/arrow-spacing': ['error', {
                     after: true,
                     before: true,
@@ -38,10 +41,10 @@ export function stylistic(options: StylisticConfig): ConfigItem[] {
                     before: false,
                 }],
                 'style/comma-style': ['error', 'last'],
+
                 'style/computed-property-spacing': ['error', 'never', {
                     enforceForClassMembers: true,
                 }],
-
                 'style/dot-location': ['error', 'property'],
                 'style/eol-last': 'error',
                 'style/func-call-spacing': ['error', 'never'],
