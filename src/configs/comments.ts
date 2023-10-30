@@ -1,5 +1,6 @@
-import { pluginComments } from '../plugins'
 import type { ConfigItem } from '../types'
+
+import { pluginComments } from '../plugins'
 
 export function comments(): ConfigItem[] {
     return [

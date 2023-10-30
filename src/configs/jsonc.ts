@@ -1,11 +1,12 @@
-import { parserJsonc, pluginJsonc } from '../plugins'
-import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
 import type { ConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
+
+import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
+import { parserJsonc, pluginJsonc } from '../plugins'
 
 export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
     const {
-        stylistic = true,
         overrides = {},
+        stylistic = true,
     } = options
 
     const {

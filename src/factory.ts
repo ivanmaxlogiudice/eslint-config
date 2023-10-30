@@ -1,7 +1,8 @@
-import gitignore from 'eslint-config-flat-gitignore'
-import { isPackageExists } from 'local-pkg'
 import fs from 'node:fs'
 import process from 'node:process'
+
+import gitignore from 'eslint-config-flat-gitignore'
+import { isPackageExists } from 'local-pkg'
 
 import type { ConfigItem, OptionsConfig } from './types'
 

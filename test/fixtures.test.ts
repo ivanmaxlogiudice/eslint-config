@@ -1,15 +1,17 @@
 import { join, resolve } from 'node:path'
-import { afterAll, beforeAll, it } from 'vitest'
-import fs from 'fs-extra'
+
 import { execa } from 'execa'
 import fg from 'fast-glob'
+import fs from 'fs-extra'
+import { afterAll, beforeAll, it } from 'vitest'
+
 import type { ConfigItem, OptionsConfig } from '../src/types'
 
 beforeAll(async () => {
-    await fs.rm('_fixtures', { recursive: true, force: true })
+    await fs.rm('_fixtures', { force: true, recursive: true })
 })
 afterAll(async () => {
-    await fs.rm('_fixtures', { recursive: true, force: true })
+    await fs.rm('_fixtures', { force: true, recursive: true })
 })
 
 runWithConfig('js', {
@@ -21,17 +23,17 @@ runWithConfig('all', {
     vue: true,
 })
 runWithConfig('no-style', {
+    stylistic: false,
     typescript: true,
     vue: true,
-    stylistic: false,
 })
 runWithConfig('tab-double-quotes', {
-    typescript: true,
-    vue: true,
     stylistic: {
         indent: 'tab',
         quotes: 'double',
     },
+    typescript: true,
+    vue: true,
 })
 runWithConfig('ts-override', {
     typescript: true,
@@ -67,11 +69,11 @@ export default config(
         })
 
         const files = await fg('**/*', {
+            cwd: target,
             ignore: [
                 'node_modules',
                 'eslint.config.js',
             ],
-            cwd: target,
         })
 
         await Promise.all(files.map(async (file) => {

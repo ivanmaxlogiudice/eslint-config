@@ -1,11 +1,12 @@
-import { pluginAntfu, pluginStylistic } from '../plugins'
 import type { ConfigItem, StylisticConfig } from '../types'
+
+import { pluginAntfu, pluginStylistic } from '../plugins'
 
 export function stylistic(options: StylisticConfig): ConfigItem[] {
     const {
         indent = 4,
-        quotes = 'single',
         jsx = true,
+        quotes = 'single',
     } = options
 
     return [

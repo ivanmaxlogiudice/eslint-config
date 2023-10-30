@@ -52,7 +52,8 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
                 }],
                 'perfectionist/sort-imports': ['error', {
                     'groups': [
-                        ['builtin', 'external'],
+                        'builtin',
+                        'external',
                         'internal-type',
                         'internal',
                         ['parent-type', 'sibling-type', 'index-type'],

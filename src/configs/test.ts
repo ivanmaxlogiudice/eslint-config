@@ -1,6 +1,7 @@
-import { pluginNoOnlyTests, pluginVitest } from '../plugins'
-import { GLOB_TESTS } from '../globs'
 import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
+
+import { GLOB_TESTS } from '../globs'
+import { pluginNoOnlyTests, pluginVitest } from '../plugins'
 
 export function test(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
     const {
