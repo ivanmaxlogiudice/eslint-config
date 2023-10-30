@@ -1,7 +1,10 @@
-import process from 'node:process'
-import fs from 'node:fs'
-import { isPackageExists } from 'local-pkg'
 import gitignore from 'eslint-config-flat-gitignore'
+import { isPackageExists } from 'local-pkg'
+import fs from 'node:fs'
+import process from 'node:process'
+
+import type { ConfigItem, OptionsConfig } from './types'
+
 import {
     comments,
     ignores,
@@ -11,7 +14,7 @@ import {
     jsonc,
     markdown,
     node,
-    sortKeys,
+    perfectionist,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -23,7 +26,6 @@ import {
     yaml,
 } from './configs'
 import { combine } from './utils'
-import type { ConfigItem, OptionsConfig } from './types'
 
 const flatConfigProps: (keyof ConfigItem)[] = [
     'files',
@@ -53,13 +55,13 @@ const UnocssPackages = [
  */
 export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
     const {
+        componentExts = [],
+        gitignore: enableGitignore = true,
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
-        vue: enableVue = VuePackages.some(i => isPackageExists(i)),
+        overrides = {},
         typescript: enableTypeScript = isPackageExists('typescript'),
         unocss: enableUnocss = UnocssPackages.some(i => isPackageExists(i)),
-        gitignore: enableGitignore = true,
-        overrides = {},
-        componentExts = [],
+        vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
 
     const stylisticOptions = options.stylistic === false
@@ -92,6 +94,9 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
         }),
         comments(),
         node(),
+        perfectionist({
+            overrides: overrides.perfectionist,
+        }),
         jsdoc({
             stylistic: stylisticOptions,
         }),
@@ -99,9 +104,6 @@ export function config(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
             stylistic: stylisticOptions,
         }),
         unicorn(),
-
-        // Optional plugins (not enabled by default)
-        sortKeys(),
     )
 
     if (enableVue)

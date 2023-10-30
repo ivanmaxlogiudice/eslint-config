@@ -1,5 +1,6 @@
-import { pluginAntfu, pluginImport } from '../plugins'
 import type { ConfigItem, OptionsStylistic } from '../types'
+
+import { pluginAntfu, pluginImport } from '../plugins'
 
 export function imports(options: OptionsStylistic = {}): ConfigItem[] {
     const {
@@ -23,23 +24,6 @@ export function imports(options: OptionsStylistic = {}): ConfigItem[] {
                 'import/no-named-default': 'error',
                 'import/no-self-import': 'error',
                 'import/no-webpack-loader-syntax': 'error',
-                'import/order': ['error', {
-                    groups: [
-                        'builtin',
-                        'external',
-                        'internal',
-                        'parent',
-                        'sibling',
-                        'index',
-                        'object',
-                        'type',
-                    ],
-                    pathGroups: [{
-                        group: 'internal',
-                        pattern: '{{@,~}/,#}**',
-                    }],
-                    pathGroupsExcludedImportTypes: ['type'],
-                }],
 
                 ...stylistic
                     ? {

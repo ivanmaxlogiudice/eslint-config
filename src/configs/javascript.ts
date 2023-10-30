@@ -1,7 +1,9 @@
 import globals from 'globals'
-import { pluginAntfu, pluginPromise, pluginUnusedImports } from '../plugins'
-import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
+
 import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
+
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
+import { pluginAntfu, pluginPromise, pluginUnusedImports } from '../plugins'
 
 export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
     const {
@@ -216,13 +218,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'prefer-spread': 'error',
                 'prefer-template': 'error',
                 'require-await': 'error',
-                'sort-imports': ['error', {
-                    allowSeparatedGroups: false,
-                    ignoreCase: false,
-                    ignoreDeclarationSort: true,
-                    ignoreMemberSort: false,
-                    memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-                }],
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
                 'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',

@@ -1,5 +1,3 @@
-import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type { ParserOptions } from '@typescript-eslint/parser'
 import type {
     EslintCommentsRules,
     EslintRules,
@@ -19,8 +17,10 @@ import type {
     VueRules,
     YmlRules,
 } from '@antfu/eslint-define-config'
-import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
 import type { UnprefixedRuleOptions } from '@stylistic/eslint-plugin'
+import type { ParserOptions } from '@typescript-eslint/parser'
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
+import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
 
 type StylisticMergedRules = MergeIntersection<
     EslintRules &
@@ -94,13 +94,13 @@ export interface OptionsHasTypeScript {
 }
 
 export interface OptionsStylistic {
-    stylistic?: boolean | StylisticConfig
+    stylistic?: StylisticConfig | boolean
 }
 
 export interface StylisticConfig {
-    indent?: number | 'tab'
-    quotes?: 'single' | 'double'
+    indent?: 'tab' | number
     jsx?: boolean
+    quotes?: 'double' | 'single'
 }
 
 export interface OptionsOverrides {
@@ -120,16 +120,20 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @see https://github.com/antfu/eslint-config-flat-gitignore
      * @default true
      */
-    gitignore?: boolean | FlatGitignoreOptions
+    gitignore?: FlatGitignoreOptions | boolean
 
     /**
-     * Enable TypeScript support.
-     *
-     * Passing an object to enable TypeScript Language Server support.
-     *
-     * @default auto-detect based on the dependencies
+     * Control to disable some rules in editors.
+     * @default auto-detect based on the process.env
      */
-    typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions
+    isInEditor?: boolean
+
+    /**
+     * Enable JSONC support.
+     *
+     * @default true
+     */
+    jsonc?: boolean
 
     /**
      * Enable JSX related rules.
@@ -141,34 +145,6 @@ export interface OptionsConfig extends OptionsComponentExts {
     jsx?: boolean
 
     /**
-     * Enable test support.
-     *
-     * @default true
-     */
-    test?: boolean
-
-    /**
-     * Enable Vue support.
-     *
-     * @default auto-detect based on the dependencies
-     */
-    vue?: boolean
-
-    /**
-     * Enable JSONC support.
-     *
-     * @default true
-     */
-    jsonc?: boolean
-
-    /**
-     * Enable YAML support.
-     *
-     * @default true
-     */
-    yaml?: boolean
-
-    /**
      * Enable Markdown support.
      *
      * @default true
@@ -176,11 +152,41 @@ export interface OptionsConfig extends OptionsComponentExts {
     markdown?: boolean
 
     /**
+     * Provide overrides for rules for each integration.
+     */
+    overrides?: {
+        javascript?: ConfigItem['rules']
+        jsonc?: ConfigItem['rules']
+        markdown?: ConfigItem['rules']
+        perfectionist?: ConfigItem['rules']
+        test?: ConfigItem['rules']
+        typescript?: ConfigItem['rules']
+        vue?: ConfigItem['rules']
+        yaml?: ConfigItem['rules']
+    }
+
+    /**
      * Enable stylistic rules.
      *
      * @default true
      */
-    stylistic?: boolean | StylisticConfig
+    stylistic?: StylisticConfig | boolean
+
+    /**
+     * Enable test support.
+     *
+     * @default true
+     */
+    test?: boolean
+
+    /**
+     * Enable TypeScript support.
+     *
+     * Passing an object to enable TypeScript Language Server support.
+     *
+     * @default auto-detect based on the dependencies
+     */
+    typescript?: OptionsTypeScriptParserOptions | OptionsTypeScriptWithTypes | boolean
 
     /**
      * Enable unocss rules.
@@ -190,21 +196,16 @@ export interface OptionsConfig extends OptionsComponentExts {
     unocss?: boolean
 
     /**
-     * Control to disable some rules in editors.
-     * @default auto-detect based on the process.env
+     * Enable Vue support.
+     *
+     * @default auto-detect based on the dependencies
      */
-    isInEditor?: boolean
+    vue?: boolean
 
     /**
-     * Provide overrides for rules for each integration.
+     * Enable YAML support.
+     *
+     * @default true
      */
-    overrides?: {
-        javascript?: ConfigItem['rules']
-        jsonc?: ConfigItem['rules']
-        markdown?: ConfigItem['rules']
-        test?: ConfigItem['rules']
-        typescript?: ConfigItem['rules']
-        vue?: ConfigItem['rules']
-        yaml?: ConfigItem['rules']
-    }
+    yaml?: boolean
 }
