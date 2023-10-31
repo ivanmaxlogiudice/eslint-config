@@ -7,7 +7,7 @@ based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 ## Features
 - Single quotes, no semi
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
-- Designed to work with TypeScript, Vue out-of-box
+- Designed to work with TypeScript, JSX, Vue out-of-box
 - Lint also for json, yaml, markdown
 - Sorted imports, dangling commas
 - Reasonable defaults, best practices, only one-line of config
