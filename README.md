@@ -14,6 +14,7 @@ based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 - Respects `.gitignore` by default
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+- Using [ESLint Perfectionist](https://github.com/azat-io/eslint-plugin-perfectionist) for sorting
 - **Style principle**: Minimal for reading, stable for diff, consistent
 
 ## Usage
@@ -195,6 +196,7 @@ import {
     jsonc,
     markdown,
     node,
+    perfectionist,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -215,6 +217,7 @@ export default [
     ...jsonc(),
     ...markdown(),
     ...node(),
+    ...perfectionist(),
     ...sortPackageJson(),
     ...sortTsconfig(),
     ...stylistic(),
