@@ -316,6 +316,9 @@ import config from '@ivanmaxlogiudice/eslint-config'
 export default config({
     typescript: {
         tsconfigPath: 'tsconfig.json',
+
+        // or if you have multiple tsconfigs
+        tsconfigPath: ['tsconfig.json', 'tsconfig.node.json', 'packages/*/tsconfig.json']
     },
 })
 ```

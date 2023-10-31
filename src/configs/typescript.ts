@@ -4,14 +4,13 @@ import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScr
 
 import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
-import { renameRules } from '../utils'
+import { renameRules, toArray } from '../utils'
 
 export function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): ConfigItem[] {
     const {
         componentExts = [],
         overrides = {},
         parserOptions = {},
-        tsconfigPath,
     } = options ?? {}
 
     const typeAwareRules: ConfigItem['rules'] = {
@@ -36,6 +35,10 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         'ts/unbound-method': 'error',
     }
 
+    const tsconfigPath = options?.tsconfigPath
+        ? toArray(options.tsconfigPath)
+        : undefined
+
     return [
         {
             name: 'config:typescript:setup',
@@ -57,7 +60,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                     sourceType: 'module',
                     ...tsconfigPath
                         ? {
-                                project: [tsconfigPath],
+                                project: tsconfigPath,
                                 tsconfigRootDir: process.cwd(),
                             }
                         : {},
