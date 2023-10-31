@@ -104,10 +104,6 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
                     order: 'asc',
                     type: 'natural',
                 }],
-                'perfectionist/sort-vue-attributes': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
 
                 ...overrides,
             },
