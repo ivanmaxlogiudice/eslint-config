@@ -7,7 +7,9 @@ on:
 
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,6 +18,9 @@ jobs:
 
       - name: Install bun
         uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        uses: bun install
 
       - name: Generate changelog
         run: bunx changelogithub
