@@ -1,5 +1,4 @@
 import type { ConfigItem } from '../types'
-
 import { pluginUnicorn } from '../plugins'
 
 export function unicorn(): ConfigItem[] {

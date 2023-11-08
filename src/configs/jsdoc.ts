@@ -1,5 +1,4 @@
 import type { ConfigItem, OptionsStylistic } from '../types'
-
 import { pluginJsdoc } from '../plugins'
 
 export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {

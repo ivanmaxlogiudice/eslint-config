@@ -1,5 +1,4 @@
 import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
-
 import { GLOB_TESTS } from '../globs'
 import { pluginNoOnlyTests, pluginVitest } from '../plugins'
 

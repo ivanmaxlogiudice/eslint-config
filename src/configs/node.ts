@@ -1,5 +1,4 @@
 import type { ConfigItem } from '../types'
-
 import { pluginNode } from '../plugins'
 
 export function node(): ConfigItem[] {

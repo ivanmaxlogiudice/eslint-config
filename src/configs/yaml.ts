@@ -1,5 +1,4 @@
 import type { ConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
-
 import { GLOB_YAML } from '../globs'
 import { parserYaml, pluginYaml } from '../plugins'
 

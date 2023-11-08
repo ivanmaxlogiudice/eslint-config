@@ -1,5 +1,4 @@
 import type { ConfigItem, StylisticConfig } from '../types'
-
 import { pluginAntfu, pluginStylistic } from '../plugins'
 
 export function stylistic(options: StylisticConfig): ConfigItem[] {

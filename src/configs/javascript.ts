@@ -1,7 +1,5 @@
 import globals from 'globals'
-
 import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
-
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 import { pluginAntfu, pluginPromise, pluginUnusedImports } from '../plugins'
 

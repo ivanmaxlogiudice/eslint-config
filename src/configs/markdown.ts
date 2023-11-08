@@ -1,5 +1,4 @@
 import type { ConfigItem, OptionsComponentExts, OptionsOverrides } from '../types'
-
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
 import { pluginMarkdown } from '../plugins'
 
