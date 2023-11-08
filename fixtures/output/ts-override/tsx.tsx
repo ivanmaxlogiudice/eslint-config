@@ -8,7 +8,7 @@ export function jsx2() {
         b: 2,
     }
     return (
-        <a bar="foo" foo="bar">
+        <a foo="bar" bar="foo">
             <div
                 {...props}
                 a={1}

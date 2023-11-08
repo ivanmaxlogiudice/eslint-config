@@ -1,15 +1,15 @@
 // Define a TypeScript interface
 interface Person { 
-  age: number; 
-name: string;
+  name: string; 
+age: number;
 }
 
 // Create an array of objects with the defined interface
 const people: Person[] = [
-  { age: 30, name: 'Alice' },
- { age: 25, name: 'Bob' },
-  { age: 35, 
-  name: 'Charlie' }
+  { name: 'Alice', age: 30 },
+ { name: 'Bob', age: 25 },
+  { name: 'Charlie', 
+  age: 35 }
 ];
 
 // eslint-disable-next-line no-console

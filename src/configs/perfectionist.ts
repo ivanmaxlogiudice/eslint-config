@@ -1,5 +1,4 @@
 import type { ConfigItem, OptionsOverrides } from '../types'
-
 import { pluginPerfectionist } from '../plugins'
 
 export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
@@ -17,15 +16,6 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
         {
             name: 'config:perfectionist:rules',
             rules: {
-                'perfectionist/sort-array-includes': ['error', {
-                    'order': 'asc',
-                    'spread-last': true,
-                    'type': 'natural',
-                }],
-                'perfectionist/sort-astro-attributes': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
                 'perfectionist/sort-classes': ['error', {
                     groups: [
                         'index-signature',
@@ -39,10 +29,6 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
                         ['get-method', 'set-method'],
                         'unknown',
                     ],
-                    order: 'asc',
-                    type: 'natural',
-                }],
-                'perfectionist/sort-enums': ['error', {
                     order: 'asc',
                     type: 'natural',
                 }],
@@ -63,21 +49,9 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
                         'unknown',
                     ],
                     'internal-pattern': ['{{@,~}/,#}**'],
-                    'newlines-between': 'always',
+                    'newlines-between': 'never',
                     'order': 'asc',
                     'type': 'natural',
-                }],
-                'perfectionist/sort-interfaces': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
-                'perfectionist/sort-jsx-props': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
-                'perfectionist/sort-maps': ['error', {
-                    order: 'asc',
-                    type: 'natural',
                 }],
                 'perfectionist/sort-named-exports': ['error', {
                     order: 'asc',
@@ -87,23 +61,50 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
                     order: 'asc',
                     type: 'natural',
                 }],
-                'perfectionist/sort-object-types': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
-                'perfectionist/sort-objects': ['error', {
-                    'order': 'asc',
-                    'partition-by-comment': true,
-                    'type': 'natural',
-                }],
-                'perfectionist/sort-svelte-attributes': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
-                'perfectionist/sort-union-types': ['error', {
-                    order: 'asc',
-                    type: 'natural',
-                }],
+
+                // 'perfectionist/sort-array-includes': ['error', {
+                //     'order': 'asc',
+                //     'spread-last': true,
+                //     'type': 'natural',
+                // }],
+                // 'perfectionist/sort-astro-attributes': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                // 'perfectionist/sort-enums': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                // 'perfectionist/sort-interfaces': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                // 'perfectionist/sort-jsx-props': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                // 'perfectionist/sort-maps': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                //
+                // 'perfectionist/sort-object-types': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                // 'perfectionist/sort-objects': ['error', {
+                //     'order': 'asc',
+                //     'partition-by-comment': true,
+                //     'type': 'natural',
+                // }],
+                // 'perfectionist/sort-svelte-attributes': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
+                // 'perfectionist/sort-union-types': ['error', {
+                //     order: 'asc',
+                //     type: 'natural',
+                // }],
 
                 ...overrides,
             },
