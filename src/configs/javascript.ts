@@ -41,8 +41,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'unused-imports': pluginUnusedImports,
             },
             rules: {
-                ...pluginPromise.configs.recommended.rules,
-
                 'accessor-pairs': ['error', {
                     enforceForClassMembers: true,
                     setWithoutGet: true,
@@ -231,6 +229,13 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 }],
                 'vars-on-top': 'error',
                 'yoda': ['error', 'never'],
+
+                // Promise
+                ...pluginPromise.configs.recommended.rules,
+
+                'promise/always-return': ['error', {
+                    ignoreLastCallback: true,
+                }],
 
                 ...overrides,
             },
