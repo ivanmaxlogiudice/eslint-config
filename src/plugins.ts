@@ -3,11 +3,13 @@
 
 export { default as pluginStylistic } from '@stylistic/eslint-plugin'
 export { default as pluginTs } from '@typescript-eslint/eslint-plugin'
+
 /**
  * Parsers
  */
 export * as parserTs from '@typescript-eslint/parser'
 export { default as pluginUnocss } from '@unocss/eslint-plugin'
+
 /**
  * Plugins
  */

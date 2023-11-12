@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "ESNext",
-        "lib": ["ESNext"],
+        "lib": ["ES2022"],
         "baseUrl": ".",
         "module": "ESNext",
         "moduleResolution": "Bundler",

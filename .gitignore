@@ -79,3 +79,4 @@ dist
 
 *.lerna_backup
 _fixtures
+.temp

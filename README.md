@@ -59,6 +59,20 @@ For example:
 }
 ```
 
+### Migration
+
+We provided an experimental cli tool to help you migrate from the legacy config to the new flat config.
+
+```bash
+# npm
+npx @ivanmaxlogiudice/eslint-config migrate
+
+# pnpm
+pnpm dlx @ivanmaxlogiudice/eslint-config migrate
+```
+
+Before running the migration, make sure to commit your changes first.
+
 ## VS Code support (auto fix)
 
 Install [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
