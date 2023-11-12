@@ -106,8 +106,10 @@ module.exports = config({\n${configContent}\n})
         console.log(`  ${c.red('-')} ${c.dim(legacyDependencies.join(', '))}`)
     }
 
-    // Need to update the eslint version? (not the latest version AND its minor that version 8)
-    const updateESLintVersion = dependencies?.eslint !== 'latest' && (dependencies?.eslint || '').match(/\d+/)?.[0] < 8
+    // Need to update the eslint version?
+    const updateESLintVersion = pkg.devDependencies?.eslint
+        ? pkg.devDependencies.eslint !== 'latest' && pkg.devDependencies.eslint.match(/\d+/)?.[0] < 8
+        : true
 
     // Update .vscode/settings.json
     let prompResult: prompts.Answers<'updateVscodeSettings' | 'updateESLintVersion'> = {
