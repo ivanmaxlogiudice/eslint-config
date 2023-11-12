@@ -7,6 +7,7 @@ import detectIndent from 'detect-indent'
 import parse from 'parse-gitignore'
 import c from 'picocolors'
 import prompts from 'prompts'
+import { devDependencies } from '../../package.json'
 import { ARROW, CHECK, CROSS, WARN, version, vscodeSettingsString } from './constants'
 import { isGitClean, throwError } from './utils'
 
@@ -30,12 +31,13 @@ export async function migrate() {
     console.log(`\n${ARROW} Installing ${c.green('@ivanmaxlogiudice/eslint-config')} to v${c.yellow(version)}.\n`)
 
     const pkgContent = await fsp.readFile(pathPackageJSON, 'utf-8')
+    const pkgIndent = detectIndent(pkgContent).indent || 2
     const pkg: Record<string, any> = JSON.parse(pkgContent)
 
     pkg.devDependencies ??= {}
     pkg.devDependencies['@ivanmaxlogiudice/eslint-config'] = `^${version}`
 
-    await fsp.writeFile(pathPackageJSON, JSON.stringify(pkg, null, detectIndent(pkgContent).indent || 2))
+    await fsp.writeFile(pathPackageJSON, JSON.stringify(pkg, null, pkgIndent))
 
     console.log(`${CHECK} Changes wrote to package.json`)
 
@@ -104,8 +106,12 @@ module.exports = config({\n${configContent}\n})
         console.log(`  ${c.red('-')} ${c.dim(legacyDependencies.join(', '))}`)
     }
 
+    // Need to update the eslint version? (not the latest version AND its minor that version 8)
+    const updateESLintVersion = dependencies?.eslint !== 'latest' && (dependencies?.eslint || '').match(/\d+/)?.[0] < 8
+
     // Update .vscode/settings.json
-    let prompResult: prompts.Answers<'updateVscodeSettings'> = {
+    let prompResult: prompts.Answers<'updateVscodeSettings' | 'updateESLintVersion'> = {
+        updateESLintVersion,
         updateVscodeSettings: true,
     }
 
@@ -113,12 +119,20 @@ module.exports = config({\n${configContent}\n})
         console.log()
 
         try {
-            prompResult = await prompts({
-                initial: true,
-                message: 'Update .vscode/settings.json for better VSCode experience?',
-                name: 'updateVscodeSettings',
-                type: 'confirm',
-            }, {
+            prompResult = await prompts([
+                {
+                    initial: true,
+                    message: 'Update .vscode/settings.json for better VSCode experience?',
+                    name: 'updateVscodeSettings',
+                    type: 'confirm',
+                },
+                {
+                    initial: true,
+                    message: 'Update ESLint to the latest version?',
+                    name: 'updateESLintVersion',
+                    type: 'confirm',
+                },
+            ], {
                 onCancel() {
                     throw new Error('Cancelled')
                 },
@@ -153,6 +167,14 @@ module.exports = config({\n${configContent}\n})
             console.log(`${CHECK} Updated ${c.green('.vscode/settings.json')} successfully.`)
             console.log(`${WARN} You need to check if there is any conflict between duplicate keys.\n`)
         }
+    }
+
+    if (prompResult.updateESLintVersion) {
+        pkg.devDependencies.eslint = devDependencies.eslint
+
+        await fsp.writeFile(pathPackageJSON, JSON.stringify(pkg, null, pkgIndent))
+
+        console.log(`${CHECK} Updated ${c.green('eslint')} to the version ${c.yellow(devDependencies.eslint)}.\n`)
     }
 
     // Migration completed
