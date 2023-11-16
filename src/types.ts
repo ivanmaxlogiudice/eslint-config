@@ -7,37 +7,33 @@ import type {
     MergeIntersection,
     NRules,
     Prefix,
-    ReactRules,
     RenamePrefix,
     RuleConfig,
-    TypeScriptRules,
-    UnicornRules,
-    Unprefix,
     VitestRules,
     VueRules,
     YmlRules,
 } from '@antfu/eslint-define-config'
-import type { UnprefixedRuleOptions } from '@stylistic/eslint-plugin'
+import type { RuleOptions as JSDocRules } from '@eslint-types/jsdoc/types'
+import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types'
+import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types'
+import type { UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
 
-type StylisticMergedRules = MergeIntersection<
-    EslintRules &
-    Unprefix<ReactRules, 'react/'> &
-    Unprefix<TypeScriptRules, '@typescript-eslint/'>
-    & { 'jsx-self-closing-comp': ReactRules['react/self-closing-comp'] }
->
+export type WrapRuleConfig<T extends { [key: string]: any }> = {
+    [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
+}
 
-type StylisticRules = Pick<StylisticMergedRules, keyof UnprefixedRuleOptions>
-
-export type Rules = MergeIntersection<
+export type Rules = WrapRuleConfig<
+  MergeIntersection<
     RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
     RenamePrefix<VitestRules, 'vitest/', 'test/'> &
     RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
     RenamePrefix<NRules, 'n/', 'node/'> &
     Prefix<StylisticRules, 'style/'> &
     Prefix<AntfuRules, 'antfu/'> &
+    JSDocRules &
     ImportRules &
     EslintRules &
     JsoncRules &
@@ -47,6 +43,7 @@ export type Rules = MergeIntersection<
     {
         'test/no-only-tests': RuleConfig<[]>
     }
+  >
 >
 
 export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
