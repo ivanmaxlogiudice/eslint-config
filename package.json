@@ -1,6 +1,6 @@
 {
     "name": "@ivanmaxlogiudice/eslint-config",
-    "version": "1.0.0-beta.18",
+    "version": "1.0.0",
     "packageManager": "pnpm@8.10.5",
     "description": "Personal ESLint config",
     "type": "module",
