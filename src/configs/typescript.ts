@@ -80,7 +80,6 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
 
                 'antfu/generic-spacing': 'error',
                 'antfu/named-tuple-spacing': 'error',
-                'antfu/no-cjs-exports': 'error',
 
                 'no-dupe-class-members': 'off',
                 'no-invalid-this': 'off',
