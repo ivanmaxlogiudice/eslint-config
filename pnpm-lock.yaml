@@ -45,8 +45,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1
       eslint-plugin-antfu:
-        specifier: ^1.0.3
-        version: 1.0.3(eslint@8.53.0)
+        specifier: ^1.0.9
+        version: 1.0.9(eslint@8.53.0)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
         version: 3.2.0(eslint@8.53.0)
@@ -1541,8 +1541,8 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-plugin-antfu@1.0.3(eslint@8.53.0):
-    resolution: {integrity: sha512-KwC4qcSGGxAsyUrks4UtqEhUI31xTMf6cyr5Jh63XMlOqPBHNKLTqnW8Fr7Pn+mSt7gEmcKygPtPZbOlxq9W4g==}
+  /eslint-plugin-antfu@1.0.9(eslint@8.53.0):
+    resolution: {integrity: sha512-7/IkVmqTjymwsb9JRyHDCDFAOWTBXSNYtPVOPmd+DymIWsQeBxXDJLzBmZLZ0/ml7sfXEtYrUrzhGZCtsYxe2w==}
     peerDependencies:
       eslint: '*'
     dependencies:

@@ -18,6 +18,9 @@ export function stylistic(options: StylisticConfig): ConfigItem[] {
             rules: {
                 'antfu/consistent-list-newline': 'error',
                 'antfu/if-newline': 'error',
+                'antfu/indent-binary-ops': ['error', {
+                    indent,
+                }],
                 'antfu/top-level-function': 'error',
 
                 'curly': ['error', 'multi-or-nest', 'consistent'],
