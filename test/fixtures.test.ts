@@ -4,6 +4,7 @@ import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { afterAll, beforeAll, it } from 'vitest'
 import type { ConfigItem, OptionsConfig } from '../src/types'
+import { GLOB_JSX } from '../src/globs'
 
 beforeAll(async () => {
     await fs.rm('_fixtures', { force: true, recursive: true })
@@ -12,6 +13,17 @@ afterAll(async () => {
     await fs.rm('_fixtures', { force: true, recursive: true })
 })
 
+/**
+ * (node:11912) DeprecationWarning: The 'typeParameters' property is deprecated on JSXOpeningElement nodes.
+ * Use 'typeArguments' instead. See https://typescript-eslint.io/linting/troubleshooting#the-key-property-is-deprecated-on-type-nodes-use-key-instead-warnings.
+ */
+const overrideJsx: ConfigItem = {
+    files: [GLOB_JSX],
+    rules: {
+        'style/object-curly-newline': 'off',
+    },
+}
+
 runWithConfig('js', {
     typescript: false,
     vue: false,
@@ -19,7 +31,7 @@ runWithConfig('js', {
 runWithConfig('all', {
     typescript: true,
     vue: true,
-})
+}, overrideJsx)
 runWithConfig('no-style', {
     stylistic: false,
     typescript: true,
@@ -32,14 +44,18 @@ runWithConfig('tab-double-quotes', {
     },
     typescript: true,
     vue: true,
-})
+}, {
+    rules: {
+        'style/no-mixed-spaces-and-tabs': 'off',
+    },
+}, overrideJsx)
 runWithConfig('ts-override', {
     typescript: true,
 }, {
     rules: {
         'ts/consistent-type-definitions': ['error', 'type'],
     },
-})
+}, overrideJsx)
 
 function runWithConfig(name: string, configs: OptionsConfig, ...items: ConfigItem[]) {
     it.concurrent(name, async ({ expect }) => {
