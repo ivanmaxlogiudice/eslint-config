@@ -49,7 +49,7 @@ export function stylistic(options: StylisticConfig): ConfigItem[] {
                 }],
                 'style/dot-location': ['error', 'property'],
                 'style/eol-last': 'error',
-                'style/func-call-spacing': ['error', 'never'],
+                'style/function-call-spacing': ['error', 'never'],
                 'style/indent': ['error', indent, {
                     ArrayExpression: 1,
                     CallExpression: { arguments: 1 },

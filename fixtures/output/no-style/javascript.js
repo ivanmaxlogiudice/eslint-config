@@ -18,7 +18,7 @@ sayHello() {
 
 // Create an array of objects
 const people = [
-  new Person('Alice', 30),
+  new Person ('Alice', 30),
   new Person('Bob', 25),
   new Person('Charlie', 35)
 ];
