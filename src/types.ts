@@ -27,22 +27,22 @@ export type WrapRuleConfig<T extends { [key: string]: any }> = {
 
 export type Rules = WrapRuleConfig<
   MergeIntersection<
-    RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
-    RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-    RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-    RenamePrefix<NRules, 'n/', 'node/'> &
-    Prefix<StylisticRules, 'style/'> &
-    Prefix<AntfuRules, 'antfu/'> &
-    JSDocRules &
-    ImportRules &
-    EslintRules &
-    JsoncRules &
-    VueRules &
-    UnicornRules &
-    EslintCommentsRules &
-    {
-        'test/no-only-tests': RuleConfig<[]>
-    }
+      RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
+      RenamePrefix<VitestRules, 'vitest/', 'test/'> &
+      RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
+      RenamePrefix<NRules, 'n/', 'node/'> &
+      Prefix<StylisticRules, 'style/'> &
+      Prefix<AntfuRules, 'antfu/'> &
+      JSDocRules &
+      ImportRules &
+      EslintRules &
+      JsoncRules &
+      VueRules &
+      UnicornRules &
+      EslintCommentsRules &
+      {
+          'test/no-only-tests': RuleConfig<[]>
+      }
   >
 >
 
