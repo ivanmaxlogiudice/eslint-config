@@ -1,17 +1,19 @@
 import process from 'node:process'
-import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
+import type { FlatConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
 import { GLOB_SRC } from '../globs'
-import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
-import { renameRules, toArray } from '../utils'
+import { pluginAntfu, pluginImport } from '../plugins'
+import { interopDefault, renameRules, toArray } from '../utils'
 
-export function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): ConfigItem[] {
+export async function typescript(
+    options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
+): Promise<FlatConfigItem[]> {
     const {
         componentExts = [],
         overrides = {},
         parserOptions = {},
     } = options ?? {}
 
-    const typeAwareRules: ConfigItem['rules'] = {
+    const typeAwareRules: FlatConfigItem['rules'] = {
         'dot-notation': 'off',
         'no-implied-eval': 'off',
         'no-throw-literal': 'off',
@@ -36,6 +38,14 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
     const tsconfigPath = options?.tsconfigPath
         ? toArray(options.tsconfigPath)
         : undefined
+
+    const [
+        pluginTs,
+        parserTs,
+    ] = await Promise.all([
+        interopDefault(import('@typescript-eslint/eslint-plugin')),
+        interopDefault(import('@typescript-eslint/parser')),
+    ] as const)
 
     return [
         {

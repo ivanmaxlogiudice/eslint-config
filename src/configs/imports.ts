@@ -1,7 +1,7 @@
-import type { ConfigItem, OptionsStylistic } from '../types'
+import type { FlatConfigItem, OptionsStylistic } from '../types'
 import { pluginAntfu, pluginImport } from '../plugins'
 
-export function imports(options: OptionsStylistic = {}): ConfigItem[] {
+export function imports(options: OptionsStylistic = {}): FlatConfigItem[] {
     const {
         stylistic = true,
     } = options
