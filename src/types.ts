@@ -18,12 +18,15 @@ import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-es
 import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types'
 import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin'
 import type { ParserOptions } from '@typescript-eslint/parser'
+import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
     [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
 }
+
+export type Awaitable<T> = T | Promise<T>
 
 export type Rules = WrapRuleConfig<
   MergeIntersection<
@@ -46,7 +49,7 @@ export type Rules = WrapRuleConfig<
   >
 >
 
-export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
     /**
      * Custom name of each config item
      */
@@ -60,6 +63,8 @@ export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
      */
     plugins?: Record<string, any>
 }
+
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
 
 export interface OptionsComponentExts {
     /**
@@ -98,7 +103,7 @@ export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent
 }
 
 export interface OptionsOverrides {
-    overrides?: ConfigItem['rules']
+    overrides?: FlatConfigItem['rules']
 }
 
 export interface OptionsIsInEditor {
@@ -149,14 +154,14 @@ export interface OptionsConfig extends OptionsComponentExts {
      * Provide overrides for rules for each integration.
      */
     overrides?: {
-        javascript?: ConfigItem['rules']
-        jsonc?: ConfigItem['rules']
-        markdown?: ConfigItem['rules']
-        perfectionist?: ConfigItem['rules']
-        test?: ConfigItem['rules']
-        typescript?: ConfigItem['rules']
-        vue?: ConfigItem['rules']
-        yaml?: ConfigItem['rules']
+        javascript?: FlatConfigItem['rules']
+        jsonc?: FlatConfigItem['rules']
+        markdown?: FlatConfigItem['rules']
+        perfectionist?: FlatConfigItem['rules']
+        test?: FlatConfigItem['rules']
+        typescript?: FlatConfigItem['rules']
+        vue?: FlatConfigItem['rules']
+        yaml?: FlatConfigItem['rules']
     }
 
     /**

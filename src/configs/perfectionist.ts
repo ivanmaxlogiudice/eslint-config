@@ -1,10 +1,13 @@
-import type { ConfigItem, OptionsOverrides } from '../types'
-import { pluginPerfectionist } from '../plugins'
+import type { FlatConfigItem, OptionsOverrides } from '../types'
+import { interopDefault } from '../utils'
 
-export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
+export async function perfectionist(options: OptionsOverrides = {}): Promise<FlatConfigItem[]> {
     const {
         overrides = {},
     } = options
+
+    // @ts-expect-error Missing types
+    const pluginPerfectionist = await interopDefault(import('eslint-plugin-perfectionist'))
 
     return [
         {
@@ -61,50 +64,6 @@ export function perfectionist(options: OptionsOverrides = {}): ConfigItem[] {
                     order: 'asc',
                     type: 'natural',
                 }],
-
-                // 'perfectionist/sort-array-includes': ['error', {
-                //     'order': 'asc',
-                //     'spread-last': true,
-                //     'type': 'natural',
-                // }],
-                // 'perfectionist/sort-astro-attributes': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                // 'perfectionist/sort-enums': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                // 'perfectionist/sort-interfaces': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                // 'perfectionist/sort-jsx-props': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                // 'perfectionist/sort-maps': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                //
-                // 'perfectionist/sort-object-types': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                // 'perfectionist/sort-objects': ['error', {
-                //     'order': 'asc',
-                //     'partition-by-comment': true,
-                //     'type': 'natural',
-                // }],
-                // 'perfectionist/sort-svelte-attributes': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
-                // 'perfectionist/sort-union-types': ['error', {
-                //     order: 'asc',
-                //     type: 'natural',
-                // }],
 
                 ...overrides,
             },

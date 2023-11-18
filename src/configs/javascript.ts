@@ -1,13 +1,24 @@
 import globals from 'globals'
-import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
+import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
-import { pluginAntfu, pluginPromise, pluginUnusedImports } from '../plugins'
+import { pluginAntfu } from '../plugins'
+import { interopDefault } from '../utils'
 
-export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
+export async function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
     const {
         isInEditor = false,
         overrides = {},
     } = options
+
+    const [
+        pluginPromise,
+        pluginUnusedImports,
+    ] = await Promise.all([
+        // @ts-expect-error Missing types
+        interopDefault(import('eslint-plugin-promise')),
+        // @ts-expect-error Missing types
+        interopDefault(import('eslint-plugin-unused-imports')),
+    ] as const)
 
     return [
         {

@@ -1,12 +1,14 @@
-import type { ConfigItem } from '../types'
-import { pluginUnocss } from '../plugins'
+import type { FlatConfigItem } from '../types'
+import { interopDefault } from '../utils'
 
-export function unocss(): ConfigItem[] {
+export async function unocss(): Promise<FlatConfigItem[]> {
+    const pluginUnocss = await interopDefault(import('@unocss/eslint-plugin'))
+
     return [
         {
             name: 'config:unocss',
             plugins: {
-                '@unocss': pluginUnocss as any,
+                '@unocss': pluginUnocss,
             },
             rules: {
                 ...pluginUnocss.configs.recommended.rules,
