@@ -84,7 +84,6 @@
         "yaml-eslint-parser": "^1.2.2"
     },
     "devDependencies": {
-        "@stylistic/eslint-plugin-migrate": "^1.4.0",
         "@types/eslint": "^8.44.7",
         "@types/fs-extra": "^11.0.4",
         "@types/node": "^20.9.1",

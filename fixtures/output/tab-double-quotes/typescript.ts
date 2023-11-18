@@ -8,10 +8,7 @@ interface Person {
 const people: Person[] = [
 	{ name: "Alice", age: 30 },
 	{ name: "Bob", age: 25 },
-	{
-		name: "Charlie",
-		age: 35,
-	},
+	{ name: "Charlie",		age: 35 },
 ]
 
 // eslint-disable-next-line no-console
@@ -43,7 +40,6 @@ const car1: Car = { make: "Toyota" }
 const car2: Car = {
 	make: "Ford",
 	model: "Focus",
-
 }
 
 // Use union types
