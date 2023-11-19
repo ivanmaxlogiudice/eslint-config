@@ -27,7 +27,7 @@ async function createMockDir() {
     await fs.ensureDir(genPath)
 
     await Promise.all([
-        fs.writeFile(join(genPath, 'package.json'), JSON.stringify({ devDependencies: { prettier: 'latest', eslint: '7.32.0' } }, null, 2)),
+        fs.writeFile(join(genPath, 'package.json'), JSON.stringify({ devDependencies: { prettier: 'latest' } }, null, 2)),
         fs.writeFile(join(genPath, '.eslintrc.yml'), ''),
         fs.writeFile(join(genPath, '.eslintignore'), 'some-path\nsome-file'),
         fs.writeFile(join(genPath, '.prettierc'), ''),
@@ -47,13 +47,28 @@ it('package.json updated', async () => {
     expect(stdout).toContain('Changes wrote to package.json')
 })
 
-it('update eslint version', async () => {
+it('update eslint version (dependencies)', async () => {
+    let pkgContent: Record<string, any> = await fs.readJSON(join(genPath, 'package.json'))
+    await fs.writeFile(join(genPath, 'package.json'), JSON.stringify({ ...pkgContent, dependencies: { eslint: '7.32.0' } }, null, 2))
+
     const { stdout } = await run()
 
-    const pkgContent: Record<string, any> = await fs.readJSON(join(genPath, 'package.json'))
+    pkgContent = await fs.readJSON(join(genPath, 'package.json'))
+
+    expect(pkgContent.dependencies.eslint).toBe(devDependencies.eslint)
+    expect(stdout).toContain(`Updated eslint to the version ${devDependencies.eslint}`)
+})
+
+it('update eslint version (devDependencies)', async () => {
+    let pkgContent: Record<string, any> = await fs.readJSON(join(genPath, 'package.json'))
+    await fs.writeFile(join(genPath, 'package.json'), JSON.stringify({ ...pkgContent, devDependencies: { eslint: '7.32.0' } }, null, 2))
+
+    const { stdout } = await run()
+
+    pkgContent = await fs.readJSON(join(genPath, 'package.json'))
 
     expect(pkgContent.devDependencies.eslint).toBe(devDependencies.eslint)
-    expect(stdout).toContain('Updated eslint to the version')
+    expect(stdout).toContain(`Updated eslint to the version ${devDependencies.eslint}`)
 })
 
 it('esm eslint.config.js', async () => {

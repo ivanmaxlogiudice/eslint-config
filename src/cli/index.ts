@@ -1,16 +1,16 @@
 import { cac } from 'cac'
 import c from 'picocolors'
 import { version } from './constants'
-import { migrate } from './migrate'
+import { run } from './run'
 
 const cli = cac(
     c.green('@ivanmaxlogiudice/eslint-config'),
 )
 
-// Migrate
 cli
-    .command('migrate', 'Migrate from legacy config to new flat config')
-    .action(migrate)
+    .command('', 'Run the initialization or migration')
+    .option('-y, --yes', 'Skip prompts and use default values', { type: [Boolean] })
+    .action(run)
 
 cli.help()
 cli.version(`${c.bold(version)}`)

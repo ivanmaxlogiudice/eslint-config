@@ -61,17 +61,18 @@ For example:
 
 ### Migration
 
-We provided an experimental cli tool to help you migrate from the legacy config to the new flat config.
+We provided an experimental CLI tool to help you migrate from the legacy config to the new flat config.
+You can use the `-y` / `--yes` flag to skip the promps and use the default values.
 
 ```bash
 # npm
-npx @ivanmaxlogiudice/eslint-config migrate
+npx @ivanmaxlogiudice/eslint-config@latest -y
 
 # pnpm
-pnpm dlx @ivanmaxlogiudice/eslint-config migrate
+pnpm dlx @ivanmaxlogiudice/eslint-config@latest -y
 ```
 
-Before running the migration, make sure to commit your changes first.
+Before running the migration, make sure to commit your unsaved changes first.
 
 ## VS Code support (auto fix)
 

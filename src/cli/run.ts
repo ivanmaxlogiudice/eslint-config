@@ -11,10 +11,17 @@ import { devDependencies } from '../../package.json'
 import { ARROW, CHECK, CROSS, WARN, version, vscodeSettingsString } from './constants'
 import { isGitClean, throwError } from './utils'
 
-const SKIP_PROMPT = !!process.env.SKIP_PROMPT
-const SKIP_GIT_CHECK = !!process.env.SKIP_GIT_CHECK
+export interface RuleOptions {
+    /**
+     * Skip prompts and use default values
+     */
+    yes?: boolean
+}
 
-export async function migrate() {
+export async function run(options: RuleOptions = {}) {
+    const SKIP_PROMPT = !!process.env.SKIP_PROMPT || options.yes
+    const SKIP_GIT_CHECK = !!process.env.SKIP_GIT_CHECK
+
     const cwd = process.cwd()
 
     const pathPackageJSON = path.join(process.cwd(), 'package.json')
@@ -107,8 +114,9 @@ module.exports = config({\n${configContent}\n})
     }
 
     // Need to update the eslint version?
-    const updateESLintVersion = pkg.devDependencies?.eslint
-        ? pkg.devDependencies.eslint !== 'latest' && pkg.devDependencies.eslint.match(/\d+/)?.[0] < 8
+    const eslintVersion = pkg.devDependencies?.eslint || pkg.dependencies?.eslint
+    const updateESLintVersion = eslintVersion
+        ? eslintVersion !== 'latest' && eslintVersion.match(/\d+/)?.[0] < 8
         : true
 
     // Update .vscode/settings.json
@@ -129,8 +137,8 @@ module.exports = config({\n${configContent}\n})
                     type: 'confirm',
                 },
                 {
-                    initial: true,
-                    message: 'Update ESLint to the latest version?',
+                    initial: updateESLintVersion,
+                    message: `Update ESLint to the latest version? (${updateESLintVersion ? c.green('Yes') : c.red('No')})`,
                     name: 'updateESLintVersion',
                     type: 'confirm',
                 },
@@ -171,8 +179,11 @@ module.exports = config({\n${configContent}\n})
         }
     }
 
-    if (prompResult.updateESLintVersion) {
-        pkg.devDependencies.eslint = devDependencies.eslint
+    if (prompResult.updateESLintVersion ?? true) {
+        if (pkg.dependencies?.eslint)
+            pkg.dependencies.eslint = devDependencies.eslint
+        else
+            pkg.devDependencies.eslint = devDependencies.eslint
 
         await fsp.writeFile(pathPackageJSON, JSON.stringify(pkg, null, pkgIndent))
 
