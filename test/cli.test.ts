@@ -12,7 +12,7 @@ function run(env = {
     SKIP_PROMPT: '1',
     SKIP_GIT_CHECK: '1',
 }) {
-    return execa(`node`, [CLI_PATH, 'migrate'], {
+    return execa(`node`, [CLI_PATH], {
         cwd: genPath,
         env: {
             ...process.env,
