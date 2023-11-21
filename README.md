@@ -32,7 +32,7 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config()
+export default await config()
 ```
 
 With CJS:
@@ -42,6 +42,32 @@ With CJS:
 const config = require('@ivanmaxlogiudice/eslint-config').default
 
 module.exports = config()
+```
+
+Combined with legacy config:
+
+```js
+// eslint.config.js
+const config = require('@ivanmaxlogiudice/eslint-config').default
+const { FlatCompat } = require('@eslint/eslintrc')
+
+const compat = new FlatCompat()
+
+module.exports = config(
+    {
+        ignores: [],
+    },
+
+    // Legacy config
+    ...compat.config({
+        extends: [
+            'eslint:recommended',
+            // Other extends...
+        ],
+    })
+
+    // Other flat configs...
+)
 ```
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
@@ -135,7 +161,7 @@ Normally you only need to import the `config` preset:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config()
+export default await config()
 ```
 
 And that's it! Or you can configure each integration individually, for example:
@@ -144,7 +170,7 @@ And that's it! Or you can configure each integration individually, for example:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config({
+export default await config({
     // Enable stylistic formatting rules
     // stylistic: true,
 
@@ -176,7 +202,7 @@ The `config` factory function also accepts any number of arbitrary custom config
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config(
+export default await config(
     {
         // Configuration
     },
@@ -279,7 +305,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config(
+export default await config(
     {
         typescript: true,
         vue: true
@@ -306,7 +332,7 @@ We also provided an `overrides` options to make it easier:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config({
+export default await config({
     overrides: {
         typescript: {
             'ts/consistent-type-definitions': ['error', 'interface'],
@@ -328,7 +354,7 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config({
+export default await config({
     typescript: {
         tsconfigPath: 'tsconfig.json',
 
