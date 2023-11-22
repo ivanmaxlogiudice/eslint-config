@@ -1,9 +1,10 @@
-import type { FlatConfigItem, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
+import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
 import { GLOB_VUE } from '../globs'
 import { interopDefault } from '../utils'
 
-export async function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {}): Promise<FlatConfigItem[]> {
+export async function vue(options: OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {}): Promise<FlatConfigItem[]> {
     const {
+        files = [GLOB_VUE],
         overrides = {},
         stylistic = true,
     } = options
@@ -29,7 +30,7 @@ export async function vue(options: OptionsHasTypeScript & OptionsOverrides & Opt
             },
         },
         {
-            files: [GLOB_VUE],
+            files,
             languageOptions: {
                 parser: parserVue,
                 parserOptions: {
