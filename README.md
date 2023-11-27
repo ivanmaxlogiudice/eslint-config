@@ -369,6 +369,28 @@ Running `pnpm dlx eslint` should prompt you to install the required dependencies
 pnpm add -D @unocss/eslint-plugin
 ```
 
+### Optional Rules
+
+This config also provides some optional plugins/rules for extended usages.
+
+#### `perfectionist` (sorting)
+
+This plugin [`eslint-plugin-perfectionist`](https://github.com/azat-io/eslint-plugin-perfectionist) allows you to sorted object keys, imports, etc, with auto-fix.
+
+The plugin is installed, you can check the [enabled rules](/src/configs/perfectionist.ts) for more info.
+
+It's recommended to opt-in on each file individually using [configuration comments](https://eslint.org/docs/latest/use/configure/rules#using-configuration-comments-1).
+
+```js
+/* eslint perfectionist/sort-objects: "error" */
+const objectWantedToSort = {
+    a: 2,
+    b: 1,
+    c: 3,
+}
+/* eslint perfectionist/sort-objects: "off" */
+```
+
 ### Type Aware Rules
 
 You can optionally enable the [type aware rules](https://typescript-eslint.io/linting/typed-linting/) by passing the options object to the `typescript` config:
