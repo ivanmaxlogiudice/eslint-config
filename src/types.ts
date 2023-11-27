@@ -117,6 +117,19 @@ export interface OptionsIsInEditor {
     isInEditor?: boolean
 }
 
+export interface OptionsUnoCSS {
+    /**
+     * Enable attributify support.
+     * @default true
+     */
+    attributify?: boolean
+    /**
+     * Enable strict mode by throwing errors about blocklisted classes.
+     * @default false
+     */
+    strict?: boolean
+}
+
 export interface OptionsConfig extends OptionsComponentExts {
     /**
      * Enable gitignore support.
@@ -197,9 +210,12 @@ export interface OptionsConfig extends OptionsComponentExts {
     /**
      * Enable unocss rules.
      *
+     * Requires installing:
+     * - `@unocss/eslint-plugin`
+     *
      * @default auto-detect based on the dependencies
      */
-    unocss?: boolean
+    unocss?: boolean | OptionsUnoCSS
 
     /**
      * Enable Vue support.

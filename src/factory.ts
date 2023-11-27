@@ -61,7 +61,7 @@ export async function config(
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
         overrides = {},
         typescript: enableTypeScript = isPackageExists('typescript'),
-        unocss: enableUnocss = UnocssPackages.some(i => isPackageExists(i)),
+        unocss: enableUnoCSS = UnocssPackages.some(i => isPackageExists(i)),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
 
@@ -125,8 +125,11 @@ export async function config(
     if (stylisticOptions)
         configs.push(stylistic(stylisticOptions))
 
-    if (enableUnocss)
-        configs.push(unocss())
+    if (enableUnoCSS) {
+        configs.push(unocss(
+            typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS,
+        ))
+    }
 
     if (options.test ?? true) {
         configs.push(test({

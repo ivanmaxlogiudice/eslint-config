@@ -326,7 +326,7 @@ export default await config(
 )
 ```
 
-We also provided an `overrides` options to make it easier:
+We also provided a `overrides` options to make it easier:
 
 ```js
 // eslint.config.js
@@ -344,6 +344,29 @@ export default await config({
         // ...
     }
 })
+```
+
+### Optional Configs
+
+We provide some optional configs for specific use cases, that we don't include their dependencies by default.
+
+#### UnoCSS
+
+UnoCSS is auto-detected, you can also explicitly enable them:
+
+```js
+// eslint.config.js
+import config from '@ivanmaxlogiudice/eslint-config'
+
+export default config({
+    unocss: true,
+})
+```
+
+Running `pnpm dlx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+pnpm add -D @unocss/eslint-plugin
 ```
 
 ### Type Aware Rules
