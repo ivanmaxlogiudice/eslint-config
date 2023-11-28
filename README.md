@@ -358,7 +358,7 @@ UnoCSS is auto-detected, you can also explicitly enable them:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default config({
+export default await config({
     unocss: true,
 })
 ```
