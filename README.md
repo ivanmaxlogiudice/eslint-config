@@ -32,7 +32,7 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config()
+export default config()
 ```
 
 With CJS:
@@ -161,7 +161,7 @@ Normally you only need to import the `config` preset:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config()
+export default config()
 ```
 
 And that's it! Or you can configure each integration individually, for example:
@@ -170,7 +170,7 @@ And that's it! Or you can configure each integration individually, for example:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config({
+export default config({
     // Enable stylistic formatting rules
     // stylistic: true,
 
@@ -202,7 +202,7 @@ The `config` factory function also accepts any number of arbitrary custom config
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config(
+export default config(
     {
         // Configuration
     },
@@ -305,7 +305,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config(
+export default config(
     {
         typescript: true,
         vue: true
@@ -332,7 +332,7 @@ We also provided a `overrides` options to make it easier:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config({
+export default config({
     overrides: {
         typescript: {
             'ts/consistent-type-definitions': ['error', 'interface'],
@@ -358,7 +358,7 @@ UnoCSS is auto-detected, you can also explicitly enable them:
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config({
+export default config({
     unocss: true,
 })
 ```
@@ -399,7 +399,7 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 // eslint.config.js
 import config from '@ivanmaxlogiudice/eslint-config'
 
-export default await config({
+export default config({
     typescript: {
         tsconfigPath: 'tsconfig.json',
 
