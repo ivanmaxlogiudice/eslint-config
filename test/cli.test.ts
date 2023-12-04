@@ -96,12 +96,11 @@ it('ignores files added in eslint.config.js', async () => {
     const eslintConfigContent = (await fs.readFile(join(genPath, 'eslint.config.js'), 'utf-8')).replaceAll('\\', '/')
 
     expect(stdout).toContain('Created eslint.config.js successfully.')
-    expect(eslintConfigContent)
-        .toMatchInlineSnapshot(`
+    expect(eslintConfigContent).toMatchInlineSnapshot(`
       "const config = require('@ivanmaxlogiudice/eslint-config').default
 
       module.exports = config({
-      ignores: [\\"some-path\\",\\"**/some-path/**\\",\\"some-file\\",\\"**/some-file/**\\"]
+      ignores: ["some-path","**/some-path/**","some-file","**/some-file/**"]
       })
       "
     `)
