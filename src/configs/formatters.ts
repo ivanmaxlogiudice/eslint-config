@@ -1,8 +1,8 @@
 import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
 import type { VendoredPrettierOptions } from '../vender/prettier-types'
-import { StylisticConfigDefaults } from '.'
 import { GLOB_CSS, GLOB_LESS, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
+import { StylisticConfigDefaults } from './stylistic'
 
 export async function formatters(
     options: OptionsFormatters | true = {},
