@@ -23,7 +23,7 @@ based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 ### Install
 
 ```bash
-pnpm i -D @ivanmaxlogiudice/eslint-config
+pnpm add -D @ivanmaxlogiudice/eslint-config
 ```
 
 ### Create config file
@@ -353,6 +353,36 @@ export default config({
 
 We provide some optional configs for specific use cases, that we don't include their dependencies by default.
 
+#### Formatters
+
+> [!WARNING]
+> Experimental feature, changes might not follow semver.
+> Use external formatters to format files that ESLint cannot handle yet (`.css`, `.html`, etc). Powered by [`eslint-plugin-format`](https://github.com/antfu/eslint-plugin-format).
+
+```js
+// eslint.config.js
+import config from '@ivanmaxlogiudice/eslint-config'
+
+export default config({
+    // Enable all formatters
+    // formatters: true,
+
+    // Or customize the formatters
+    formatters: {
+        css: true, // by default use Prettier
+        html: true, // by default use Prettier
+        toml: 'dprint', // use dprint for TOML
+        markdown: 'prettier' // use prettier for markdown
+    }
+})
+```
+
+Running `pnpx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+pnpm add -D eslint-plugin-format
+```
+
 #### UnoCSS
 
 UnoCSS is auto-detected, you can also explicitly enable them:
@@ -430,7 +460,7 @@ If you want to apply lint and auto-fix before every commit, you can add the foll
 and then
 
 ```bash
-pnpm i -D lint-staged simple-git-hooks
+pnpm add -D lint-staged simple-git-hooks
 ```
 
 ## License
