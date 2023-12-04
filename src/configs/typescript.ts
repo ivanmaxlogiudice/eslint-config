@@ -1,7 +1,7 @@
 import process from 'node:process'
 import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
 import { GLOB_SRC } from '../globs'
-import { pluginAntfu, pluginImport } from '../plugins'
+import { pluginImport } from '../plugins'
 import { interopDefault, renameRules, toArray } from '../utils'
 
 export async function typescript(
@@ -56,7 +56,6 @@ export async function typescript(
         {
             name: 'config:typescript:setup',
             plugins: {
-                antfu: pluginAntfu,
                 import: pluginImport,
                 ts: pluginTs as any,
             },
@@ -89,9 +88,6 @@ export async function typescript(
                     '@typescript-eslint/',
                     'ts/',
                 ),
-
-                'antfu/generic-spacing': 'error',
-                'antfu/named-tuple-spacing': 'error',
 
                 'no-dupe-class-members': 'off',
                 'no-loss-of-precision': 'off',

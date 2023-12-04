@@ -58,7 +58,7 @@
         "@eslint-types/jsdoc": "46.9.0",
         "@eslint-types/typescript-eslint": "^6.12.0",
         "@eslint-types/unicorn": "^49.0.0",
-        "@stylistic/eslint-plugin": "^1.4.1",
+        "@stylistic/eslint-plugin": "^1.5.0-beta.0",
         "@typescript-eslint/eslint-plugin": "^6.13.1",
         "@typescript-eslint/parser": "^6.13.1",
         "cac": "^6.7.14",

@@ -40,8 +40,6 @@ export async function markdown(options: OptionsFiles & OptionsComponentExts & Op
             rules: {
                 ...pluginMarkdown.configs.recommended.overrides[1].rules,
 
-                'antfu/no-ts-export-equal': 'off',
-
                 'import/newline-after-import': 'off',
 
                 'no-alert': 'off',
