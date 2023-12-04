@@ -1,4 +1,5 @@
 export * from './comments'
+export * from './formatters'
 export * from './ignores'
 export * from './imports'
 export * from './javascript'

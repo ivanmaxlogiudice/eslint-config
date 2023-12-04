@@ -4,6 +4,7 @@ import { isPackageExists } from 'local-pkg'
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
 import {
     comments,
+    formatters,
     ignores,
     imports,
     javascript,
@@ -168,7 +169,14 @@ export async function config(
         configs.push(markdown({
             componentExts,
             overrides: overrides.markdown,
-        }))
+        }, options.formatters === true || !!(options.formatters || {})?.markdown))
+    }
+
+    if (options.formatters) {
+        configs.push(formatters(
+            options.formatters,
+            typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
+        ))
     }
 
     // User can optionally pass a flat config item to the first argument
