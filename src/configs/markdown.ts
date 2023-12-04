@@ -1,28 +1,61 @@
 import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides } from '../types'
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs'
 import { interopDefault } from '../utils'
+import type { Linter } from 'eslint'
 
-export async function markdown(options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
+export async function markdown(
+    options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {},
+    formatMarkdown: boolean = false,
+): Promise<FlatConfigItem[]> {
     const {
         componentExts = [],
         files = [GLOB_MARKDOWN],
         overrides = {},
     } = options
 
-    // @ts-expect-error Missing types
-    const pluginMarkdown = await interopDefault(import('eslint-plugin-markdown'))
+    // @ts-expect-error missing types
+    const markdown = await interopDefault(import('eslint-plugin-markdown'))
+    const baseProcessor = markdown.processors.markdown
+
+    // `eslint-plugin-markdown` only creates virtual files for code blocks,
+    // but not the markdown file itself. In order to format the whole markdown file,
+    // we need to create another virtual file for the markdown file itself.
+    const processor: Linter.Processor = !formatMarkdown
+        ? baseProcessor
+        : {
+                ...baseProcessor,
+                postprocess(messages, filename) {
+                    const markdownContent = messages.pop()
+                    const codeSnippets = baseProcessor.postprocess(messages, filename)
+                    return [
+                        ...markdownContent || [],
+                        ...codeSnippets || [],
+                    ]
+                },
+                preprocess(text, filename) {
+                    const result = baseProcessor.preprocess(text, filename)
+                    return [
+                        ...result,
+                        {
+                            filename: '.__markdown_content__',
+                            text,
+                        },
+                    ]
+                },
+            }
 
     return [
         {
             name: 'config:markdown:setup',
             plugins: {
-                markdown: pluginMarkdown,
+                markdown,
             },
         },
         {
             files,
+            ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
             name: 'config:markdown:processor',
-            processor: 'markdown/markdown',
+            processor,
         },
         {
             files: [
@@ -38,7 +71,7 @@ export async function markdown(options: OptionsFiles & OptionsComponentExts & Op
             },
             name: 'config:markdown:rules',
             rules: {
-                ...pluginMarkdown.configs.recommended.overrides[1].rules,
+                ...markdown.configs.recommended.overrides[1].rules,
 
                 'import/newline-after-import': 'off',
 
@@ -51,6 +84,7 @@ export async function markdown(options: OptionsFiles & OptionsComponentExts & Op
                 'no-unused-expressions': 'off',
                 'no-unused-labels': 'off',
                 'no-unused-vars': 'off',
+
                 'node/prefer-global/process': 'off',
 
                 'style/comma-dangle': 'off',
@@ -65,6 +99,7 @@ export async function markdown(options: OptionsFiles & OptionsComponentExts & Op
                 'ts/no-var-requires': 'off',
 
                 'unicode-bom': 'off',
+
                 'unused-imports/no-unused-imports': 'off',
                 'unused-imports/no-unused-vars': 'off',
 

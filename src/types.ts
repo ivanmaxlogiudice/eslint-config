@@ -1,3 +1,4 @@
+import type { VendoredPrettierOptions } from './vender/prettier-types'
 import type {
     EslintCommentsRules,
     EslintRules,
@@ -73,6 +74,57 @@ export interface OptionsFiles {
     files?: string[]
 }
 
+export interface OptionsFormatters {
+    /**
+     * Enable formatting support for CSS, Less, Sass, and SCSS.
+     *
+     * Currently only support Prettier.
+     */
+    css?: 'prettier' | boolean
+
+    /**
+     * Enable formatting support for HTML.
+     *
+     * Currently only support Prettier.
+     */
+    html?: 'prettier' | boolean
+
+    /**
+     * Enable formatting support for TOML.
+     *
+     * Currently only support dprint.
+     */
+    toml?: 'dprint' | boolean
+
+    /**
+     * Enable formatting support for Markdown.
+     *
+     * Support both Prettier and dprint.
+     *
+     * When set to `true`, it will use Prettier.
+     */
+    markdown?: 'prettier' | 'dprint' | boolean
+
+    /**
+     * Enable formatting support for GraphQL.
+     */
+    graphql?: 'prettier' | boolean
+
+    /**
+     * Custom options for Prettier.
+     *
+     * By default it's controlled by our own config.
+     */
+    prettierOptions?: VendoredPrettierOptions
+
+    /**
+     * Custom options for dprint.
+     *
+     * By default it's controlled by our own config.
+     */
+    dprintOptions?: boolean
+}
+
 export interface OptionsComponentExts {
     /**
      * Additional extensions for components.
@@ -139,20 +191,16 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @see https://github.com/antfu/eslint-config-flat-gitignore
      * @default true
      */
-    gitignore?: FlatGitignoreOptions | boolean
+    gitignore?: boolean | FlatGitignoreOptions
 
     /**
-     * Control to disable some rules in editors.
-     * @default auto-detect based on the process.env
-     */
-    isInEditor?: boolean
-
-    /**
-     * Enable JSONC support.
+     * Enable TypeScript support.
      *
-     * @default true
+     * Passing an object to enable TypeScript Language Server support.
+     *
+     * @default auto-detect based on the dependencies
      */
-    jsonc?: boolean
+    typescript?: boolean | OptionsTypeScriptParserOptions | OptionsTypeScriptWithTypes
 
     /**
      * Enable JSX related rules.
@@ -164,34 +212,6 @@ export interface OptionsConfig extends OptionsComponentExts {
     jsx?: boolean
 
     /**
-     * Enable Markdown support.
-     *
-     * @default true
-     */
-    markdown?: boolean
-
-    /**
-     * Provide overrides for rules for each integration.
-     */
-    overrides?: {
-        javascript?: FlatConfigItem['rules']
-        jsonc?: FlatConfigItem['rules']
-        markdown?: FlatConfigItem['rules']
-        perfectionist?: FlatConfigItem['rules']
-        test?: FlatConfigItem['rules']
-        typescript?: FlatConfigItem['rules']
-        vue?: FlatConfigItem['rules']
-        yaml?: FlatConfigItem['rules']
-    }
-
-    /**
-     * Enable stylistic rules.
-     *
-     * @default true
-     */
-    stylistic?: StylisticConfig | boolean
-
-    /**
      * Enable test support.
      *
      * @default true
@@ -199,13 +219,39 @@ export interface OptionsConfig extends OptionsComponentExts {
     test?: boolean
 
     /**
-     * Enable TypeScript support.
-     *
-     * Passing an object to enable TypeScript Language Server support.
+     * Enable Vue support.
      *
      * @default auto-detect based on the dependencies
      */
-    typescript?: OptionsTypeScriptParserOptions | OptionsTypeScriptWithTypes | boolean
+    vue?: boolean
+
+    /**
+     * Enable JSONC support.
+     *
+     * @default true
+     */
+    jsonc?: boolean
+
+    /**
+     * Enable YAML support.
+     *
+     * @default true
+     */
+    yaml?: boolean
+
+    /**
+     * Enable Markdown support.
+     *
+     * @default true
+     */
+    markdown?: boolean
+
+    /**
+     * Enable stylistic rules.
+     *
+     * @default true
+     */
+    stylistic?: boolean | StylisticConfig
 
     /**
      * Enable unocss rules.
@@ -218,16 +264,34 @@ export interface OptionsConfig extends OptionsComponentExts {
     unocss?: boolean | OptionsUnoCSS
 
     /**
-     * Enable Vue support.
+     * Use external formatters to format files.
      *
-     * @default auto-detect based on the dependencies
+     * Requires installing:
+     * - `eslint-plugin-format`
+     *
+     * When set to `true`, it will enable all formatters.
+     *
+     * @default false
      */
-    vue?: boolean
+    formatters?: boolean | OptionsFormatters
 
     /**
-     * Enable YAML support.
-     *
-     * @default true
+     * Control to disable some rules in editors.
+     * @default auto-detect based on the process.env
      */
-    yaml?: boolean
+    isInEditor?: boolean
+
+    /**
+     * Provide overrides for rules for each integration.
+     */
+    overrides?: {
+        javascript?: FlatConfigItem['rules']
+        typescript?: FlatConfigItem['rules']
+        test?: FlatConfigItem['rules']
+        vue?: FlatConfigItem['rules']
+        jsonc?: FlatConfigItem['rules']
+        markdown?: FlatConfigItem['rules']
+        yaml?: FlatConfigItem['rules']
+        perfectionist?: FlatConfigItem['rules']
+    }
 }

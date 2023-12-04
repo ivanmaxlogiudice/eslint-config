@@ -1,27 +1,29 @@
-# @ivanmaxlogiudice/eslint-config [![npm (scoped with tag)](https://flat.badgen.net/npm/v/@ivanmaxlogiudice/eslint-config)](https://npmjs.com/package/@ivanmaxlogiudice/eslint-config) [![npm](https://flat.badgen.net/npm/dt/@ivanmaxlogiudice/eslint-config)](https://npmjs.com/package/@ivanmaxlogiudice/eslint-config) #
+# @ivanmaxlogiudice/eslint-config [![npm (scoped with tag)](https://flat.badgen.net/npm/v/@ivanmaxlogiudice/eslint-config)](https://npmjs.com/package/@ivanmaxlogiudice/eslint-config) [![npm](https://flat.badgen.net/npm/dt/@ivanmaxlogiudice/eslint-config)](https://npmjs.com/package/@ivanmaxlogiudice/eslint-config)
 
 Personal Flat ESLint configuration for Javascript, TypeScript, Vue 3.
 
 based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 
 ## Features
-- Single quotes, no semi
-- Auto fix for formatting (aimed to be used standalone **without** Prettier)
-- Designed to work with TypeScript, JSX, Vue out-of-box
-- Lint also for json, yaml, markdown
-- Sorted imports, dangling commas
-- Reasonable defaults, best practices, only one-line of config
-- Respects `.gitignore` by default
-- [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
-- Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
-- Using [ESLint Perfectionist](https://github.com/azat-io/eslint-plugin-perfectionist) for sorting
-- **Style principle**: Minimal for reading, stable for diff, consistent
+
+-   Single quotes, no semi
+-   Auto fix for formatting (aimed to be used standalone **without** Prettier)
+-   Designed to work with TypeScript, JSX, Vue out-of-box
+-   Lint also for json, yaml, markdown
+-   Sorted imports, dangling commas
+-   Reasonable defaults, best practices, only one-line of config
+-   Respects `.gitignore` by default
+-   [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
+-   Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+-   Using [ESLint Perfectionist](https://github.com/azat-io/eslint-plugin-perfectionist) for sorting
+-   **Style principle**: Minimal for reading, stable for diff, consistent
 
 ## Usage
 
 ### Install
+
 ```bash
-pnpm i -D @ivanmaxlogiudice/eslint-config
+pnpm add -D @ivanmaxlogiudice/eslint-config
 ```
 
 ### Create config file
@@ -124,6 +126,7 @@ Add the following settings to your `settings.json`:
     // Silent the stylistic rules in you IDE, but still auto fix them
     "eslint.rules.customizations": [
         { "rule": "style/*", "severity": "off" },
+        { "rule": "format/*", "severity": "off" },
         { "rule": "*-indent", "severity": "off" },
         { "rule": "*-spacing", "severity": "off" },
         { "rule": "*-spaces", "severity": "off" },
@@ -279,15 +282,15 @@ Check out the [configs](https://github.com/ivanmaxlogiudice/eslint-config/blob/m
 
 Since flat config requires us to explicitly provide the plugin names (instead of mandatory convention from npm package name), we renamed some plugins to make overall scope more consistent and easier to write.
 
-| New Prefix | Original Prefix | Source Plugin |
-| --- | --- | --- |
-| `import/*` | `i/*` | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i) |
-| `node/*` | `n/*` | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n) |
-| `yaml/*` | `yml/*` | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml) |
-| `ts/*` | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `style/*` | `@stylistic/*` | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) |
-| `test/*` | `vitest/*` | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest) |
-| `test/*` | `no-only-tests/*` | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests) |
+| New Prefix | Original Prefix        | Source Plugin                                                                              |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------------ |
+| `import/*` | `i/*`                  | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i)                                |
+| `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
+| `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
+| `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
+| `style/*`  | `@stylistic/*`         | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)           |
+| `test/*`   | `vitest/*`             | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                    |
+| `test/*`   | `no-only-tests/*`      | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)  |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -349,6 +352,36 @@ export default config({
 ### Optional Configs
 
 We provide some optional configs for specific use cases, that we don't include their dependencies by default.
+
+#### Formatters
+
+> [!WARNING]
+> Experimental feature, changes might not follow semver.
+> Use external formatters to format files that ESLint cannot handle yet (`.css`, `.html`, etc). Powered by [`eslint-plugin-format`](https://github.com/antfu/eslint-plugin-format).
+
+```js
+// eslint.config.js
+import config from '@ivanmaxlogiudice/eslint-config'
+
+export default config({
+    // Enable all formatters
+    // formatters: true,
+
+    // Or customize the formatters
+    formatters: {
+        css: true, // by default use Prettier
+        html: true, // by default use Prettier
+        toml: 'dprint', // use dprint for TOML
+        markdown: 'prettier' // use prettier for markdown
+    }
+})
+```
+
+Running `pnpx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+pnpm add -D eslint-plugin-format
+```
 
 #### UnoCSS
 
@@ -427,7 +460,7 @@ If you want to apply lint and auto-fix before every commit, you can add the foll
 and then
 
 ```bash
-pnpm i -D lint-staged simple-git-hooks
+pnpm add -D lint-staged simple-git-hooks
 ```
 
 ## License

@@ -44,6 +44,11 @@ runWithConfig('ts-override', {
         'ts/consistent-type-definitions': ['error', 'type'],
     },
 })
+runWithConfig('with-formatters', {
+    vue: true,
+    typescript: true,
+    formatters: true,
+})
 
 function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfigItem[]) {
     it.concurrent(name, async ({ expect }) => {
