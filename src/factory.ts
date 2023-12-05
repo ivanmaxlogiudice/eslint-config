@@ -176,6 +176,7 @@ export async function config(
         configs.push(formatters(
             options.formatters,
             typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
+            options.markdown !== false,
         ))
     }
 

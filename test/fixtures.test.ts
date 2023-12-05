@@ -49,6 +49,14 @@ runWithConfig('with-formatters', {
     typescript: true,
     formatters: true,
 })
+runWithConfig('no-markdown-with-formatters', {
+    jsx: false,
+    vue: false,
+    markdown: false,
+    formatters: {
+        markdown: true,
+    },
+})
 
 function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfigItem[]) {
     it.concurrent(name, async ({ expect }) => {
