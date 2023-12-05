@@ -11,10 +11,10 @@ export const StylisticConfigDefaults: StylisticConfig = {
 
 export async function stylistic(options: StylisticConfig = {}): Promise<FlatConfigItem[]> {
     const {
-        indent = 4,
-        jsx = true,
-        quotes = 'single',
-        semi = false,
+        indent,
+        jsx,
+        quotes,
+        semi,
     } = {
         ...StylisticConfigDefaults,
         ...options,
