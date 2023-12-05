@@ -26,11 +26,11 @@ export function imports(options: OptionsStylistic = {}): FlatConfigItem[] {
 
                 ...stylistic
                     ? {
-                            'import/newline-after-import': ['error', {
-                                considerComments: true,
-                                count: 1,
-                            }],
-                        }
+                        'import/newline-after-import': ['error', {
+                            considerComments: true,
+                            count: 1,
+                        }],
+                    }
                     : {},
             },
         },

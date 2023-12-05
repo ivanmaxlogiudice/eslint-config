@@ -69,9 +69,9 @@ export async function typescript(
                     sourceType: 'module',
                     ...tsconfigPath
                         ? {
-                                project: tsconfigPath,
-                                tsconfigRootDir: process.cwd(),
-                            }
+                            project: tsconfigPath,
+                            tsconfigRootDir: process.cwd(),
+                        }
                         : {},
                     ...parserOptions as any,
                 },

@@ -23,13 +23,13 @@ export async function unocss(options: OptionsUnoCSS = {}): Promise<FlatConfigIte
                 'unocss/order': 'warn',
                 ...attributify
                     ? {
-                            'unocss/order-attributify': 'warn',
-                        }
+                        'unocss/order-attributify': 'warn',
+                    }
                     : {},
                 ...strict
                     ? {
-                            'unocss/blocklist': 'error',
-                        }
+                        'unocss/blocklist': 'error',
+                    }
                     : {},
             },
         },

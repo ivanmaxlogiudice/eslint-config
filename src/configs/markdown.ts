@@ -22,36 +22,36 @@ export async function markdown(
     // we need to create another virtual file for the markdown file itself.
     const processor: Linter.Processor = !formatMarkdown
         ? {
-                meta: {
-                    name: 'markdown-processor',
-                },
-                supportsAutofix: true,
-                ...baseProcessor,
-            }
+            meta: {
+                name: 'markdown-processor',
+            },
+            supportsAutofix: true,
+            ...baseProcessor,
+        }
         : {
-                meta: {
-                    name: 'markdown-processor-with-content',
-                },
-                postprocess(messages, filename) {
-                    const markdownContent = messages.pop()
-                    const codeSnippets = baseProcessor.postprocess(messages, filename)
-                    return [
-                        ...markdownContent || [],
-                        ...codeSnippets || [],
-                    ]
-                },
-                preprocess(text, filename) {
-                    const result = baseProcessor.preprocess(text, filename)
-                    return [
-                        ...result,
-                        {
-                            filename: '.__markdown_content__',
-                            text,
-                        },
-                    ]
-                },
-                supportsAutofix: true,
-            }
+            meta: {
+                name: 'markdown-processor-with-content',
+            },
+            postprocess(messages, filename) {
+                const markdownContent = messages.pop()
+                const codeSnippets = baseProcessor.postprocess(messages, filename)
+                return [
+                    ...markdownContent || [],
+                    ...codeSnippets || [],
+                ]
+            },
+            preprocess(text, filename) {
+                const result = baseProcessor.preprocess(text, filename)
+                return [
+                    ...result,
+                    {
+                        filename: '.__markdown_content__',
+                        text,
+                    },
+                ]
+            },
+            supportsAutofix: true,
+        }
 
     return [
         {

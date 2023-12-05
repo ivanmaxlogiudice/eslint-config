@@ -172,14 +172,14 @@ export async function formatters(
                     'error',
                     formater === 'prettier'
                         ? {
-                                ...prettierOptions,
-                                embeddedLanguageFormatting: 'off',
-                                parser: 'markdown',
-                            }
+                            ...prettierOptions,
+                            embeddedLanguageFormatting: 'off',
+                            parser: 'markdown',
+                        }
                         : {
-                                ...dprintOptions,
-                                language: 'markdown',
-                            },
+                            ...dprintOptions,
+                            language: 'markdown',
+                        },
                 ],
             },
         })
