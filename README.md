@@ -13,6 +13,7 @@ based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 -   Sorted imports, dangling commas
 -   Reasonable defaults, best practices, only one-line of config
 -   Respects `.gitignore` by default
+-   Optional [formatters](#formatters) support for CSS, HTML, TOML, etc.
 -   [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 -   Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 -   Using [ESLint Perfectionist](https://github.com/azat-io/eslint-plugin-perfectionist) for sorting
@@ -227,7 +228,7 @@ Going more advanced, you can also import fine-grained configs and compose them a
 <details>
 <summary>Advanced Example</summary>
 
-We don't recommend using this style in general usages, as there are shared options between configs and might need extra care to make them consistent.
+We wouldn't recommend using this style in general unless you know exactly what they are doing, as there are shared options between configs and might need extra care to make them consistent.
 
 ```js
 // eslint.config.js
@@ -462,6 +463,24 @@ and then
 ```bash
 pnpm add -D lint-staged simple-git-hooks
 ```
+
+## FAQ
+
+### Prettier?
+
+Why I don't use Prettier ? [Check @antfu post](https://antfu.me/posts/why-not-prettier)
+
+Well, you can still use Prettier to format files that are not supported well by ESLint yet, such as `.css`, `.html`, etc. See [formatters](#formatters) for more details.
+
+### dprint?
+
+[dprint](https://dprint.dev/) is also a great formatter that with more abilities to customize. However, it's in the same model as Prettier which reads the AST and reprints the code from scratch. This means it's similar to Prettier, which ignores the original line breaks and might also cause the inconsistent diff. So in general, we prefer to use ESLint to format and lint JavaScript/TypeScript code.
+
+Meanwhile, we do have dprint integrations for formatting other files such as `.toml` and `.md`. See [formatters](#formatters) for more details.
+
+### How to format CSS?
+
+You can opt-in to the [`formatters`](#formatters) feature to format your CSS. Note that it's only doing formatting, but not linting. If you want proper linting support, give [`stylelint`](https://stylelint.io/) a try.
 
 ## License
 
