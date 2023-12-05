@@ -31,6 +31,11 @@ export async function stylistic(options: StylisticConfig = {}): Promise<FlatConf
         semi,
     })
 
+    if (indent !== 2) {
+        // @ts-expect-error Check Issue: https://github.com/ivanmaxlogiudice/eslint-config/issues/37
+        config.rules['style/indent'][2].offsetTernaryExpressions = false
+    }
+
     return [
         {
             name: 'config:stylistic',
