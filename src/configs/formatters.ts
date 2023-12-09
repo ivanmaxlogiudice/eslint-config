@@ -1,3 +1,4 @@
+import * as parserPlain from 'eslint-parser-plain'
 import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
 import type { VendoredPrettierOptions } from '../vender/prettier-types'
 import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
@@ -7,7 +8,6 @@ import { StylisticConfigDefaults } from './stylistic'
 export async function formatters(
     options: OptionsFormatters | true = {},
     stylistic: StylisticConfig = {},
-    markdownEnabled = true,
 ): Promise<FlatConfigItem[]> {
     await ensurePackages([
         'eslint-plugin-format',
@@ -32,31 +32,26 @@ export async function formatters(
         ...stylistic,
     }
 
-    const prettierOptions: VendoredPrettierOptions = Object.assign(
-        {
-            semi,
-            singleQuote: quotes === 'single',
-            tabWidth: typeof indent === 'number' ? indent : 2,
-            trailingComma: 'all',
-            useTabs: indent === 'tab',
-        } satisfies VendoredPrettierOptions,
-        options.prettierOptions || {},
-    )
+    const prettierOptions: VendoredPrettierOptions = Object.assign({
+        endOfLine: 'auto',
+        semi,
+        singleQuote: quotes === 'single',
+        tabWidth: typeof indent === 'number' ? indent : 2,
+        trailingComma: 'all',
+        useTabs: indent === 'tab',
+    }, options.prettierOptions || {})
 
-    const dprintOptions = Object.assign(
-        {
-            indentWidth: typeof indent === 'number' ? indent : 2,
-            quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
-            useTabs: indent === 'tab',
-        },
-        options.dprintOptions || {},
-    )
+    const dprintOptions = Object.assign({
+        indentWidth: typeof indent === 'number' ? indent : 2,
+        quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
+        useTabs: indent === 'tab',
+    }, options.dprintOptions || {})
 
     const pluginFormat = await interopDefault(import('eslint-plugin-format'))
 
     const configs: FlatConfigItem[] = [
         {
-            name: 'antfu:formatters:setup',
+            name: 'config:formatters:setup',
             plugins: {
                 format: pluginFormat,
             },
@@ -68,49 +63,40 @@ export async function formatters(
             {
                 files: [GLOB_CSS, GLOB_POSTCSS],
                 languageOptions: {
-                    parser: pluginFormat.parserPlain,
+                    parser: parserPlain,
                 },
-                name: 'antfu:formatter:css',
+                name: 'config:formatter:css',
                 rules: {
-                    'format/prettier': [
-                        'error',
-                        {
-                            ...prettierOptions,
-                            parser: 'css',
-                        },
-                    ],
+                    'format/prettier': ['error', {
+                        ...prettierOptions,
+                        parser: 'css',
+                    }],
                 },
             },
             {
                 files: [GLOB_SCSS],
                 languageOptions: {
-                    parser: pluginFormat.parserPlain,
+                    parser: parserPlain,
                 },
-                name: 'antfu:formatter:scss',
+                name: 'config:formatter:scss',
                 rules: {
-                    'format/prettier': [
-                        'error',
-                        {
-                            ...prettierOptions,
-                            parser: 'scss',
-                        },
-                    ],
+                    'format/prettier': ['error', {
+                        ...prettierOptions,
+                        parser: 'scss',
+                    }],
                 },
             },
             {
                 files: [GLOB_LESS],
                 languageOptions: {
-                    parser: pluginFormat.parserPlain,
+                    parser: parserPlain,
                 },
-                name: 'antfu:formatter:less',
+                name: 'config:formatter:less',
                 rules: {
-                    'format/prettier': [
-                        'error',
-                        {
-                            ...prettierOptions,
-                            parser: 'less',
-                        },
-                    ],
+                    'format/prettier': ['error', {
+                        ...prettierOptions,
+                        parser: 'less',
+                    }],
                 },
             },
         )
@@ -120,17 +106,14 @@ export async function formatters(
         configs.push({
             files: ['**/*.html'],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
-            name: 'antfu:formatter:html',
+            name: 'config:formatter:html',
             rules: {
-                'format/prettier': [
-                    'error',
-                    {
-                        ...prettierOptions,
-                        parser: 'html',
-                    },
-                ],
+                'format/prettier': ['error', {
+                    ...prettierOptions,
+                    parser: 'html',
+                }],
             },
         })
     }
@@ -139,17 +122,14 @@ export async function formatters(
         configs.push({
             files: ['**/*.toml'],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
-            name: 'antfu:formatter:toml',
+            name: 'config:formatter:toml',
             rules: {
-                'format/dprint': [
-                    'error',
-                    {
-                        ...dprintOptions,
-                        language: 'toml',
-                    },
-                ],
+                'format/dprint': ['error', {
+                    ...dprintOptions,
+                    language: 'toml',
+                }],
             },
         })
     }
@@ -160,13 +140,11 @@ export async function formatters(
             : options.markdown
 
         configs.push({
-            files: markdownEnabled
-                ? ['**/*.__markdown_content__']
-                : [GLOB_MARKDOWN],
+            files: [GLOB_MARKDOWN],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
-            name: 'antfu:formatter:markdown',
+            name: 'config:formatter:markdown',
             rules: {
                 [`format/${formater}`]: [
                     'error',
@@ -189,17 +167,14 @@ export async function formatters(
         configs.push({
             files: ['**/*.graphql'],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
-            name: 'antfu:formatter:graphql',
+            name: 'config:formatter:graphql',
             rules: {
-                'format/prettier': [
-                    'error',
-                    {
-                        ...prettierOptions,
-                        parser: 'graphql',
-                    },
-                ],
+                'format/prettier': ['error', {
+                    ...prettierOptions,
+                    parser: 'graphql',
+                }],
             },
         })
     }

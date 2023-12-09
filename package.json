@@ -68,6 +68,7 @@
         "cac": "^6.7.14",
         "detect-indent": "^7.0.1",
         "eslint-config-flat-gitignore": "^0.1.2",
+        "eslint-parser-plain": "^0.1.0",
         "eslint-plugin-antfu": "^2.0.0",
         "eslint-plugin-eslint-comments": "^3.2.0",
         "eslint-plugin-i": "^2.29.0",

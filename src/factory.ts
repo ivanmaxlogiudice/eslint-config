@@ -169,14 +169,13 @@ export async function config(
         configs.push(markdown({
             componentExts,
             overrides: overrides.markdown,
-        }, options.formatters === true || !!(options.formatters || {})?.markdown))
+        }))
     }
 
     if (options.formatters) {
         configs.push(formatters(
             options.formatters,
             typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
-            options.markdown !== false,
         ))
     }
 
