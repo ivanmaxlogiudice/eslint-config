@@ -1,13 +1,20 @@
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
+import { mergeProcessors } from 'eslint-merge-processors'
+import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
 import { GLOB_VUE } from '../globs'
 import { interopDefault } from '../utils'
 
-export async function vue(options: OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {}): Promise<FlatConfigItem[]> {
+export async function vue(
+    options: OptionsVue & OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
+): Promise<FlatConfigItem[]> {
     const {
         files = [GLOB_VUE],
         overrides = {},
         stylistic = true,
     } = options
+
+    const sfcBlocks = options.sfcBlocks === true
+        ? {}
+        : options.sfcBlocks ?? {}
 
     const {
         indent = 4,
@@ -16,10 +23,12 @@ export async function vue(options: OptionsFiles & OptionsHasTypeScript & Options
     const [
         pluginVue,
         parserVue,
+        processorVueBlocks,
     ] = await Promise.all([
         // @ts-expect-error Missing types
         interopDefault(import('eslint-plugin-vue')),
         interopDefault(import('vue-eslint-parser')),
+        interopDefault(import('eslint-processor-vue-blocks')),
     ] as const)
 
     return [
@@ -45,7 +54,18 @@ export async function vue(options: OptionsFiles & OptionsHasTypeScript & Options
                 },
             },
             name: 'config:vue:rules',
-            processor: pluginVue.processors['.vue'],
+            processor: sfcBlocks === false
+                ? pluginVue.processors['.vue']
+                : mergeProcessors([
+                    pluginVue.processors['.vue'],
+                    processorVueBlocks({
+                        ...sfcBlocks,
+                        blocks: {
+                            styles: true,
+                            ...sfcBlocks.blocks,
+                        },
+                    }),
+                ]),
             rules: {
                 ...pluginVue.configs.base.rules,
                 ...pluginVue.configs['vue3-essential'].rules,

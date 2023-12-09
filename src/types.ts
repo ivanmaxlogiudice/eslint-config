@@ -22,6 +22,7 @@ import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
+import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
     [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
@@ -72,6 +73,16 @@ export interface OptionsFiles {
      * Override the `files` option to provide custom globs.
      */
     files?: string[]
+}
+
+export interface OptionsVue {
+    /**
+     * Create virtual files for Vue SFC blocks to enable linting.
+     *
+     * @see https://github.com/antfu/eslint-processor-vue-blocks
+     * @default true
+     */
+    sfcBlocks?: boolean | VueBlocksOptions
 }
 
 export interface OptionsFormatters {
@@ -223,7 +234,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default auto-detect based on the dependencies
      */
-    vue?: boolean
+    vue?: boolean | OptionsVue
 
     /**
      * Enable JSONC support.
