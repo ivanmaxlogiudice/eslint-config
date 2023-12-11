@@ -49,10 +49,10 @@
         "eslint-plugin-format": "^0.0.1"
     },
     "peerDependenciesMeta": {
-        "eslint-plugin-format": {
+        "@unocss/eslint-plugin": {
             "optional": true
         },
-        "@unocss/eslint-plugin": {
+        "eslint-plugin-format": {
             "optional": true
         }
     },
