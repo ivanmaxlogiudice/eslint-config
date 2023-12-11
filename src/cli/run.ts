@@ -16,11 +16,17 @@ export interface RuleOptions {
      * Skip prompts and use default values
      */
     yes?: boolean
+
+    /**
+     * Ignore uncommitted changes.
+     */
+    ignoreGit?: boolean
 }
 
 export async function run(options: RuleOptions = {}) {
+    console.log(options)
     const SKIP_PROMPT = !!process.env.SKIP_PROMPT || options.yes
-    const SKIP_GIT_CHECK = !!process.env.SKIP_GIT_CHECK
+    const SKIP_GIT_CHECK = !!process.env.SKIP_GIT_CHECK || options.ignoreGit
 
     const cwd = process.cwd()
 
@@ -31,8 +37,17 @@ export async function run(options: RuleOptions = {}) {
     if (fs.existsSync(pathESLintConfig))
         throwError(WARN, 'eslint.config.js already exists, migration wizard exited.')
 
-    if (!SKIP_GIT_CHECK && !isGitClean())
-        throwError(CROSS, 'There are uncommitted changes in the current repository, please commit them and try again.')
+    if (!SKIP_GIT_CHECK && !isGitClean()) {
+        const { confirmed } = await prompts({
+            initial: false,
+            message: 'There are uncommitted changes in the current repository, are you sure to continue?',
+            name: 'confirmed',
+            type: 'confirm',
+        })
+
+        if (!confirmed)
+            throwError(CROSS, 'There are uncommitted changes in the current repository, please commit them and try again.')
+    }
 
     // Update package.json
     console.log(`\n${ARROW} Installing ${c.green('@ivanmaxlogiudice/eslint-config')} to v${c.yellow(version)}.\n`)

@@ -91,14 +91,14 @@ For example:
 ### Migration
 
 We provided an experimental CLI tool to help you migrate from the legacy config to the new flat config.
-You can use the `-y` / `--yes` flag to skip the promps and use the default values.
 
 ```bash
-# npm
-npx @ivanmaxlogiudice/eslint-config@latest -y
-
 # pnpm
-pnpm dlx @ivanmaxlogiudice/eslint-config@latest -y
+pnpx @ivanmaxlogiudice/eslint-config@latest
+
+Options:
+  -y, --yes         Skip prompts and use default values
+  -i, --ignore-git  Skip uncommitted changes
 ```
 
 Before running the migration, make sure to commit your unsaved changes first.
@@ -417,7 +417,7 @@ export default config({
 })
 ```
 
-Running `pnpm dlx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+Running `pnpx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
 
 ```bash
 pnpm add -D @unocss/eslint-plugin
