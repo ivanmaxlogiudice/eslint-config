@@ -52,7 +52,7 @@ export async function perfectionist(options: OptionsOverrides = {}): Promise<Fla
                         'unknown',
                     ],
                     'internal-pattern': ['{{@,~}/,#}**'],
-                    'newlines-between': 'never',
+                    'newlines-between': 'ignore',
                     'order': 'asc',
                     'type': 'natural',
                 }],
