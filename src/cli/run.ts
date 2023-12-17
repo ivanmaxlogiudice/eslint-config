@@ -24,7 +24,6 @@ export interface RuleOptions {
 }
 
 export async function run(options: RuleOptions = {}) {
-    console.log(options)
     const SKIP_PROMPT = !!process.env.SKIP_PROMPT || options.yes
     const SKIP_GIT_CHECK = !!process.env.SKIP_GIT_CHECK || options.ignoreGit
 
