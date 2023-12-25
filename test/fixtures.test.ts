@@ -70,6 +70,7 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfi
 
         await fs.writeFile(join(target, 'eslint.config.js'), `
 // @eslint-disable
+// eslint-disable-next-line antfu/no-import-dist
 import config from '../../dist/index.js'
 
 export default config(
