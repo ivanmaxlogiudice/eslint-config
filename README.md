@@ -311,8 +311,8 @@ import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config(
     {
-        typescript: true,
-        vue: true
+        vue: true,
+        typescript: true
     },
     {
         // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
@@ -330,23 +330,28 @@ export default config(
 )
 ```
 
-We also provided a `overrides` options to make it easier:
+We also provided a `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
-import config from '@ivanmaxlogiudice/eslint-config'
+import antfu from '@antfu/eslint-config'
 
-export default config({
-    overrides: {
-        typescript: {
-            'ts/consistent-type-definitions': ['error', 'interface'],
-        },
-        vue: {
+export default antfu({
+    vue: {
+        overrides: {
             'vue/operator-linebreak': ['error', 'before'],
         },
-        yaml: {},
-        // ...
-    }
+    },
+    typescript: {
+        overrides: {
+            'ts/consistent-type-definitions': ['error', 'interface'],
+        },
+    },
+    yaml: {
+        overrides: {
+            // ...
+        },
+    },
 })
 ```
 
@@ -425,7 +430,7 @@ pnpm add -D @unocss/eslint-plugin
 
 ### Optional Rules
 
-This config also provides some optional plugins/rules for extended usages.
+This config also provides some optional plugins/rules for extended usage.
 
 #### `perfectionist` (sorting)
 

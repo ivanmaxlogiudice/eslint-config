@@ -75,7 +75,7 @@ export interface OptionsFiles {
     files?: string[]
 }
 
-export interface OptionsVue {
+export interface OptionsVue extends OptionsOverrides {
     /**
      * Create virtual files for Vue SFC blocks to enable linting.
      *
@@ -84,6 +84,10 @@ export interface OptionsVue {
      */
     sfcBlocks?: boolean | VueBlocksOptions
 }
+
+export type OptionsTypescript =
+  (OptionsTypeScriptWithTypes & OptionsOverrides)
+  | (OptionsTypeScriptParserOptions & OptionsOverrides)
 
 export interface OptionsFormatters {
     /**
@@ -186,7 +190,7 @@ export interface OptionsIsInEditor {
     isInEditor?: boolean
 }
 
-export interface OptionsUnoCSS {
+export interface OptionsUnoCSS extends OptionsOverrides {
     /**
      * Enable attributify support.
      * @default true
@@ -211,13 +215,18 @@ export interface OptionsConfig extends OptionsComponentExts {
     gitignore?: boolean | FlatGitignoreOptions
 
     /**
+     * Core rules. Can't be disabled.
+     */
+    javascript?: OptionsOverrides
+
+    /**
      * Enable TypeScript support.
      *
      * Passing an object to enable TypeScript Language Server support.
      *
      * @default auto-detect based on the dependencies
      */
-    typescript?: boolean | OptionsTypeScriptParserOptions | OptionsTypeScriptWithTypes
+    typescript?: boolean | OptionsTypescript
 
     /**
      * Enable JSX related rules.
@@ -233,7 +242,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    test?: boolean
+    test?: boolean | OptionsTypescript
 
     /**
      * Enable Vue support.
@@ -247,14 +256,14 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    jsonc?: boolean
+    jsonc?: boolean | OptionsTypescript
 
     /**
      * Enable YAML support.
      *
      * @default true
      */
-    yaml?: boolean
+    yaml?: boolean | OptionsTypescript
 
     /**
      * Enable linting for **code snippets** in Markdown.
@@ -263,7 +272,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    markdown?: boolean
+    markdown?: boolean | OptionsTypescript
 
     /**
      * Enable stylistic rules.
@@ -281,6 +290,13 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @default auto-detect based on the dependencies
      */
     unocss?: boolean | OptionsUnoCSS
+
+    /**
+     * Enable perfectionist rules.
+     *
+     * @default true
+     */
+    perfectionist?: boolean | OptionsOverrides
 
     /**
      * Use external formatters to format files.
@@ -302,6 +318,8 @@ export interface OptionsConfig extends OptionsComponentExts {
 
     /**
      * Provide overrides for rules for each integration.
+     *
+     * @deprecated use `overrides` option in each integration key instead
      */
     overrides?: {
         stylistic?: FlatConfigItem['rules']

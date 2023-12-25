@@ -60,7 +60,6 @@ export async function config(
         componentExts = [],
         gitignore: enableGitignore = true,
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
-        overrides = {},
         typescript: enableTypeScript = isPackageExists('typescript'),
         unocss: enableUnoCSS = UnocssPackages.some(i => isPackageExists(i)),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -94,13 +93,10 @@ export async function config(
         ignores(),
         javascript({
             isInEditor,
-            overrides: overrides.javascript,
+            overrides: getOverrides(options, 'javascript'),
         }),
         comments(),
         node(),
-        perfectionist({
-            overrides: overrides.perfectionist,
-        }),
         jsdoc({
             stylistic: stylisticOptions,
         }),
@@ -115,40 +111,35 @@ export async function config(
 
     if (enableTypeScript) {
         configs.push(typescript({
-            ...typeof enableTypeScript !== 'boolean'
-                ? enableTypeScript
-                : {},
+            ...resolveSubOptions(options, 'typescript'),
             componentExts,
-            overrides: overrides.typescript,
         }))
     }
 
     if (stylisticOptions) {
         configs.push(stylistic({
             ...stylisticOptions,
-            overrides: overrides.stylistic,
+            overrides: getOverrides(options, 'stylistic'),
         }))
     }
 
     if (enableUnoCSS) {
-        configs.push(unocss(
-            typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS,
-        ))
+        configs.push(unocss({
+            ...resolveSubOptions(options, 'unocss'),
+            overrides: getOverrides(options, 'unocss'),
+        }))
     }
 
     if (options.test ?? true) {
         configs.push(test({
             isInEditor,
-            overrides: overrides.test,
+            overrides: getOverrides(options, 'test'),
         }))
     }
 
     if (enableVue) {
         configs.push(vue({
-            ...typeof enableVue !== 'boolean'
-                ? enableVue
-                : {},
-            overrides: overrides.vue,
+            ...resolveSubOptions(options, 'vue'),
             stylistic: stylisticOptions,
             typescript: !!enableTypeScript,
         }))
@@ -157,7 +148,7 @@ export async function config(
     if (options.jsonc ?? true) {
         configs.push(
             jsonc({
-                overrides: overrides.jsonc,
+                overrides: getOverrides(options, 'jsonc'),
                 stylistic: stylisticOptions,
             }),
             sortPackageJson(),
@@ -167,7 +158,7 @@ export async function config(
 
     if (options.yaml ?? true) {
         configs.push(yaml({
-            overrides: overrides.yaml,
+            overrides: getOverrides(options, 'yaml'),
             stylistic: stylisticOptions,
         }))
     }
@@ -175,7 +166,7 @@ export async function config(
     if (options.markdown ?? true) {
         configs.push(markdown({
             componentExts,
-            overrides: overrides.markdown,
+            overrides: getOverrides(options, 'markdown'),
         }))
     }
 
@@ -184,6 +175,12 @@ export async function config(
             options.formatters,
             typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
         ))
+    }
+
+    if (options.perfectionist ?? true) {
+        configs.push(perfectionist({
+            overrides: getOverrides(options, 'perfectionist'),
+        }))
     }
 
     // User can optionally pass a flat config item to the first argument
@@ -204,4 +201,30 @@ export async function config(
     )
 
     return merged
+}
+
+export type ResolvedOptions<T> = T extends boolean
+    ? never
+    : NonNullable<T>
+
+export function resolveSubOptions<K extends keyof OptionsConfig>(
+    options: OptionsConfig,
+    key: K,
+): ResolvedOptions<OptionsConfig[K]> {
+    return typeof options[key] === 'boolean'
+        ? {} as any
+        : options[key] || {}
+}
+
+export function getOverrides<K extends keyof OptionsConfig>(
+    options: OptionsConfig,
+    key: K,
+) {
+    const sub = resolveSubOptions(options, key)
+    return {
+        ...(options.overrides as any)?.[key],
+        ...'overrides' in sub
+            ? sub.overrides
+            : {},
+    }
 }
