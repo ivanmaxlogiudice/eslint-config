@@ -149,6 +149,7 @@ export async function formatters(
                     'error',
                     formater === 'prettier'
                         ? {
+                            printWidth: 120,
                             ...prettierOptions,
                             embeddedLanguageFormatting: 'off',
                             parser: 'markdown',
