@@ -123,8 +123,12 @@ export async function config(
         }))
     }
 
-    if (stylisticOptions)
-        configs.push(stylistic(stylisticOptions))
+    if (stylisticOptions) {
+        configs.push(stylistic({
+            ...stylisticOptions,
+            overrides: overrides.stylistic,
+        }))
+    }
 
     if (enableUnoCSS) {
         configs.push(unocss(
