@@ -151,6 +151,12 @@ export interface OptionsTypeScriptParserOptions {
      * Additional parser options for TypeScript.
      */
     parserOptions?: Partial<ParserOptions>
+
+    /**
+     * Glob patterns for files that should be type aware.
+     * @default ['**\/*.{ts,tsx}']
+     */
+    filesTypeAware?: string[]
 }
 
 export interface OptionsTypeScriptWithTypes {
