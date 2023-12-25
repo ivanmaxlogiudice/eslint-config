@@ -15,6 +15,7 @@ export function imports(options: OptionsStylistic = {}): FlatConfigItem[] {
             },
             rules: {
                 'antfu/import-dedupe': 'error',
+                'antfu/no-import-dist': 'error',
                 'antfu/no-import-node-modules-by-path': 'error',
 
                 'import/first': 'error',
