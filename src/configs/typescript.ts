@@ -128,6 +128,9 @@ export async function typescript(
                     variables: true,
                 }],
                 'ts/no-useless-constructor': 'off',
+                'ts/prefer-literal-enum-member': ['error', {
+                    allowBitwiseExpressions: true,
+                }],
                 'ts/prefer-ts-expect-error': 'error',
                 'ts/triple-slash-reference': 'off',
                 'ts/unified-signatures': 'off',
