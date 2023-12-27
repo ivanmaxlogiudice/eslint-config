@@ -54,7 +54,7 @@ export async function unicorn(): Promise<FlatConfigItem[]> {
                 'unicorn/prefer-dom-node-text-content': 'error',
                 'unicorn/prefer-includes': 'error',
                 'unicorn/prefer-keyboard-event-key': 'error',
-                'unicorn/prefer-math-trunc': 'error',
+                'unicorn/prefer-math-trunc': 'off', // https://github.com/sindresorhus/eslint-plugin-unicorn/issues/1863
                 'unicorn/prefer-modern-dom-apis': 'error',
                 'unicorn/prefer-modern-math-apis': 'error',
                 'unicorn/prefer-negative-index': 'error',
