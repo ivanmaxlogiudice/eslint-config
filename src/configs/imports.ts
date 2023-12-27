@@ -1,4 +1,5 @@
 import type { FlatConfigItem, OptionsStylistic } from '../types'
+import { GLOB_SRC_EXT } from '../globs'
 import { pluginAntfu, pluginImport } from '../plugins'
 
 export function imports(options: OptionsStylistic = {}): FlatConfigItem[] {
@@ -33,6 +34,14 @@ export function imports(options: OptionsStylistic = {}): FlatConfigItem[] {
                         }],
                     }
                     : {},
+            },
+        },
+        {
+            files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
+            name: 'config:imports:bin',
+            rules: {
+                'antfu/no-import-dist': 'off',
+                'antfu/no-import-node-modules-by-path': 'off',
             },
         },
     ]
