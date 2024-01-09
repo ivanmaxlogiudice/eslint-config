@@ -150,7 +150,6 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
                     'TSEnumDeclaration[const=true]',
                     'TSExportAssignment',
                 ],
-                'no-return-assign': ['error', 'except-parens'],
                 'no-self-assign': ['error', {
                     props: true,
                 }],
