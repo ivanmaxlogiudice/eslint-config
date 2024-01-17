@@ -279,7 +279,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    stylistic?: boolean | StylisticConfig
+    stylistic?: boolean | (StylisticConfig & OptionsOverrides)
 
     /**
      * Enable unocss rules.
