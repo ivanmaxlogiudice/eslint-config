@@ -19,6 +19,10 @@ export async function typescript(
     ]
 
     const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
+    const tsconfigPath = options?.tsconfigPath
+        ? toArray(options.tsconfigPath)
+        : undefined
+    const isTypeAware = !!tsconfigPath
 
     const typeAwareRules: FlatConfigItem['rules'] = {
         'dot-notation': 'off',
@@ -42,10 +46,6 @@ export async function typescript(
         'ts/unbound-method': 'error',
     }
 
-    const tsconfigPath = options?.tsconfigPath
-        ? toArray(options.tsconfigPath)
-        : undefined
-
     const [
         pluginTs,
         parserTs,
@@ -54,22 +54,16 @@ export async function typescript(
         interopDefault(import('@typescript-eslint/parser')),
     ] as const)
 
-    return [
-        {
-            name: 'config:typescript:setup',
-            plugins: {
-                import: pluginImport,
-                ts: pluginTs as any,
-            },
-        },
-        {
+    function makeParser(typeAware: boolean, files: string[], ignores?: string[]): FlatConfigItem {
+        return {
             files,
+            ...ignores ? { ignores } : {},
             languageOptions: {
                 parser: parserTs,
                 parserOptions: {
                     extraFileExtensions: componentExts.map(ext => `.${ext}`),
                     sourceType: 'module',
-                    ...tsconfigPath
+                    ...typeAware
                         ? {
                             project: tsconfigPath,
                             tsconfigRootDir: process.cwd(),
@@ -78,6 +72,28 @@ export async function typescript(
                     ...parserOptions as any,
                 },
             },
+            name: `config:typescript:${typeAware ? 'type-aware-parser' : 'parser'}`,
+        }
+    }
+
+    return [
+        // Install the plugins without globs, so they can be configured separately.
+        {
+            name: 'config:typescript:setup',
+            plugins: {
+                import: pluginImport,
+                ts: pluginTs as any,
+            },
+        },
+        // assign type-aware parser for type-aware files and type-unaware parser for the rest
+        ...isTypeAware
+            ? [
+                makeParser(true, filesTypeAware),
+                makeParser(false, files, filesTypeAware),
+            ]
+            : [makeParser(false, files)],
+        {
+            files,
             name: 'config:typescript:rules',
             rules: {
                 ...renameRules(
