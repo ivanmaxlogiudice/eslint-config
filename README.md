@@ -194,7 +194,7 @@ export default config({
 
     // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
     ignores: [
-        './fixtures',
+        '**/fixtures',
         // ...globs
     ]
 })
