@@ -26,6 +26,7 @@ import {
 import { combine, interopDefault } from './utils'
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
+    'name',
     'files',
     'ignores',
     'languageOptions',
