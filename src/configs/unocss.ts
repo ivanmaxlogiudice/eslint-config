@@ -17,7 +17,7 @@ export async function unocss(options: OptionsUnoCSS = {}): Promise<FlatConfigIte
         {
             name: 'config:unocss',
             plugins: {
-                '@unocss': pluginUnocss,
+                unocss: pluginUnocss,
             },
             rules: {
                 'unocss/order': 'warn',
