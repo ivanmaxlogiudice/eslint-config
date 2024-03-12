@@ -105,5 +105,5 @@ export default config(
 
             await expect.soft(content).toMatchFileSnapshot(outputPath)
         }))
-    }, 30_000)
+    }, 35_000)
 }

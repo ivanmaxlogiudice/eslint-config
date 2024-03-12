@@ -16,9 +16,12 @@ import { ref } from "vue"
 
 const greeting = ref(`Hello, Vue 3!${1}`)
 const counter = ref(0)
+const doubled = computed(() => counter.value * 2)
 
 // Define a function
 function incrementCounter() {
 	counter.value++
 }
+
+const _zero = doubled + counter.value
 </script>
