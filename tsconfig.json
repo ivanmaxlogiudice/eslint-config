@@ -2,10 +2,9 @@
     "compilerOptions": {
         /* Language and Environment */
         "target": "ES2022",
-        "lib": ["ES2022"],
 
         /* Modules */
-        "module": "ESNext",
+        "module": "ES2022",
         "moduleResolution": "Bundler",
 
         /* Type Checking */
@@ -22,7 +21,6 @@
     },
     "include": ["**/*.ts"],
     "exclude": [
-        "dist",
         "./fixtures/**/*.*",
         "./_fixtures/**/*.*"
     ]
