@@ -74,7 +74,7 @@ it('ignores files added in eslint.config.js', async () => {
       "import config from '@ivanmaxlogiudice/eslint-config'
 
       export default config({
-        ignores: ["some-path","**/some-path/**","some-file","**/some-file/**"],
+          ignores: ["some-path","**/some-path/**","some-file","**/some-file/**"],
       })
       "
     `)
