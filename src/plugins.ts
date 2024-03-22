@@ -5,4 +5,4 @@
  * Plugins
  */
 export { default as pluginAntfu } from 'eslint-plugin-antfu'
-export * as pluginImport from 'eslint-plugin-i'
+export * as pluginImport from 'eslint-plugin-import-x'
