@@ -1,18 +1,59 @@
-import { cac } from 'cac'
+import process from 'node:process'
+import * as p from '@clack/prompts'
 import c from 'picocolors'
-import { version } from './constants'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import { pkgJson } from './constants'
 import { run } from './run'
 
-const cli = cac(
-    c.green('@ivanmaxlogiudice/eslint-config'),
-)
+function header() {
+    // eslint-disable-next-line no-console
+    console.log('\n')
+    p.intro(`${c.green(`@ivanmaxlogiudice/eslint-config `)}${c.dim(`v${pkgJson.version}`)}`)
+}
 
-cli
-    .command('', 'Run the initialization or migration')
-    .option('-y, --yes', 'Skip prompts and use default values', { type: [Boolean] })
-    .option('-i, --ignore-git', 'Skip uncommitted changes', { type: [Boolean] })
-    .action(run)
+const instance = yargs(hideBin(process.argv))
+    .scriptName('@ivanmaxlogiudice/eslint-config')
+    .usage('')
+    .command(
+        '*',
+        'Run the initialization or migration',
+        args => args
+            .option('yes', {
+                alias: 'y',
+                description: 'Skip prompts and use default values',
+                type: 'boolean',
+            })
+            .option('template', {
+                alias: 't',
+                description: 'Use the framework template for optimal customization: vue',
+                type: 'string',
+            })
+            .option('extra', {
+                alias: 'e',
+                array: true,
+                description: 'Use the extra utils: formatter / perfectionist / unocss',
+                type: 'string',
+            })
+            .help(),
+        async (args) => {
+            header()
+            try {
+                await run(args)
+            }
+            catch (error) {
+                p.log.error(c.inverse(c.red(' Failed to migrate ')))
+                p.log.error(c.red(`✘ ${String(error)}`))
+                process.exit(1)
+            }
+        },
+    )
+    .showHelpOnFail(false)
+    .alias('h', 'help')
+    .version('version', pkgJson.version)
+    .alias('v', 'version')
 
-cli.help()
-cli.version(`${c.bold(version)}`)
-cli.parse()
+// eslint-disable-next-line no-unused-expressions
+instance
+    .help()
+    .argv

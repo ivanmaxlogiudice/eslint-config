@@ -1,12 +1,13 @@
 import c from 'picocolors'
-import { version } from '../../package.json'
+import type { ExtraLibrariesOption, FrameworkOption, PromItem } from './types'
+import pkgJson from '../../package.json'
 
 export const ARROW = c.cyan('→')
 export const CHECK = c.green('✔')
 export const CROSS = c.red('✘')
 export const WARN = c.yellow('ℹ')
 
-export { version }
+export { pkgJson }
 
 export const vscodeSettingsString = `
     // Enable the ESlint flat config support
@@ -47,6 +48,34 @@ export const vscodeSettingsString = `
         "markdown",
         "json",
         "jsonc",
-        "yaml"
+        "yaml",
+        "toml",
     ]
 `
+
+export const frameworkOptions: PromItem<FrameworkOption>[] = [
+    {
+        label: c.green('Vue'),
+        value: 'vue',
+    },
+]
+
+export const frameworks: FrameworkOption[] = frameworkOptions.map(({ value }) => (value))
+
+export const extraOptions: PromItem<ExtraLibrariesOption>[] = [
+    {
+        hint: 'Use external formatters (Prettier and/or dprint) to format files that ESLint cannot handle yet (.css, .html, etc)',
+        label: c.red('Formatter'),
+        value: 'formatter',
+    },
+    {
+        label: c.cyan('UnoCSS'),
+        value: 'unocss',
+    },
+]
+
+export const extra: ExtraLibrariesOption[] = extraOptions.map(({ value }) => (value))
+
+export const dependenciesMap = {
+    vue: [],
+} as const

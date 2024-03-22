@@ -21,6 +21,14 @@ based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 
 ## Usage
 
+### Wizard
+
+We provided a CLI tool to help you set up your project, or migrate from the legacy config to the new flat config.
+
+```bash
+pnpx @ivanmaxlogiudice/eslint-config@latest
+```
+
 ### Install
 
 ```bash
