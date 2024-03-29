@@ -28,18 +28,6 @@ jobs:
       - name: Lint
         run: bun run lint
 
-  typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install bun
-        uses: oven-sh/setup-bun@v1
-
-      - name: Install
-        run: bun install
-
       - name: Typecheck
         run: bun run typecheck
 
