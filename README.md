@@ -505,6 +505,16 @@ and then
 pnpm add -D lint-staged simple-git-hooks
 ```
 
+## View what rules are enabled
+
+Use [@eslint/config-inspector](https://github.com/eslint/config-inspector) to view what rules are enabled in your project and apply them to what files,
+
+Go to your project root that contains `eslint.config.js` and run:
+
+```bash
+pnpx @eslint/config-inspector
+```
+
 ## FAQ
 
 ### Prettier?
