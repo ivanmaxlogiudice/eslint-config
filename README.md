@@ -21,50 +21,46 @@ based on [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 
 ## Usage
 
-### Wizard
+### Starter Wizard
 
-We provided a CLI tool to help you set up your project, or migrate from the legacy config to the new flat config.
+We provided a CLI tool to help you set up your project, or migrate from the legacy config to the new flat config with one command.
 
 ```bash
 pnpx @ivanmaxlogiudice/eslint-config@latest
 ```
 
-### Install
+### Manual Install
+
+If you prefer to set up manually:
 
 ```bash
 pnpm add -D @ivanmaxlogiudice/eslint-config
 ```
 
-### Create config file
-
-With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package.json` (recommended):
+And create `eslint.config.mjs` in your project root:
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config()
 ```
 
-With CJS:
-
-```js
-// eslint.config.js
-const config = require('@ivanmaxlogiudice/eslint-config').default
-
-module.exports = config()
-```
-
+<details>
+<summary>
 Combined with legacy config:
+</summary>
+
+If you still use some configs from the legacy eslintrc format, you can use the [`@eslint/eslintrc`](https://www.npmjs.com/package/@eslint/eslintrc) package to convert them to the flat config.
 
 ```js
-// eslint.config.js
-const config = require('@ivanmaxlogiudice/eslint-config').default
-const { FlatCompat } = require('@eslint/eslintrc')
+// eslint.config.mjs
+import { FlatCompat } from '@eslint/eslintrc'
+import config from '@ivanmaxlogiudice/eslint-config'
 
 const compat = new FlatCompat()
 
-module.exports = config(
+export default config(
     {
         ignores: [],
     },
@@ -82,6 +78,8 @@ module.exports = config(
 ```
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
+
+</details>
 
 ### Add script for package.json
 
@@ -111,7 +109,7 @@ Options:
 
 Before running the migration, make sure to commit your unsaved changes first.
 
-## VS Code support (auto fix)
+## VS Code support (auto fix on save)
 
 Install [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
@@ -344,9 +342,9 @@ We also provided a `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import config from '@ivanmaxlogiudice/eslint-config'
 
-export default antfu({
+export default config({
     vue: {
         overrides: {
             'vue/operator-linebreak': ['error', 'before'],
