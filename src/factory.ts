@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import process from 'node:process'
 import { isPackageExists } from 'local-pkg'
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
+import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import {
     comments,
     formatters,
@@ -25,7 +25,7 @@ import {
 } from './configs'
 import { combine, interopDefault, renamePluginInConfigs } from './utils'
 
-const flatConfigProps: (keyof FlatConfigItem)[] = [
+const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
     'name',
     'files',
     'ignores',
@@ -63,9 +63,9 @@ export const defaultPluginRenaming = {
  */
 
 export async function config(
-    options: OptionsConfig & FlatConfigItem = {},
-    ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
-): Promise<UserConfigItem[]> {
+    options: OptionsConfig & TypedFlatConfigItem = {},
+    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
+): Promise<TypedFlatConfigItem[]> {
     const {
         autoRenamePlugins = true,
         componentExts = [],
@@ -85,7 +85,7 @@ export async function config(
     if (stylisticOptions && !('jsx' in stylisticOptions))
         stylisticOptions.jsx = options.jsx ?? true
 
-    const configs: Awaitable<FlatConfigItem[]>[] = []
+    const configs: Awaitable<TypedFlatConfigItem[]>[] = []
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
@@ -203,7 +203,7 @@ export async function config(
             acc[key] = options[key] as any
 
         return acc
-    }, {} as FlatConfigItem)
+    }, {} as TypedFlatConfigItem)
 
     if (Object.keys(fusedConfig).length > 0)
         configs.push([fusedConfig])

@@ -81,3 +81,5 @@ dist
 _fixtures
 .temp
 .history
+
+src/typegen.d.ts

@@ -1,4 +1,4 @@
-import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
+import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
 import type { VendoredPrettierOptions } from '../vender/prettier-types'
 import { GLOB_CSS, GLOB_GRAPHQL, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault, parserPlain } from '../utils'
@@ -7,7 +7,7 @@ import { StylisticConfigDefaults } from './stylistic'
 export async function formatters(
     options: OptionsFormatters | true = {},
     stylistic: StylisticConfig = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
     await ensurePackages([
         'eslint-plugin-format',
     ])
@@ -18,7 +18,6 @@ export async function formatters(
             graphql: true,
             html: true,
             markdown: true,
-            toml: true,
         }
     }
 
@@ -48,7 +47,7 @@ export async function formatters(
 
     const pluginFormat = await interopDefault(import('eslint-plugin-format'))
 
-    const configs: FlatConfigItem[] = [
+    const configs: TypedFlatConfigItem[] = [
         {
             name: 'config:formatters:setup',
             plugins: {
@@ -112,22 +111,6 @@ export async function formatters(
                 'format/prettier': ['error', {
                     ...prettierOptions,
                     parser: 'html',
-                }],
-            },
-        })
-    }
-
-    if (options.toml) {
-        configs.push({
-            files: ['**/*.toml'],
-            languageOptions: {
-                parser: parserPlain,
-            },
-            name: 'config:formatter:toml',
-            rules: {
-                'format/dprint': ['error', {
-                    ...dprintOptions,
-                    language: 'toml',
                 }],
             },
         })

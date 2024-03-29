@@ -1,7 +1,7 @@
-import type { FlatConfigItem, OptionsUnoCSS } from '../types'
+import type { OptionsUnoCSS, TypedFlatConfigItem } from '../types'
 import { ensurePackages, interopDefault } from '../utils'
 
-export async function unocss(options: OptionsUnoCSS = {}): Promise<FlatConfigItem[]> {
+export async function unocss(options: OptionsUnoCSS = {}): Promise<TypedFlatConfigItem[]> {
     const {
         attributify = true,
         strict = false,

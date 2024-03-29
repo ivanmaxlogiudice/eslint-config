@@ -3,7 +3,7 @@ import { execa } from 'execa'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { afterAll, beforeAll, it } from 'vitest'
-import type { FlatConfigItem, OptionsConfig } from '../src/types'
+import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 
 beforeAll(async () => {
     await fs.rm('_fixtures', { force: true, recursive: true })
@@ -58,7 +58,7 @@ runWithConfig('no-markdown-with-formatters', {
     },
 })
 
-function runWithConfig(name: string, configs: OptionsConfig, ...items: FlatConfigItem[]) {
+function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlatConfigItem[]) {
     it.concurrent(name, async ({ expect }) => {
         const from = resolve('fixtures/input')
         const output = resolve('fixtures/output', name)

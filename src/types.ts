@@ -1,57 +1,16 @@
+import type { RuleOptions } from './typegen'
 import type { VendoredPrettierOptions } from './vender/prettier-types'
-import type {
-    EslintCommentsRules,
-    EslintRules,
-    FlatESLintConfigItem,
-    ImportRules,
-    JsoncRules,
-    MergeIntersection,
-    NRules,
-    Prefix,
-    RenamePrefix,
-    RuleConfig,
-    VitestRules,
-    VueRules,
-    YmlRules,
-} from '@antfu/eslint-define-config'
-import type { RuleOptions as JSDocRules } from '@eslint-types/jsdoc/types'
-import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types'
-import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types'
-import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin'
+import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
-
-export type WrapRuleConfig<T extends { [key: string]: any }> = {
-    [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
-}
 
 export type Awaitable<T> = T | Promise<T>
 
-export type Rules = WrapRuleConfig<
-  MergeIntersection<
-      RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
-      RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-      RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-      RenamePrefix<NRules, 'n/', 'node/'> &
-      Prefix<StylisticRules, 'style/'> &
-      Prefix<AntfuRules, 'antfu/'> &
-      JSDocRules &
-      ImportRules &
-      EslintRules &
-      JsoncRules &
-      VueRules &
-      UnicornRules &
-      EslintCommentsRules &
-      {
-          'test/no-only-tests': RuleConfig<[]>
-      }
-  >
->
+export type Rules = RuleOptions
 
-export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
     /**
      * Custom name of each config item
      */
@@ -64,9 +23,12 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'>
      * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
      */
     plugins?: Record<string, any>
-}
 
-export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
+    /**
+     * An object containing a name-value mapping of rules to use.
+     */
+    rules?: Linter.RulesRecord & Rules
+}
 
 export interface OptionsFiles {
     /**
@@ -103,13 +65,6 @@ export interface OptionsFormatters {
      * Currently only support Prettier.
      */
     html?: 'prettier' | boolean
-
-    /**
-     * Enable formatting support for TOML.
-     *
-     * Currently only support dprint.
-     */
-    toml?: 'dprint' | boolean
 
     /**
      * Enable formatting support for Markdown.
@@ -176,14 +131,14 @@ export interface OptionsHasTypeScript {
 }
 
 export interface OptionsStylistic {
-    stylistic?: StylisticConfig | boolean
+    stylistic?: boolean | StylisticConfig
 }
 
 export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
 }
 
 export interface OptionsOverrides {
-    overrides?: FlatConfigItem['rules']
+    overrides?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsIsInEditor {
@@ -242,7 +197,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    test?: boolean | OptionsTypescript
+    test?: boolean | OptionsOverrides
 
     /**
      * Enable Vue support.
@@ -256,14 +211,14 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    jsonc?: boolean | OptionsTypescript
+    jsonc?: boolean | OptionsOverrides
 
     /**
      * Enable YAML support.
      *
      * @default true
      */
-    yaml?: boolean | OptionsTypescript
+    yaml?: boolean | OptionsOverrides
 
     /**
      * Enable linting for **code snippets** in Markdown.
@@ -272,7 +227,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    markdown?: boolean | OptionsTypescript
+    markdown?: boolean | OptionsOverrides
 
     /**
      * Enable stylistic rules.
@@ -329,14 +284,14 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @deprecated use `overrides` option in each integration key instead
      */
     overrides?: {
-        stylistic?: FlatConfigItem['rules']
-        javascript?: FlatConfigItem['rules']
-        typescript?: FlatConfigItem['rules']
-        test?: FlatConfigItem['rules']
-        vue?: FlatConfigItem['rules']
-        jsonc?: FlatConfigItem['rules']
-        markdown?: FlatConfigItem['rules']
-        yaml?: FlatConfigItem['rules']
-        perfectionist?: FlatConfigItem['rules']
+        stylistic?: TypedFlatConfigItem['rules']
+        javascript?: TypedFlatConfigItem['rules']
+        typescript?: TypedFlatConfigItem['rules']
+        test?: TypedFlatConfigItem['rules']
+        vue?: TypedFlatConfigItem['rules']
+        jsonc?: TypedFlatConfigItem['rules']
+        markdown?: TypedFlatConfigItem['rules']
+        yaml?: TypedFlatConfigItem['rules']
+        perfectionist?: TypedFlatConfigItem['rules']
     }
 }

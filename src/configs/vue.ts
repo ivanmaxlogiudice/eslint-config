@@ -1,11 +1,11 @@
 import { mergeProcessors } from 'eslint-merge-processors'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue, TypedFlatConfigItem } from '../types'
 import { GLOB_VUE } from '../globs'
 import { interopDefault } from '../utils'
 
 export async function vue(
     options: OptionsVue & OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
     const {
         files = [GLOB_VUE],
         overrides = {},

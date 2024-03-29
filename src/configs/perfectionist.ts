@@ -1,7 +1,7 @@
-import type { FlatConfigItem, OptionsOverrides } from '../types'
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 import { interopDefault } from '../utils'
 
-export async function perfectionist(options: OptionsOverrides = {}): Promise<FlatConfigItem[]> {
+export async function perfectionist(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
         overrides = {},
     } = options

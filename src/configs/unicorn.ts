@@ -1,7 +1,7 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { interopDefault } from '../utils'
 
-export async function unicorn(): Promise<FlatConfigItem[]> {
+export async function unicorn(): Promise<TypedFlatConfigItem[]> {
     // @ts-expect-error Missing types
     const pluginUnicorn = await interopDefault(import('eslint-plugin-unicorn'))
 

@@ -1,7 +1,7 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { interopDefault } from '../utils'
 
-export async function comments(): Promise<FlatConfigItem[]> {
+export async function comments(): Promise<TypedFlatConfigItem[]> {
     // @ts-expect-error Missing types
     const pluginComments = await interopDefault(import('eslint-plugin-eslint-comments'))
 
