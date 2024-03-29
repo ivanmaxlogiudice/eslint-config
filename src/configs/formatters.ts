@@ -1,6 +1,6 @@
 import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
 import type { VendoredPrettierOptions } from '../vender/prettier-types'
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import { GLOB_CSS, GLOB_GRAPHQL, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault, parserPlain } from '../utils'
 import { StylisticConfigDefaults } from './stylistic'
 
@@ -165,7 +165,7 @@ export async function formatters(
 
     if (options.graphql) {
         configs.push({
-            files: ['**/*.graphql'],
+            files: [GLOB_GRAPHQL],
             languageOptions: {
                 parser: parserPlain,
             },

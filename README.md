@@ -160,7 +160,9 @@ Add the following settings to your `settings.json`:
         "markdown",
         "json",
         "jsonc",
-        "yaml"
+        "toml",
+        "gql",
+        "graphql"
     ]
 }
 ```
