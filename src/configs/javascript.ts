@@ -251,7 +251,7 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
         },
         {
             files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-            name: 'config:scripts-overrides',
+            name: 'config:disables:cli',
             rules: {
                 'no-console': 'off',
             },

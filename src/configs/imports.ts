@@ -38,7 +38,7 @@ export function imports(options: OptionsStylistic = {}): TypedFlatConfigItem[] {
         },
         {
             files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
-            name: 'config:imports:bin',
+            name: 'config:disables:imports-bin',
             rules: {
                 'antfu/no-import-dist': 'off',
                 'antfu/no-import-node-modules-by-path': 'off',

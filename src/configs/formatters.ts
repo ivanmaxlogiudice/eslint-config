@@ -49,7 +49,7 @@ export async function formatters(
 
     const configs: TypedFlatConfigItem[] = [
         {
-            name: 'config:formatters:setup',
+            name: 'config:formatter:setup',
             plugins: {
                 format: pluginFormat,
             },

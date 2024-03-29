@@ -9,7 +9,7 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
     return [
         {
             files: ['**/package.json'],
-            name: 'config:sort-package-json',
+            name: 'config:sort:package-json',
             rules: {
                 'jsonc/sort-array-values': ['error', {
                     order: { type: 'asc' },
@@ -112,7 +112,7 @@ export function sortTsconfig(): TypedFlatConfigItem[] {
     return [
         {
             files: ['**/tsconfig.json', '**/tsconfig.*.json'],
-            name: 'config:sort-tsconfig',
+            name: 'config:sort:tsconfig',
             rules: {
                 'jsonc/sort-keys': [
                     'error',
