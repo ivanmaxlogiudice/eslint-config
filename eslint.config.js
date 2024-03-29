@@ -1,8 +1,12 @@
 // @ts-check
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
+import JITI from 'jiti'
 
-// eslint-disable-next-line antfu/no-import-dist
-import config from './dist/index.js'
+const jiti = JITI(import.meta.url)
+/**
+ * @type {import('./src').default}
+ */
+const config = jiti('./src').default
 
 export default config(
     {

@@ -442,7 +442,7 @@ This config also provides some optional plugins/rules for extended usage.
 
 #### `perfectionist` (sorting)
 
-This plugin [`eslint-plugin-perfectionist`](https://github.com/azat-io/eslint-plugin-perfectionist) allows you to sorted object keys, imports, etc, with auto-fix.
+This plugin [`eslint-plugin-perfectionist`](https://github.com/azat-io/eslint-plugin-perfectionist) allows you to sort object keys, imports, etc, with auto-fix.
 
 The plugin is installed, you can check the [enabled rules](/src/configs/perfectionist.ts) for more info.
 
