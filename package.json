@@ -33,9 +33,10 @@
         "access": "public"
     },
     "scripts": {
-        "build": "pnpm run typegen && tsup --format esm,cjs --clean --dts",
         "stub": "tsup --format esm",
         "dev": "tsup --format esm,cjs --watch & pnpx @eslint/config-inspector",
+        "build": "pnpm run typegen && tsup --format esm,cjs --clean --dts",
+        "build:inspector": "pnpm build && pnpx @eslint/config-inspector build",
         "lint": "pnpm run stub && eslint .",
         "typegen": "esno scripts/typegen.ts",
         "prepack": "pnpm run build",
