@@ -1,8 +1,16 @@
 import fs from 'node:fs/promises'
+import { builtinRules } from 'eslint/use-at-your-own-risk'
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { combine, comments, formatters, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, sortPackageJson, stylistic, test, typescript, unicorn, unocss, vue, yaml } from '../src'
 
 const configs = await combine(
+    {
+        plugins: {
+            '': {
+                rules: Object.fromEntries(builtinRules.entries()),
+            },
+        },
+    },
     comments(),
     formatters(),
     imports(),
