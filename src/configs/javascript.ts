@@ -117,7 +117,7 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
                 'no-multi-str': 'error',
                 'no-new': 'error',
                 'no-new-func': 'error',
-                'no-new-symbol': 'error',
+                'no-new-native-nonconstructor': 'error',
                 'no-new-wrappers': 'error',
                 'no-obj-calls': 'error',
                 'no-object-constructor': 'error',
