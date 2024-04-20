@@ -29,6 +29,9 @@ importers:
       eslint-config-flat-gitignore:
         specifier: ^0.1.5
         version: 0.1.5
+      eslint-flat-config-utils:
+        specifier: ^0.2.3
+        version: 0.2.3
       eslint-merge-processors:
         specifier: ^0.1.0
         version: 0.1.0(eslint@9.1.0)
@@ -59,9 +62,6 @@ importers:
       eslint-plugin-perfectionist:
         specifier: ^2.9.0
         version: 2.9.0(eslint@9.1.0)(typescript@5.4.5)(vue-eslint-parser@9.4.2(eslint@9.1.0))
-      eslint-plugin-promise:
-        specifier: ^6.1.1
-        version: 6.1.1(eslint@9.1.0)
       eslint-plugin-unicorn:
         specifier: ^52.0.0
         version: 52.0.0(eslint@9.1.0)
@@ -1276,6 +1276,9 @@ packages:
   eslint-config-flat-gitignore@0.1.5:
     resolution: {integrity: sha512-hEZLwuZjDBGDERA49c2q7vxc8sCGv8EdBp6PQYzGOMcHIgrfG9YOM6s/4jx24zhD+wnK9AI8mgN5RxSss5nClQ==}
 
+  eslint-flat-config-utils@0.2.3:
+    resolution: {integrity: sha512-tfrMNXZfuN4q7sFi1Cr//BN3qdI7c8fLJhbshlp8l9PZIqZ7eVeeyd2Regtu/P9kjOlv18lRlBALzsZaF7ByUg==}
+
   eslint-formatting-reporter@0.0.0:
     resolution: {integrity: sha512-k9RdyTqxqN/wNYVaTk/ds5B5rA8lgoAmvceYN7bcZMBwU7TuXx5ntewJv81eF3pIL/CiJE+pJZm36llG8yhyyw==}
     peerDependencies:
@@ -1365,12 +1368,6 @@ packages:
         optional: true
       vue-eslint-parser:
         optional: true
-
-  eslint-plugin-promise@6.1.1:
-    resolution: {integrity: sha512-tjqWDwVZQo7UIPMeDReOpUgHCmCiH+ePnVT+5zVapL0uuHnegBUs2smM13CzOs2Xb5+MHMRFTs9v24yjba4Oig==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0
 
   eslint-plugin-unicorn@52.0.0:
     resolution: {integrity: sha512-1Yzm7/m+0R4djH0tjDjfVei/ju2w3AzUGjG6q8JnuNIL5xIwsflyCooW5sfBvQp2pMYQFSWWCFONsjCax1EHng==}
@@ -3783,6 +3780,11 @@ snapshots:
       find-up: 7.0.0
       parse-gitignore: 2.0.0
 
+  eslint-flat-config-utils@0.2.3:
+    dependencies:
+      '@types/eslint': 8.56.10
+      pathe: 1.1.2
+
   eslint-formatting-reporter@0.0.0(eslint@9.1.0):
     dependencies:
       eslint: 9.1.0
@@ -3903,10 +3905,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
-
-  eslint-plugin-promise@6.1.1(eslint@9.1.0):
-    dependencies:
-      eslint: 9.1.0
 
   eslint-plugin-unicorn@52.0.0(eslint@9.1.0):
     dependencies:

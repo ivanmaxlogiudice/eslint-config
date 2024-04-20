@@ -1,10 +1,10 @@
 import fs from 'node:fs'
 import process from 'node:process'
+import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import { isPackageExists } from 'local-pkg'
-import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
+import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types'
 import {
     comments,
-    formatters,
     ignores,
     imports,
     javascript,
@@ -23,7 +23,9 @@ import {
     vue,
     yaml,
 } from './configs'
-import { combine, interopDefault, renamePluginInConfigs } from './utils'
+import { formatters } from './configs/formatters'
+import { interopDefault } from './utils'
+import type { Linter } from 'eslint'
 
 const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
     'name',
@@ -60,17 +62,20 @@ export const defaultPluginRenaming = {
 
 /**
  * Construct an array of ESLint flat config items.
+ *
+ * @param options       The options for generating the ESLint configurations.
+ * @param userConfigs   The user configurations to be merged with the generated configurations.
+ * @returns             The merged ESLint configurations.
  */
-
-export async function config(
+export function config(
     options: OptionsConfig & TypedFlatConfigItem = {},
-    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
-): Promise<TypedFlatConfigItem[]> {
+    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
     const {
         autoRenamePlugins = true,
         componentExts = [],
         gitignore: enableGitignore = true,
-        isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+        isInEditor = !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
         typescript: enableTypeScript = isPackageExists('typescript'),
         unocss: enableUnoCSS = UnocssPackages.some(i => isPackageExists(i)),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -89,9 +94,7 @@ export async function config(
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
-            configs.push(
-                interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]),
-            )
+            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]))
         }
         else {
             if (fs.existsSync('.gitignore'))
@@ -135,13 +138,6 @@ export async function config(
         }))
     }
 
-    if (enableUnoCSS) {
-        configs.push(unocss({
-            ...resolveSubOptions(options, 'unocss'),
-            overrides: getOverrides(options, 'unocss'),
-        }))
-    }
-
     if (options.test ?? true) {
         configs.push(test({
             isInEditor,
@@ -155,6 +151,13 @@ export async function config(
             overrides: getOverrides(options, 'vue'),
             stylistic: stylisticOptions,
             typescript: !!enableTypeScript,
+        }))
+    }
+
+    if (enableUnoCSS) {
+        configs.push(unocss({
+            ...resolveSubOptions(options, 'unocss'),
+            overrides: getOverrides(options, 'unocss'),
         }))
     }
 
@@ -208,15 +211,20 @@ export async function config(
     if (Object.keys(fusedConfig).length > 0)
         configs.push([fusedConfig])
 
-    const merged = await combine(
-        ...configs,
-        ...userConfigs,
-    )
+    let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>()
 
-    if (autoRenamePlugins)
-        return renamePluginInConfigs(merged, defaultPluginRenaming)
+    composer = composer
+        .append(
+            ...configs,
+            ...userConfigs as any,
+        )
 
-    return merged
+    if (autoRenamePlugins) {
+        composer = composer
+            .renamePlugins(defaultPluginRenaming)
+    }
+
+    return composer
 }
 
 export type ResolvedOptions<T> = T extends boolean

@@ -2,7 +2,6 @@ import type { TypedFlatConfigItem } from '../types'
 import { interopDefault } from '../utils'
 
 export async function node(): Promise<TypedFlatConfigItem[]> {
-    // @ts-expect-error Missing types
     const pluginNode = await interopDefault(import('eslint-plugin-n'))
 
     return [

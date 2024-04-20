@@ -118,7 +118,7 @@ Add the following settings to your `settings.json`:
 ```jsonc
 {
     // Enable the flat config support
-    "eslint.experimental.useFlatConfig": true,
+    "eslint.useFlatConfig": true,
 
     // Disable the default formatter
     "prettier.enable": false,
@@ -308,6 +308,8 @@ When you want to override rules, or disable them inline, you need to update to t
 type foo = { bar: 2 }
 ```
 
+Since v2.0.0, this preset will automatically rename the plugins also for your custom configs. You can use the original prefix to override the rules directly.
+
 ### Rules Overrides
 
 Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
@@ -337,7 +339,7 @@ export default config(
 )
 ```
 
-We also provided a `overrides` options in each integration to make it easier:
+We also provided the `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
@@ -360,6 +362,35 @@ export default config({
         },
     },
 })
+```
+
+### Config Composer
+
+Since v2.0.0, the factory function `config()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
+
+```js
+// eslint.config.js
+import config from '@ivanmaxlogiudice/eslint-config'
+
+export default config()
+    .prepend(
+        // some configs before the main config
+    )
+    // overrides any named configs
+    .override(
+        'antfu/imports',
+        {
+            rules: {
+                'import/order': ['error', { 'newlines-between': 'always' }],
+            }
+        }
+    )
+    // rename plugin prefixes
+    .renamePlugins({
+        'old-prefix': 'new-prefix',
+        // ...
+    })
+    // ...
 ```
 
 ### Optional Configs
@@ -448,7 +479,6 @@ const objectWantedToSort = {
     b: 1,
     c: 3,
 }
-/* eslint perfectionist/sort-objects: "off" */
 ```
 
 ### Type Aware Rules

@@ -11,7 +11,7 @@ export { pkgJson }
 
 export const vscodeSettingsString = `
     // Enable the ESlint flat config support
-    "eslint.experimental.useFlatConfig": true,
+    "eslint.useFlatConfig": true,
 
     // Disable the default formatter, use eslint instead
     "prettier.enable": false,

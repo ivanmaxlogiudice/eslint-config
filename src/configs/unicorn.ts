@@ -69,9 +69,11 @@ export async function unicorn(): Promise<TypedFlatConfigItem[]> {
                 'unicorn/prefer-string-slice': 'error',
                 'unicorn/prefer-string-starts-ends-with': 'error',
                 'unicorn/prefer-string-trim-start-end': 'error',
-                'unicorn/prefer-top-level-await': 'error',
                 'unicorn/prefer-type-error': 'error',
                 'unicorn/throw-new-error': 'error',
+
+                // Off
+                'unicorn/prefer-top-level-await': 'off',
             },
         },
     ]
