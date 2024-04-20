@@ -103,7 +103,7 @@
         "@types/yargs": "^17.0.32",
         "@unocss/eslint-plugin": "^0.59.4",
         "bumpp": "^9.4.0",
-        "eslint": "^8.57.0",
+        "eslint": "^9.1.0",
         "eslint-plugin-format": "^0.1.1",
         "esno": "^4.7.0",
         "execa": "^8.0.1",
