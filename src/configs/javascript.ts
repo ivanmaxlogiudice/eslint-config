@@ -11,11 +11,8 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
     } = options
 
     const [
-        pluginPromise,
         pluginUnusedImports,
     ] = await Promise.all([
-        // @ts-expect-error Missing types
-        interopDefault(import('eslint-plugin-promise')),
         // @ts-expect-error Missing types
         interopDefault(import('eslint-plugin-unused-imports')),
     ] as const)
@@ -48,7 +45,6 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
             name: 'config:javascript',
             plugins: {
                 'antfu': pluginAntfu,
-                'promise': pluginPromise,
                 'unused-imports': pluginUnusedImports,
             },
             rules: {
@@ -238,13 +234,6 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
                 }],
                 'vars-on-top': 'error',
                 'yoda': ['error', 'never'],
-
-                // Promise
-                ...pluginPromise.configs.recommended.rules,
-
-                'promise/always-return': ['error', {
-                    ignoreLastCallback: true,
-                }],
 
                 ...overrides,
             },
