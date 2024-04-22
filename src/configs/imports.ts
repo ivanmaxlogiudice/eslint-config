@@ -9,7 +9,7 @@ export function imports(options: OptionsStylistic = {}): TypedFlatConfigItem[] {
 
     return [
         {
-            name: 'config:imports',
+            name: 'config/imports/rules',
             plugins: {
                 antfu: pluginAntfu,
                 import: pluginImport,
@@ -38,7 +38,7 @@ export function imports(options: OptionsStylistic = {}): TypedFlatConfigItem[] {
         },
         {
             files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
-            name: 'config:disables:imports-bin',
+            name: 'config/imports/disables/bin',
             rules: {
                 'antfu/no-import-dist': 'off',
                 'antfu/no-import-node-modules-by-path': 'off',

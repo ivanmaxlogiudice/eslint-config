@@ -11,13 +11,13 @@ export async function perfectionist(options: OptionsOverrides = {}): Promise<Typ
 
     return [
         {
-            name: 'config:perfectionist:setup',
+            name: 'config/perfectionist/setup',
             plugins: {
                 perfectionist: pluginPerfectionist,
             },
         },
         {
-            name: 'config:perfectionist:rules',
+            name: 'config/perfectionist/rules',
             rules: {
                 'perfectionist/sort-classes': ['error', {
                     groups: [

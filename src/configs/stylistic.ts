@@ -41,7 +41,7 @@ export async function stylistic(
 
     return [
         {
-            name: 'config:stylistic',
+            name: 'config/stylistic/rules',
             plugins: {
                 antfu: pluginAntfu,
                 style: pluginStylistic,

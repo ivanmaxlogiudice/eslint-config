@@ -11,13 +11,17 @@ export async function unocss(options: OptionsUnoCSS = {}): Promise<TypedFlatConf
         '@unocss/eslint-plugin',
     ])
 
-    const pluginUnocss = await interopDefault(import('@unocss/eslint-plugin'))
+    const [
+        pluginUnoCSS,
+    ] = await Promise.all([
+        interopDefault(import('@unocss/eslint-plugin')),
+    ] as const)
 
     return [
         {
-            name: 'config:unocss',
+            name: 'config/unocss',
             plugins: {
-                unocss: pluginUnocss,
+                unocss: pluginUnoCSS,
             },
             rules: {
                 'unocss/order': 'warn',

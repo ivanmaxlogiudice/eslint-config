@@ -42,7 +42,7 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
             linterOptions: {
                 reportUnusedDisableDirectives: true,
             },
-            name: 'config:javascript',
+            name: 'config/javascript/rules',
             plugins: {
                 'antfu': pluginAntfu,
                 'unused-imports': pluginUnusedImports,
@@ -240,7 +240,7 @@ export async function javascript(options: OptionsIsInEditor & OptionsOverrides =
         },
         {
             files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-            name: 'config:disables:cli',
+            name: 'config/javascript/disables/cli',
             rules: {
                 'no-console': 'off',
             },

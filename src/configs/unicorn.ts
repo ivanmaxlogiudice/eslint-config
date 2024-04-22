@@ -7,7 +7,7 @@ export async function unicorn(): Promise<TypedFlatConfigItem[]> {
 
     return [
         {
-            name: 'config:unicorn',
+            name: 'config/unicorn/rules',
             plugins: {
                 unicorn: pluginUnicorn,
             },

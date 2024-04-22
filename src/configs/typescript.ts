@@ -72,14 +72,14 @@ export async function typescript(
                     ...parserOptions as any,
                 },
             },
-            name: `config:typescript:${typeAware ? 'type-aware-parser' : 'parser'}`,
+            name: `config/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
         }
     }
 
     return [
         // Install the plugins without globs, so they can be configured separately.
         {
-            name: 'config:typescript:setup',
+            name: 'config/typescript/setup',
             plugins: {
                 import: pluginImport,
                 ts: pluginTs as any,
@@ -94,7 +94,7 @@ export async function typescript(
             : [makeParser(false, files)],
         {
             files,
-            name: 'config:typescript:rules',
+            name: 'config/typescript/rules',
             rules: {
                 ...renameRules(
                     pluginTs.configs['eslint-recommended'].overrides![0].rules!,
@@ -154,7 +154,7 @@ export async function typescript(
         },
         {
             files: filesTypeAware,
-            name: 'config:typescript:rules-type-aware',
+            name: 'config/typescript/rules-type-aware',
             rules: {
                 ...tsconfigPath ? typeAwareRules : {},
                 ...overrides,
@@ -162,7 +162,7 @@ export async function typescript(
         },
         {
             files: ['**/*.d.ts'],
-            name: 'config:typescript:dts-overrides',
+            name: 'config/typescript/disables/dts',
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
@@ -172,14 +172,14 @@ export async function typescript(
         },
         {
             files: ['**/*.{test,spec}.ts?(x)'],
-            name: 'config:typescript:tests-overrides',
+            name: 'config/typescript/disables/test',
             rules: {
                 'no-unused-expressions': 'off',
             },
         },
         {
             files: ['**/*.js', '**/*.cjs'],
-            name: 'config:typescript:javascript-overrides',
+            name: 'config/typescript/disables/cjs',
             rules: {
                 'ts/no-require-imports': 'off',
                 'ts/no-var-requires': 'off',

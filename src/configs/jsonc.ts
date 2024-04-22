@@ -23,7 +23,7 @@ export async function jsonc(options: OptionsFiles & OptionsStylistic & OptionsOv
 
     return [
         {
-            name: 'config:jsonc:setup',
+            name: 'config/jsonc/setup',
             plugins: {
                 jsonc: pluginJsonc as any,
             },
@@ -33,7 +33,7 @@ export async function jsonc(options: OptionsFiles & OptionsStylistic & OptionsOv
             languageOptions: {
                 parser: parserJsonc,
             },
-            name: 'config:jsonc:rules',
+            name: 'config/jsonc/rules',
             rules: {
                 'jsonc/no-bigint-literals': 'error',
                 'jsonc/no-binary-expression': 'error',

@@ -32,14 +32,14 @@ export async function test(options: OptionsFiles & OptionsIsInEditor & OptionsOv
 
     return [
         {
-            name: 'config:test:setup',
+            name: 'config/test/setup',
             plugins: {
                 test: _pluginTest,
             },
         },
         {
             files,
-            name: 'config:test:rules',
+            name: 'config/test/rules',
             rules: {
                 'node/prefer-global/process': 'off',
 

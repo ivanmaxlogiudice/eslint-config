@@ -10,7 +10,7 @@ export async function jsdoc(options: OptionsStylistic = {}): Promise<TypedFlatCo
 
     return [
         {
-            name: 'config:jsdoc',
+            name: 'config/jsdoc/rules',
             plugins: {
                 jsdoc: pluginJsdoc,
             },

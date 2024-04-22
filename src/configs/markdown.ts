@@ -17,7 +17,7 @@ export async function markdown(
 
     return [
         {
-            name: 'config:markdown:setup',
+            name: 'config/markdown/setup',
             plugins: {
                 markdown,
             },
@@ -25,7 +25,7 @@ export async function markdown(
         {
             files,
             ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
-            name: 'config:markdown:processor',
+            name: 'config/markdown/processor',
             // `eslint-plugin-markdown` only creates virtual files for code blocks,
             // but not the markdown file itself. We use `eslint-merge-processors` to
             // add a pass-through processor for the markdown file itself.
@@ -39,7 +39,7 @@ export async function markdown(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'config:markdown:parser',
+            name: 'config/markdown/parser',
         },
         {
             files: [
@@ -53,7 +53,7 @@ export async function markdown(
                     },
                 },
             },
-            name: 'config:markdown:rules',
+            name: 'config/markdown/disables',
             rules: {
                 'import/newline-after-import': 'off',
 

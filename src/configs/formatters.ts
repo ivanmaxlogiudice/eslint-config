@@ -8,10 +8,6 @@ export async function formatters(
     options: OptionsFormatters | true = {},
     stylistic: StylisticConfig = {},
 ): Promise<TypedFlatConfigItem[]> {
-    await ensurePackages([
-        'eslint-plugin-format',
-    ])
-
     if (options === true) {
         options = {
             css: true,
@@ -20,6 +16,10 @@ export async function formatters(
             markdown: true,
         }
     }
+
+    await ensurePackages([
+        'eslint-plugin-format',
+    ])
 
     const {
         indent,
@@ -37,7 +37,7 @@ export async function formatters(
         tabWidth: typeof indent === 'number' ? indent : 2,
         trailingComma: 'all',
         useTabs: indent === 'tab',
-    }, options.prettierOptions || {})
+    } satisfies VendoredPrettierOptions, options.prettierOptions || {})
 
     const dprintOptions = Object.assign({
         indentWidth: typeof indent === 'number' ? indent : 2,
@@ -49,7 +49,7 @@ export async function formatters(
 
     const configs: TypedFlatConfigItem[] = [
         {
-            name: 'config:formatter:setup',
+            name: 'config/formatter/setup',
             plugins: {
                 format: pluginFormat,
             },
@@ -63,7 +63,7 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'config:formatter:css',
+                name: 'config/formatter/css',
                 rules: {
                     'format/prettier': ['error', {
                         ...prettierOptions,
@@ -76,7 +76,7 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'config:formatter:scss',
+                name: 'config/formatter/scss',
                 rules: {
                     'format/prettier': ['error', {
                         ...prettierOptions,
@@ -89,7 +89,7 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'config:formatter:less',
+                name: 'config/formatter/less',
                 rules: {
                     'format/prettier': ['error', {
                         ...prettierOptions,
@@ -106,7 +106,7 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'config:formatter:html',
+            name: 'config/formatter/html',
             rules: {
                 'format/prettier': ['error', {
                     ...prettierOptions,
@@ -126,7 +126,7 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'config:formatter:markdown',
+            name: 'config/formatter/markdown',
             rules: {
                 [`format/${formater}`]: [
                     'error',
@@ -152,7 +152,7 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'config:formatter:graphql',
+            name: 'config/formatter/graphql',
             rules: {
                 'format/prettier': ['error', {
                     ...prettierOptions,

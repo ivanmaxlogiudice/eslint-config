@@ -24,7 +24,7 @@ export async function yaml(options: OptionsFiles & OptionsOverrides & OptionsSty
 
     return [
         {
-            name: 'config:yaml:setup',
+            name: 'config/yaml/setup',
             plugins: {
                 yaml: pluginYaml as any,
             },
@@ -34,7 +34,7 @@ export async function yaml(options: OptionsFiles & OptionsOverrides & OptionsSty
             languageOptions: {
                 parser: parserYaml,
             },
-            name: 'config:yaml:rules',
+            name: 'config/yaml/rules',
             rules: {
                 'style/spaced-comment': 'off',
 
