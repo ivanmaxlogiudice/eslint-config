@@ -16,20 +16,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install bun
-        uses: oven-sh/setup-bun@v1
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
 
       - name: Install dependencies
-        run: bun install
+        run: pnpm install
 
       - name: Build
-        run: bun run build
+        run: pnpm run build
 
       - name: Lint
-        run: bun run lint
+        run: pnpm run lint
 
       - name: Typecheck
-        run: bun run typecheck
+        run: pnpm run typecheck
 
   test:
     runs-on: ${{ matrix.os }}
@@ -43,14 +48,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install bun
-        uses: oven-sh/setup-bun@v1
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
 
       - name: Install
-        run: bun install
+        run: pnpm install
 
       - name: Build
-        run: bun run build
+        run: pnpm run build
 
       - name: Test
-        run: bun run test
+        run: pnpm run test
