@@ -118,6 +118,7 @@ Add the following settings to your `settings.json`:
 ```jsonc
 {
     // Enable the flat config support
+    // (remove this if your ESLint extension above v3.0.5)
     "eslint.useFlatConfig": true,
 
     // Disable the default formatter
