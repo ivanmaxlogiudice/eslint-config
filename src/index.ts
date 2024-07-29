@@ -1,9 +1,12 @@
-import { config } from './factory'
+import antfu from '@antfu/eslint-config'
 
-export * from './configs'
-export * from './factory'
-export * from './globs'
-export * from './types'
-export * from './utils'
+export const config: typeof antfu = (options, ...userConfigs) => {
+    return antfu({
+        stylistic: {
+            indent: 4,
+        },
+        ...options,
+    }, ...userConfigs)
+}
 
 export default config

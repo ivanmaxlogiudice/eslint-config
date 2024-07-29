@@ -3,7 +3,7 @@ import { execa } from 'execa'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { afterAll, beforeAll, it } from 'vitest'
-import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
+import type { OptionsConfig, TypedFlatConfigItem } from '@antfu/eslint-config'
 
 beforeAll(async () => {
     await fs.rm('_fixtures', { force: true, recursive: true })
