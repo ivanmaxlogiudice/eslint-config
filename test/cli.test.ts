@@ -15,7 +15,7 @@ async function run(params: string[] = [], env = {
     SKIP_PROMPT: '1',
     NO_COLOR: '1',
 }) {
-    return await execa('node', [CLI_PATH, ...params], {
+    return execa('node', [CLI_PATH, ...params], {
         cwd: genPath,
         env: {
             ...process.env,
@@ -71,7 +71,7 @@ it('cjs eslint.config.mjs', async () => {
 it('ignores files added in eslint.config.js', async () => {
     const { stdout } = await run()
 
-    const eslintConfigContent = (await fs.readFile(join(genPath, 'eslint.config.mjs'), 'utf-8')).replaceAll('\\', '/')
+    const eslintConfigContent = (await fs.readFile(join(genPath, 'eslint.config.mjs'), 'utf-8')).replace(/\\/g, '/')
 
     expect(stdout).toContain('Created eslint.config.mjs')
     expect(eslintConfigContent).toMatchInlineSnapshot(`

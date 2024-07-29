@@ -1,12 +1,12 @@
 import process from 'node:process'
-import * as p from '@clack/prompts'
 import c from 'picocolors'
-import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { pkgJson } from './constants'
+import yargs from 'yargs'
+import * as p from '@clack/prompts'
 import { run } from './run'
+import { pkgJson } from './constants'
 
-function header() {
+function header(): void {
     // eslint-disable-next-line no-console
     console.log('\n')
     p.intro(`${c.green(`@ivanmaxlogiudice/eslint-config `)}${c.dim(`v${pkgJson.version}`)}`)
@@ -26,7 +26,7 @@ const instance = yargs(hideBin(process.argv))
             })
             .option('template', {
                 alias: 't',
-                description: 'Use the framework template for optimal customization: vue',
+                description: 'Use the framework template for optimal customization: vue / react / svelte / astro',
                 type: 'string',
             })
             .option('extra', {
@@ -53,7 +53,7 @@ const instance = yargs(hideBin(process.argv))
     .version('version', pkgJson.version)
     .alias('v', 'version')
 
-// eslint-disable-next-line no-unused-expressions
+// eslint-disable-next-line ts/no-unused-expressions
 instance
     .help()
     .argv
