@@ -96,7 +96,7 @@
     "devDependencies": {
         "@eslint/config-inspector": "^0.4.8",
         "@stylistic/eslint-plugin-migrate": "^1.8.1",
-        "@types/eslint": "^8.56.10",
+        "@types/eslint": "^9.6.0",
         "@types/fs-extra": "^11.0.4",
         "@types/node": "^20.12.10",
         "@types/prompts": "^2.4.9",
