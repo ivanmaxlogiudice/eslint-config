@@ -1,17 +1,16 @@
-/* eslint-disable consistent-return */
 /* eslint-disable perfectionist/sort-objects */
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import * as p from '@clack/prompts'
 import c from 'picocolors'
+import * as p from '@clack/prompts'
 
-import type { ExtraLibrariesOption, FrameworkOption, PromItem, PromtResult } from './types'
 import { extra, extraOptions, frameworkOptions, frameworks } from './constants'
-import { updateEslintFiles } from './stages/update-eslint-files'
-import { updatePackageJson } from './stages/update-package-json'
-import { updateVscodeSettings } from './stages/update-vscode-settings'
 import { isGitClean } from './utils'
+import type { ExtraLibrariesOption, FrameworkOption, PromItem, PromptResult } from './types'
+import { updatePackageJson } from './stages/update-package-json'
+import { updateEslintFiles } from './stages/update-eslint-files'
+import { updateVscodeSettings } from './stages/update-vscode-settings'
 
 export interface CliRunOptions {
     /**
@@ -28,18 +27,18 @@ export interface CliRunOptions {
     extra?: string[]
 }
 
-export async function run(options: CliRunOptions = {}) {
+export async function run(options: CliRunOptions = {}): Promise<void> {
     const argSkipPrompt = !!process.env.SKIP_PROMPT || options.yes
-    const argTemplate = options.frameworks?.map(m => m.trim()) as FrameworkOption[]
-    const argExtra = options.extra?.map(m => m.trim()) as ExtraLibrariesOption[]
+    const argTemplate = <FrameworkOption[]>options.frameworks?.map(m => m.trim())
+    const argExtra = <ExtraLibrariesOption[]>options.extra?.map(m => m.trim())
 
     if (fs.existsSync(path.join(process.cwd(), 'eslint.config.js'))) {
         p.log.warn(c.yellow(`eslint.config.js already exists, migration wizard exited.`))
         return process.exit(1)
     }
 
-    // Set default value for promtResult if `argSkipPromt` is enabled
-    let result: PromtResult = {
+    // Set default value for promptResult if `argSkipPrompt` is enabled
+    let result: PromptResult = {
         extra: argExtra ?? [],
         frameworks: argTemplate ?? [],
         uncommittedConfirmed: false,
@@ -58,7 +57,7 @@ export async function run(options: CliRunOptions = {}) {
                 })
             },
             frameworks: ({ results }) => {
-                const isArgTemplateValid = typeof argTemplate === 'string' && !!frameworks.includes((argTemplate as FrameworkOption))
+                const isArgTemplateValid = typeof argTemplate === 'string' && !!frameworks.includes(<FrameworkOption>argTemplate)
 
                 if (!results.uncommittedConfirmed || isArgTemplateValid)
                     return
@@ -74,7 +73,7 @@ export async function run(options: CliRunOptions = {}) {
                 })
             },
             extra: ({ results }) => {
-                const isArgExtraValid = argExtra?.length && argExtra.filter(element => !extra.includes((element as ExtraLibrariesOption))).length === 0
+                const isArgExtraValid = argExtra?.length && !argExtra.filter(element => !extra.includes(<ExtraLibrariesOption>element)).length
 
                 if (!results.uncommittedConfirmed || isArgExtraValid)
                     return
@@ -89,6 +88,7 @@ export async function run(options: CliRunOptions = {}) {
                     required: false,
                 })
             },
+
             updateVscodeSettings: ({ results }) => {
                 if (!results.uncommittedConfirmed)
                     return
@@ -103,7 +103,7 @@ export async function run(options: CliRunOptions = {}) {
                 p.cancel('Operation cancelled.')
                 process.exit(0)
             },
-        }) as PromtResult
+        }) as PromptResult
 
         if (!result.uncommittedConfirmed)
             return process.exit(1)
@@ -115,5 +115,4 @@ export async function run(options: CliRunOptions = {}) {
 
     p.log.success(c.green(`Setup completed`))
     p.outro(`Now you can update the dependencies and run ${c.blue('eslint . --fix')}\n`)
-    return process.exit()
 }

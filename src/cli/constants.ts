@@ -1,19 +1,10 @@
 import c from 'picocolors'
-import type { ExtraLibrariesOption, FrameworkOption, PromItem } from './types'
 import pkgJson from '../../package.json'
-
-export const ARROW = c.cyan('→')
-export const CHECK = c.green('✔')
-export const CROSS = c.red('✘')
-export const WARN = c.yellow('ℹ')
+import type { ExtraLibrariesOption, FrameworkOption, PromItem } from './types'
 
 export { pkgJson }
 
 export const vscodeSettingsString = `
-    // Enable the ESlint flat config support
-    // (remove this if your ESLint extension above v3.0.5)
-    "eslint.useFlatConfig": true,
-
     // Disable the default formatter, use eslint instead
     "prettier.enable": false,
     "editor.formatOnSave": false,
@@ -26,16 +17,16 @@ export const vscodeSettingsString = `
 
     // Silent the stylistic rules in you IDE, but still auto fix them
     "eslint.rules.customizations": [
-        { "rule": "style/*", "severity": "off" },
-        { "rule": "format/*", "severity": "off" },
-        { "rule": "*-indent", "severity": "off" },
-        { "rule": "*-spacing", "severity": "off" },
-        { "rule": "*-spaces", "severity": "off" },
-        { "rule": "*-order", "severity": "off" },
-        { "rule": "*-dangle", "severity": "off" },
-        { "rule": "*-newline", "severity": "off" },
-        { "rule": "*quotes", "severity": "off" },
-        { "rule": "*semi", "severity": "off" }
+        { "rule": "style/*", "severity": "off", "fixable": true },
+        { "rule": "format/*", "severity": "off", "fixable": true },
+        { "rule": "*-indent", "severity": "off", "fixable": true },
+        { "rule": "*-spacing", "severity": "off", "fixable": true },
+        { "rule": "*-spaces", "severity": "off", "fixable": true },
+        { "rule": "*-order", "severity": "off", "fixable": true },
+        { "rule": "*-dangle", "severity": "off", "fixable": true },
+        { "rule": "*-newline", "severity": "off", "fixable": true },
+        { "rule": "*quotes", "severity": "off", "fixable": true },
+        { "rule": "*semi", "severity": "off", "fixable": true }
     ],
 
     // Enable eslint for all supported languages
@@ -50,6 +41,16 @@ export const vscodeSettingsString = `
         "json",
         "jsonc",
         "yaml",
+        "toml",
+        "xml",
+        "gql",
+        "graphql",
+        "astro",
+        "css",
+        "less",
+        "scss",
+        "pcss",
+        "postcss"
     ]
 `
 
@@ -57,6 +58,26 @@ export const frameworkOptions: PromItem<FrameworkOption>[] = [
     {
         label: c.green('Vue'),
         value: 'vue',
+    },
+    {
+        label: c.cyan('React'),
+        value: 'react',
+    },
+    {
+        label: c.red('Svelte'),
+        value: 'svelte',
+    },
+    {
+        label: c.magenta('Astro'),
+        value: 'astro',
+    },
+    {
+        label: c.cyan('Solid'),
+        value: 'solid',
+    },
+    {
+        label: c.blue('Slidev'),
+        value: 'slidev',
     },
 ]
 
@@ -77,5 +98,24 @@ export const extraOptions: PromItem<ExtraLibrariesOption>[] = [
 export const extra: ExtraLibrariesOption[] = extraOptions.map(({ value }) => (value))
 
 export const dependenciesMap = {
+    astro: [
+        'eslint-plugin-astro',
+        'astro-eslint-parser',
+    ],
+    react: [
+        '@eslint-react/eslint-plugin',
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-react-refresh',
+    ],
+    slidev: [
+        'prettier-plugin-slidev',
+    ],
+    solid: [
+        'eslint-plugin-solid',
+    ],
+    svelte: [
+        'eslint-plugin-svelte',
+        'svelte-eslint-parser',
+    ],
     vue: [],
 } as const

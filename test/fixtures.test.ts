@@ -1,15 +1,15 @@
 import { join, resolve } from 'node:path'
+import { afterAll, beforeAll, it } from 'vitest'
+import fs from 'fs-extra'
 import { execa } from 'execa'
 import fg from 'fast-glob'
-import fs from 'fs-extra'
-import { afterAll, beforeAll, it } from 'vitest'
-import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
+import type { OptionsConfig, TypedFlatConfigItem } from '@antfu/eslint-config'
 
 beforeAll(async () => {
-    await fs.rm('_fixtures', { force: true, recursive: true })
+    await fs.rm('_fixtures', { recursive: true, force: true })
 })
 afterAll(async () => {
-    await fs.rm('_fixtures', { force: true, recursive: true })
+    await fs.rm('_fixtures', { recursive: true, force: true })
 })
 
 runWithConfig('js', {
@@ -19,24 +19,28 @@ runWithConfig('js', {
 runWithConfig('all', {
     typescript: true,
     vue: true,
+    svelte: true,
+    astro: true,
 })
 runWithConfig('no-style', {
-    stylistic: false,
     typescript: true,
     vue: true,
+    stylistic: false,
 })
 runWithConfig('tab-double-quotes', {
+    typescript: true,
+    vue: true,
     stylistic: {
         indent: 'tab',
         quotes: 'double',
     },
-    typescript: true,
-    vue: true,
 }, {
     rules: {
         'style/no-mixed-spaces-and-tabs': 'off',
     },
 })
+
+// https:// github.com/antfu/eslint-config/issues/255
 runWithConfig('ts-override', {
     typescript: true,
 }, {
@@ -44,11 +48,25 @@ runWithConfig('ts-override', {
         'ts/consistent-type-definitions': ['error', 'type'],
     },
 })
+
+// https://github.com/antfu/eslint-config/issues/255
+runWithConfig('ts-strict', {
+    typescript: {
+        tsconfigPath: '../../tsconfig.json',
+    },
+}, {
+    rules: {
+        'ts/no-unsafe-return': ['off'],
+    },
+})
+
 runWithConfig('with-formatters', {
-    vue: true,
     typescript: true,
+    vue: true,
+    astro: true,
     formatters: true,
 })
+
 runWithConfig('no-markdown-with-formatters', {
     jsx: false,
     vue: false,
@@ -65,13 +83,13 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlat
         const target = resolve('_fixtures', name)
 
         await fs.copy(from, target, {
-            filter: src => !src.includes('node_modules'),
+            filter: (src) => {
+                return !src.includes('node_modules')
+            },
         })
-
         await fs.writeFile(join(target, 'eslint.config.js'), `
 // @eslint-disable
-// eslint-disable-next-line antfu/no-import-dist
-import config from '../../dist/index.js'
+import config from '@ivanmaxlogiudice/eslint-config'
 
 export default config(
   ${JSON.stringify(configs)},
@@ -102,7 +120,6 @@ export default config(
                     await fs.remove(outputPath)
                 return
             }
-
             await expect.soft(content).toMatchFileSnapshot(outputPath)
         }))
     }, 35_000)

@@ -1,17 +1,16 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
-import path from 'node:path'
 import process from 'node:process'
+import path from 'node:path'
+import c from 'picocolors'
 import * as p from '@clack/prompts'
 
 // @ts-expect-error missing types
 import parse from 'parse-gitignore'
-
-import c from 'picocolors'
-import type { PromtResult } from '../types'
 import { getEslintConfigContent } from '../utils'
+import type { PromptResult } from '../types'
 
-export async function updateEslintFiles(result: PromtResult) {
+export async function updateEslintFiles(result: PromptResult): Promise<void> {
     const cwd = process.cwd()
     const pathESLintIgnore = path.join(cwd, '.eslintignore')
     const pathPackageJSON = path.join(cwd, 'package.json')
@@ -39,7 +38,7 @@ export async function updateEslintFiles(result: PromtResult) {
 
     const configLines: string[] = []
 
-    if (eslintIgnores.length > 0)
+    if (eslintIgnores.length)
         configLines.push(`ignores: ${JSON.stringify(eslintIgnores)},`)
 
     if (result.extra.includes('formatter'))
@@ -66,6 +65,6 @@ export async function updateEslintFiles(result: PromtResult) {
             legacyConfig.push(file)
     })
 
-    if (legacyConfig.length > 0)
+    if (legacyConfig.length)
         p.note(`${c.dim(legacyConfig.join(', '))}`, 'You can now remove those files manually')
 }

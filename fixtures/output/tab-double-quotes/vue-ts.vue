@@ -1,11 +1,11 @@
 <template>
-	<div>
-		<h1>{{ greeting }}</h1>
-		<button @click="incrementCounter">
-			Click me!
-		</button>
-		<p>Counter: {{ counter }}</p>
-	</div>
+    <div>
+        <h1>{{ greeting }}</h1>
+        <button @click="incrementCounter">
+            Click me!
+        </button>
+        <p>Counter: {{ counter }}</p>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -17,7 +17,7 @@ const counter = ref<number | 1>(0)
 
 // Define a function
 function incrementCounter() {
-	counter.value++
+    counter.value++
 }
 </script>
 

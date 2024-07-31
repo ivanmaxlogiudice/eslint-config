@@ -62,11 +62,23 @@ setTimeout(() => {
     log('This code runs after a delay of 2 seconds.')
 }, 2000)
 
+// https://github.com/ivanmaxlogiudice/eslint-config/issues/37
+const example = true
+    ? {
+        name: 'test',
+    }
+    : {
+        name: 'asd',
+    }
+
+log(`example: ${example.name}`)
+
 let a, b, c, d, foo
 
 if (a
     || b
     || c || d
     || (d && b)
-)
+) {
     foo()
+}

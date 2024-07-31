@@ -1,13 +1,13 @@
 <template>
-	<div>
-		<h1>
-			{{ greeting }}
-		</h1>
-		<button @click="incrementCounter">
-			Click me!
-		</button>
-		<p>Counter: {{ counter }}</p>
-	</div>
+    <div>
+        <h1>
+            {{ greeting }}
+        </h1>
+        <button @click="incrementCounter">
+            Click me!
+        </button>
+        <p>Counter: {{ counter }}</p>
+    </div>
 </template>
 
 <script setup>
@@ -20,7 +20,7 @@ const doubled = computed(() => counter.value * 2)
 
 // Define a function
 function incrementCounter() {
-	counter.value++
+    counter.value++
 }
 
 const _zero = doubled.value + counter.value
