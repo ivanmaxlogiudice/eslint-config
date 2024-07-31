@@ -1,7 +1,7 @@
 {
     "name": "@ivanmaxlogiudice/eslint-config",
     "type": "module",
-    "version": "2.0.2",
+    "version": "3.0.0-beta.1",
     "packageManager": "pnpm@9.6.0",
     "description": "Personal ESLint config",
     "author": "Iván Máximiliano, Lo Giudice (https://github.com/ivanmaxlogiudice/)",
