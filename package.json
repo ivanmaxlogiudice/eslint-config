@@ -40,6 +40,7 @@
     },
     "devDependencies": {
         "@types/eslint": "^9.6.0",
+        "@types/node": "^22.1.0",
         "eslint": "^9.8.0",
         "eslint-plugin-regexp": "^2.6.0",
         "mitata": "^0.1.11",
