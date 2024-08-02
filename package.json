@@ -1,157 +1,50 @@
 {
     "name": "@ivanmaxlogiudice/eslint-config",
+    "version": "2.1.0",
+    "packageManager": "bun@1.1.21",
     "type": "module",
-    "version": "2.0.2",
-    "packageManager": "pnpm@9.6.0",
-    "description": "Personal ESLint config",
-    "author": "Iván Máximiliano, Lo Giudice (https://github.com/ivanmaxlogiudice/)",
-    "license": "MIT",
-    "homepage": "https://github.com/ivanmaxlogiudice/eslint-config#readme",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ivanmaxlogiudice/eslint-config.git"
-    },
-    "bugs": {
-        "url": "https://github.com/ivanmaxlogiudice/eslint-config/issues"
-    },
-    "keywords": [
-        "eslint",
-        "eslint-config"
-    ],
+    "files": ["dist"],
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "import": "./dist/index.js",
             "require": "./dist/index.cjs"
         }
     },
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "bin": "./bin/index.js",
-    "files": [
-        "bin",
-        "dist"
-    ],
-    "publishConfig": {
-        "access": "public"
-    },
     "scripts": {
-        "stub": "tsup --format esm",
-        "dev": "config-inspector --config eslint.config.ts",
-        "build": "tsup --format esm,cjs --clean --dts",
-        "build:inspector": "pnpm build && config-inspector build",
-        "lint": "pnpm run stub && eslint . --fix",
-        "prepack": "pnpm run build",
-        "release": "bumpp && pnpm publish",
-        "test": "vitest",
-        "typecheck": "tsc --noEmit",
-        "prepare": "simple-git-hooks"
+        "dev": "tsup --format esm",
+        "build": "tsup --format esm --clean --dts",
+        "lint": "eslint . --fix"
     },
     "peerDependencies": {
-        "@eslint-react/eslint-plugin": ">=1.6.0",
-        "@prettier/plugin-xml": ">=3.4.1",
-        "@unocss/eslint-plugin": ">=0.61.6",
-        "astro-eslint-parser": ">=1.0.2",
-        "eslint": ">=9.8.0",
-        "eslint-plugin-astro": ">=1.2.3",
-        "eslint-plugin-format": ">=0.1.2",
-        "eslint-plugin-react-hooks": ">=4.6.2",
-        "eslint-plugin-react-refresh": ">=0.4.9",
-        "eslint-plugin-solid": ">=0.14.1",
-        "eslint-plugin-svelte": ">=2.43.0",
-        "prettier-plugin-astro": ">=0.14.1",
-        "prettier-plugin-slidev": ">=1.0.5",
-        "svelte-eslint-parser": ">=0.41.0"
+        "eslint": "^9.8.0",
+        "eslint-plugin-regexp": "^2.6.0"
     },
     "peerDependenciesMeta": {
-        "@eslint-react/eslint-plugin": {
-            "optional": true
-        },
-        "@prettier/plugin-xml": {
-            "optional": true
-        },
-        "@unocss/eslint-plugin": {
-            "optional": true
-        },
-        "astro-eslint-parser": {
-            "optional": true
-        },
-        "eslint-plugin-astro": {
-            "optional": true
-        },
-        "eslint-plugin-format": {
-            "optional": true
-        },
-        "eslint-plugin-react-hooks": {
-            "optional": true
-        },
-        "eslint-plugin-react-refresh": {
-            "optional": true
-        },
-        "eslint-plugin-solid": {
-            "optional": true
-        },
-        "eslint-plugin-svelte": {
-            "optional": true
-        },
-        "prettier-plugin-astro": {
-            "optional": true
-        },
-        "prettier-plugin-slidev": {
-            "optional": true
-        },
-        "svelte-eslint-parser": {
+        "eslint-plugin-regexp": {
             "optional": true
         }
     },
     "dependencies": {
-        "@antfu/eslint-config": "^2.24.0",
-        "@clack/prompts": "^0.7.0",
-        "defu": "^6.1.4",
-        "parse-gitignore": "^2.0.0",
-        "picocolors": "^1.0.1",
-        "yargs": "^17.7.2"
+        "@stylistic/eslint-plugin": "^2.6.1",
+        "@typescript-eslint/eslint-plugin": "^8.0.0",
+        "@typescript-eslint/parser": "^8.0.0",
+        "eslint-plugin-antfu": "^2.3.4",
+        "eslint-plugin-import-x": "^3.1.0",
+        "eslint-plugin-jsonc": "^2.16.0",
+        "eslint-plugin-n": "^17.10.1",
+        "eslint-plugin-unicorn": "^55.0.0",
+        "globals": "^15.9.0",
+        "jsonc-eslint-parser": "^2.4.0"
     },
     "devDependencies": {
-        "@eslint-react/eslint-plugin": "^1.6.0",
-        "@eslint/config-inspector": "^0.5.2",
-        "@ivanmaxlogiudice/eslint-config": "workspace:*",
-        "@prettier/plugin-xml": "^3.4.1",
         "@types/eslint": "^9.6.0",
-        "@types/fs-extra": "^11.0.4",
-        "@types/node": "^22.0.0",
-        "@types/prompts": "^2.4.9",
-        "@types/yargs": "^17.0.32",
-        "@unocss/eslint-plugin": "^0.61.6",
-        "astro-eslint-parser": "^1.0.2",
-        "bumpp": "^9.4.1",
-        "eslint": "npm:eslint-ts-patch@9.8.0-1",
-        "eslint-plugin-astro": "^1.2.3",
-        "eslint-plugin-format": "^0.1.2",
-        "eslint-plugin-react-hooks": "^4.6.2",
-        "eslint-plugin-react-refresh": "^0.4.9",
-        "eslint-plugin-solid": "^0.14.1",
-        "eslint-plugin-svelte": "^2.43.0",
-        "eslint-ts-patch": "9.8.0-1",
-        "esno": "^4.7.0",
-        "execa": "^9.3.0",
-        "fast-glob": "^3.3.2",
-        "fs-extra": "^11.2.0",
-        "lint-staged": "^15.2.7",
-        "prettier-plugin-astro": "^0.14.1",
-        "prettier-plugin-slidev": "^1.0.5",
-        "simple-git-hooks": "^2.11.1",
-        "svelte": "^4.2.18",
-        "svelte-eslint-parser": "^0.41.0",
-        "tsup": "^8.2.3",
-        "tsx": "^4.16.2",
+        "eslint": "^9.8.0",
+        "eslint-plugin-regexp": "^2.6.0",
+        "mitata": "^0.1.11",
+        "tsup": "^8.2.4",
         "typescript": "^5.5.4",
-        "vitest": "^2.0.4",
-        "vue": "^3.4.34"
-    },
-    "simple-git-hooks": {
-        "pre-commit": "pnpm lint-staged"
-    },
-    "lint-staged": {
-        "*": "eslint --fix"
+        "unbuild": "^2.0.0"
     }
 }
