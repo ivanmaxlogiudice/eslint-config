@@ -1,7 +1,8 @@
 import type { Linter } from 'eslint'
-import { interopDefault } from '../utils'
+import { ensurePackages, interopDefault } from '../utils'
 
 export async function regexp(): Promise<Linter.Config[]> {
+    await ensurePackages(['eslint-plugin-regexp'])
     const plugin = await interopDefault(import('eslint-plugin-regexp'))
 
     return [

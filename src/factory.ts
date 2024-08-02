@@ -16,7 +16,7 @@ export async function config(options: OptionsConfig = {}, config: Linter.Config 
     const {
         regexp: enableRegexp = false,
     } = options
-
+    
     const configs = [
         ...presetJavaScript,
 
