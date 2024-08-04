@@ -1,5 +1,5 @@
-import type { Linter } from 'eslint'
 import plugin from '@stylistic/eslint-plugin'
+import type { TypedFlatConfigItem } from '../types'
 
 const config = plugin.configs.customize({
     flat: true,
@@ -10,7 +10,7 @@ const config = plugin.configs.customize({
     semi: false,
 })
 
-export const stylistic: Linter.Config[] = [
+export const stylistic: TypedFlatConfigItem[] = [
     {
         name: 'ivanmaxlogiudice/stylistic/rules',
         plugins: {
@@ -18,6 +18,10 @@ export const stylistic: Linter.Config[] = [
         },
         rules: {
             ...config.rules,
+
+            'antfu/curly': 'error',
+            'antfu/if-newline': 'error',
+            'antfu/top-level-function': 'error',
         },
     },
 ]

@@ -1,3 +1,6 @@
-import { config } from './dist/index.js'
-console.log(config())
-export default config()
+// @ts-check
+import { bundleRequire } from 'bundle-require'
+
+export default bundleRequire({
+    filepath: './eslint.config.ts',
+}).then(r => r.mod.default)

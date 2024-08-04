@@ -1,5 +1,10 @@
-import type { Linter } from 'eslint'
 import globals from 'globals'
+import pluginAntfu from 'eslint-plugin-antfu'
+// @ts-expect-error missing types
+import pluginUnused from 'eslint-plugin-unused-imports'
+
+import { isInEditorEnv } from '../utils'
+import type { TypedFlatConfigItem } from '../types'
 
 export const restrictedSyntaxJs = [
     'ForInStatement',
@@ -7,7 +12,7 @@ export const restrictedSyntaxJs = [
     'WithStatement',
 ]
 
-export const javascript: Linter.Config[] = [
+export const javascript: TypedFlatConfigItem[] = [
     {
         name: 'ivanmaxlogiudice/javascript/setup',
         languageOptions: {
@@ -35,6 +40,10 @@ export const javascript: Linter.Config[] = [
     },
     {
         name: 'ivanmaxlogiudice/javascript/rules',
+        plugins: {
+            'antfu': pluginAntfu,
+            'unused-imports': pluginUnused,
+        },
         rules: {
             'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
 
@@ -195,23 +204,21 @@ export const javascript: Linter.Config[] = [
 
             'symbol-description': 'error',
             'unicode-bom': ['error', 'never'],
-            // 'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
-            // 'unused-imports/no-unused-vars': [
-            //   'error',
-            //   {
-            //     args: 'after-used',
-            //     argsIgnorePattern: '^_',
-            //     ignoreRestSiblings: true,
-            //     vars: 'all',
-            //     varsIgnorePattern: '^_',
-            //   },
-            // ],
+            'unused-imports/no-unused-imports': isInEditorEnv() ? 'off' : 'error',
+            'unused-imports/no-unused-vars': [
+                'error',
+                {
+                    args: 'after-used',
+                    argsIgnorePattern: '^_',
+                    ignoreRestSiblings: true,
+                    vars: 'all',
+                    varsIgnorePattern: '^_',
+                },
+            ],
             'use-isnan': ['error', { enforceForIndexOf: true, enforceForSwitchCase: true }],
             'valid-typeof': ['error', { requireStringLiterals: true }],
             'vars-on-top': 'error',
             'yoda': ['error', 'never'],
-
-            // ...overrides,
         },
     },
 ]

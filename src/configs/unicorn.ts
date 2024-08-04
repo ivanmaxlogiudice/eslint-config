@@ -1,7 +1,7 @@
-import type { Linter } from 'eslint'
 import plugin from 'eslint-plugin-unicorn'
+import type { TypedFlatConfigItem } from '../types'
 
-export const unicorn: Linter.Config[] = [
+export const unicorn: TypedFlatConfigItem[] = [
     {
         name: 'ivanmaxlogiudice/unicorn/rules',
         plugins: {

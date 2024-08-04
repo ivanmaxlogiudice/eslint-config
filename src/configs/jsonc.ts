@@ -1,13 +1,13 @@
-import type { Linter } from 'eslint'
 import plugin from 'eslint-plugin-jsonc'
 import parser from 'jsonc-eslint-parser'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
+import type { TypedFlatConfigItem } from '../types'
 
-export const jsonc: Linter.Config[] = [
+export const jsonc: TypedFlatConfigItem[] = [
     {
         name: 'ivanmaxlogiudice/jsonc/setup',
         plugins: {
-            jsonc: plugin as any,
+            jsonc: plugin,
         },
     }, {
         name: 'ivanmaxlogiudice/jsonc/rules',
@@ -43,7 +43,7 @@ export const jsonc: Linter.Config[] = [
             'jsonc/valid-json-number': 'error',
             'jsonc/vue-custom-block/no-parsing-error': 'error',
 
-            // stylistic
+            // Stylistic
             'jsonc/array-bracket-spacing': ['error', 'never'],
             'jsonc/comma-dangle': ['error', 'never'],
             'jsonc/comma-style': ['error', 'last'],

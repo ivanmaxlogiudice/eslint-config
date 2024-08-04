@@ -1,8 +1,9 @@
-import type { Linter } from 'eslint'
 import plugin from 'eslint-plugin-n'
+import type { TypedFlatConfigItem } from '../types'
 
-export const node: Linter.Config[] = [
+export const node: TypedFlatConfigItem[] = [
     {
+        name: 'ivanmaxlogiudice/node/rules',
         plugins: {
             node: plugin,
         },

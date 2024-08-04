@@ -1,7 +1,8 @@
-import type { Linter } from 'eslint'
+import type { TypedFlatConfigItem } from '../types'
 
-export const sortPackageJson: Linter.Config[] = [
+export const sortPackageJson: TypedFlatConfigItem[] = [
     {
+        name: 'ivanmaxlogiudice/sort/packageJson',
         files: ['**/package.json'],
         rules: {
             'jsonc/sort-array-values': [
@@ -77,8 +78,9 @@ export const sortPackageJson: Linter.Config[] = [
     },
 ]
 
-export const sortTsconfig: Linter.Config[] = [
+export const sortTsconfig: TypedFlatConfigItem[] = [
     {
+        name: 'ivanmaxlogiudice/sort/tsconfig',
         files: ['**/tsconfig.json', '**/tsconfig.*.json'],
         rules: {
             'jsonc/sort-keys': [

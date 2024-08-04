@@ -1,14 +1,12 @@
-import type { Linter } from 'eslint'
 import plugin from 'eslint-plugin-import-x'
-import pluginAntfu from 'eslint-plugin-antfu'
 import { GLOB_SRC_EXT } from '../globs'
+import type { TypedFlatConfigItem } from '../types'
 
-export const imports: Linter.Config[] = [
+export const imports: TypedFlatConfigItem[] = [
     {
         name: 'ivanmaxlogiudice/imports/rules',
         plugins: {
-            antfu: pluginAntfu,
-            import: plugin as any,
+            import: plugin,
         },
         rules: {
             'antfu/import-dedupe': 'error',
