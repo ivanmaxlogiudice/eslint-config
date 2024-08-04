@@ -15,7 +15,7 @@
     "scripts": {
         "stub": "tsup --format esm",
         "dev": "config-inspector --config eslint.config.ts",
-        "build": "tsup --format esm --clean --dts",
+        "build": "bun run typegen && tsup --format esm --clean --dts",
         "lint": "eslint . --fix",
         "typegen": "esno scripts/typegen.ts",
         "prepack": "bun run build",
