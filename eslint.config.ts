@@ -4,6 +4,7 @@ import { config } from './src'
 
 export default config({
     type: 'lib',
+    yaml: true,
 }, {
     files: ['src/configs/*.ts'],
     plugins: {

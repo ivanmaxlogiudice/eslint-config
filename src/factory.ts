@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint'
-import { ignores, imports, javascript, jsonc, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue } from './configs'
+import { ignores, imports, javascript, jsonc, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import { clearPackageCache, combine, hasSomePackage, packageExists } from './utils'
 
@@ -63,6 +63,10 @@ export async function config(
         configs.push(unocss({
             ...resolveSubOptions(options, 'unocss'),
         }))
+    }
+
+    if (options.yaml) {
+        configs.push(yaml())
     }
 
     const merged = await combine(

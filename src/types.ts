@@ -86,4 +86,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @default false
      */
     unocss?: boolean | OptionsUnoCSS
+
+    /**
+     * Enable YAML support.
+     *
+     * @default false
+     */
+    yaml?: boolean
 }
