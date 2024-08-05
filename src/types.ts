@@ -93,4 +93,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @default false
      */
     yaml?: boolean
+
+    /**
+     * Enable Markdown support.
+     *
+     * @default false
+     */
+    markdown?: boolean
 }

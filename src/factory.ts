@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint'
-import { comments, ignores, imports, javascript, jsonc, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
+import { comments, ignores, imports, javascript, jsonc, markdown, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import { clearPackageCache, combine, hasSomePackage, packageExists } from './utils'
 
@@ -68,6 +68,12 @@ export async function config(
 
     if (options.yaml) {
         configs.push(yaml())
+    }
+
+    if (options.markdown) {
+        configs.push(markdown({
+            componentExts,
+        }))
     }
 
     const merged = await combine(

@@ -30,7 +30,10 @@
         "javascriptreact",
         "typescript",
         "typescriptreact",
+        "vue",
+        "markdown",
         "json",
-        "jsonc"
+        "jsonc",
+        "yaml"
     ]
 }
