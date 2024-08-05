@@ -3,18 +3,6 @@ import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, r
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import { clearPackageCache, combine, hasSomePackage, packageExists } from './utils'
 
-/** Ignore common files and include javascript support */
-export const presetJavaScript = [
-    ...comments,
-    ...ignores,
-    ...javascript,
-    ...jsdoc,
-    ...node,
-    ...imports,
-    ...unicorn,
-    ...stylistic,
-]
-
 export async function config(
     options: OptionsConfig = {},
     ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | Linter.Config[]>[]
@@ -29,16 +17,21 @@ export async function config(
         unocss: enableUnoCSS = hasSomePackage(['unocss', '@unocss/nuxt']),
     } = options
 
-    const configs: Awaitable<Linter.Config[]>[] = []
-
-    configs.push(
-        presetJavaScript,
+    const configs: Awaitable<Linter.Config[]>[] = [
+        comments,
+        ignores,
+        imports,
+        javascript,
+        jsdoc,
+        node,
+        stylistic,
+        unicorn,
 
         // Basic json(c) file support and sorting json keys
         jsonc,
         sortPackageJson,
         sortTsconfig,
-    )
+    ]
 
     if (enableVue) {
         componentExts.push('vue')
