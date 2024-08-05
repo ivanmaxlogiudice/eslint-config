@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
-import { combine, comments, ignores, imports, javascript, jsonc, markdown, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from '../src'
+import { combine, comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from '../src'
 
 const configs = await combine(
     {
@@ -15,6 +15,7 @@ const configs = await combine(
     ignores,
     imports,
     javascript,
+    jsdoc,
     jsonc,
     markdown(),
     node,
