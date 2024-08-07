@@ -5,6 +5,7 @@ import pluginUnused from 'eslint-plugin-unused-imports'
 
 import { isInEditorEnv } from '../utils'
 import type { TypedFlatConfigItem } from '../types'
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 
 export const restrictedSyntaxJs = [
     'ForInStatement',
@@ -219,6 +220,13 @@ export const javascript: TypedFlatConfigItem[] = [
             'valid-typeof': ['error', { requireStringLiterals: true }],
             'vars-on-top': 'error',
             'yoda': ['error', 'never'],
+        },
+    },
+    {
+        name: 'ivanmaxlogiudice/javascript/disables/cli',
+        files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+        rules: {
+            'no-console': 'off',
         },
     },
 ]
