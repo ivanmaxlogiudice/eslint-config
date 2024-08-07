@@ -10,9 +10,9 @@ export async function copy(from: string, target: string): Promise<void> {
         await fsp.mkdir(target, { recursive: true })
     }
 
-    for (const file of files) {
-        await fsp.copyFile(join(from, file), join(target, file))
-    }
+    await Promise.all(
+        files.map(async file => await fsp.copyFile(join(from, file), join(target, file))),
+    )
 }
 
 export async function runESLint(cwd: string): Promise<void> {
