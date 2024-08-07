@@ -8,6 +8,9 @@ export async function regexp(): Promise<TypedFlatConfigItem[]> {
     return [
         {
             name: 'ivanmaxlogiudice/regexp/rules',
+            plugins: {
+                regexp: plugin,
+            },
             rules: {
                 ...plugin.configs['flat/recommended'].rules,
             },

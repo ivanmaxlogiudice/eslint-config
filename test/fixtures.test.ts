@@ -3,7 +3,8 @@ import fs from 'node:fs'
 import { join, resolve } from 'node:path'
 import { afterAll, beforeAll, it } from 'vitest'
 import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
-import { copy, runESLint } from './utils'
+import { asyncSpawn } from '../src'
+import { copy } from './utils'
 
 beforeAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
 afterAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
@@ -48,7 +49,9 @@ export default config(
 )`)
 
         // Run ESLint
-        await runESLint(target)
+        await asyncSpawn('bun', ['x', 'eslint', '.', '--fix'], {
+            cwd: target,
+        })
 
         // Check files
         const files = await fsp.readdir(target)

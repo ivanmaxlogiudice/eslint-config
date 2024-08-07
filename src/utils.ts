@@ -1,6 +1,7 @@
 import path from 'node:path'
 import fs from 'node:fs'
 import process from 'node:process'
+import { type SpawnOptionsWithoutStdio, spawn } from 'node:child_process'
 import type { Linter } from 'eslint'
 import type { Awaitable } from './types'
 
@@ -72,8 +73,9 @@ export async function ensurePackages(packages: string[]): Promise<void> {
     if (missingPackages.length === 0)
         return
 
-    // TODO: In vscode windows, "@clack/prompts" doesnt works, check for another one.
-    throw new Error(`${missingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${missingPackages.join(', ')}. Do you want to install them?`)
+    await asyncSpawn('bun', ['add', '-D', ...missingPackages], {
+        stdio: 'pipe',
+    })
 }
 
 export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
@@ -83,4 +85,19 @@ export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { de
 
 export function isInEditorEnv(): boolean {
     return !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM) && !process.env.CI)
+}
+
+export async function asyncSpawn(command: string, args?: readonly string[], options?: SpawnOptionsWithoutStdio): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        const process = spawn(command, args, options)
+
+        process.on('close', (code) => {
+            if (code) {
+                reject(new Error(`${command} failed\nError: ${code}`))
+            }
+            else {
+                resolve()
+            }
+        })
+    })
 }
