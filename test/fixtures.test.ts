@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import { join, resolve } from 'node:path'
 import { afterAll, beforeAll, it } from 'vitest'
 import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
-import { asyncSpawn } from '../src'
+import { spawnAsync } from '../src'
 import { copy } from './utils'
 
 beforeAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
@@ -49,7 +49,7 @@ export default config(
 )`)
 
         // Run ESLint
-        await asyncSpawn('bun', ['x', 'eslint', '.', '--fix'], {
+        await spawnAsync('bun', ['x', 'eslint', '.', '--fix'], {
             cwd: target,
         })
 

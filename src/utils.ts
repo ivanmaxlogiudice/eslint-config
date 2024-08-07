@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import path from 'node:path'
 import fs from 'node:fs'
 import process from 'node:process'
 import { type SpawnOptionsWithoutStdio, spawn } from 'node:child_process'
+import { Buffer } from 'node:buffer'
 import type { Linter } from 'eslint'
 import type { Awaitable } from './types'
 
@@ -73,9 +75,13 @@ export async function ensurePackages(packages: string[]): Promise<void> {
     if (missingPackages.length === 0)
         return
 
-    await asyncSpawn('bun', ['add', '-D', ...missingPackages], {
+    console.log(`\n⚠️ Installing the required ${missingPackages.length === 1 ? 'package' : 'packages'} for this config: ${missingPackages.join(', ')}.`)
+
+    await spawnAsync('bun', ['add', '-D', ...missingPackages], {
         stdio: 'pipe',
     })
+
+    console.log(`✅ ${missingPackages.length === 1 ? 'Package' : 'Packages'} installed successfully.\n`)
 }
 
 export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
@@ -87,17 +93,25 @@ export function isInEditorEnv(): boolean {
     return !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM) && !process.env.CI)
 }
 
-export async function asyncSpawn(command: string, args?: readonly string[], options?: SpawnOptionsWithoutStdio): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        const process = spawn(command, args, options)
-
-        process.on('close', (code) => {
-            if (code) {
-                reject(new Error(`${command} failed\nError: ${code}`))
-            }
-            else {
-                resolve()
-            }
+export async function spawnAsync(command: string, args?: readonly string[], options?: SpawnOptionsWithoutStdio): Promise<{ stdout: string, stderr: string }> {
+    return new Promise((resolve, reject) => {
+        const proc = spawn(command, args, {
+            ...options,
+            shell: process.platform === 'win32',
+            stdio: 'pipe',
         })
+
+        const stderr: Buffer[] = []
+        const stdout: Buffer[] = []
+        proc.stderr.on('data', chunk => stderr.push(chunk))
+        proc.stdout.on('data', chunk => stdout.push(chunk))
+
+        proc.on('error', () => reject(new Error(`${command} exited with code -1: ${stderr}`)))
+        proc.on('close', code => code
+            ? reject(new Error(`${command} exited with code ${code}: ${stderr}`))
+            : resolve({
+                stdout: Buffer.concat(stdout).toString(),
+                stderr: Buffer.concat(stderr).toString(),
+            }))
     })
 }
