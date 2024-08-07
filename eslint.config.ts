@@ -7,6 +7,8 @@ export default config({
     yaml: true,
     markdown: true,
 }, {
+    ignores: ['fixtures', '_fixtures'],
+}, {
     files: ['src/configs/*.ts'],
     plugins: {
         'style-migrate': styleMigrate,

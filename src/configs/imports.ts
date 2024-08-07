@@ -20,9 +20,12 @@ export const imports: TypedFlatConfigItem[] = [
             'import/no-self-import': 'error',
             'import/no-webpack-loader-syntax': 'error',
             'import/order': 'error',
+
+            // Stylistic
             'import/newline-after-import': ['error', { count: 1 }],
         },
-    }, {
+    },
+    {
         name: 'ivanmaxlogiudice/imports/disables/bin',
         files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
         rules: {

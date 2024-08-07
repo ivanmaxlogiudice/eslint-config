@@ -9,7 +9,8 @@ export const jsonc: TypedFlatConfigItem[] = [
         plugins: {
             jsonc: plugin,
         },
-    }, {
+    },
+    {
         name: 'ivanmaxlogiudice/jsonc/rules',
         languageOptions: {
             parser,

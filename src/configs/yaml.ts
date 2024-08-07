@@ -46,10 +46,7 @@ export async function yaml(): Promise<TypedFlatConfigItem[]> {
                 'yaml/indent': ['error', 2],
                 'yaml/key-spacing': 'error',
                 'yaml/no-tab-indent': 'error',
-                'yaml/quotes': ['error', {
-                    avoidEscape: false,
-                    prefer: 'single',
-                }],
+                'yaml/quotes': ['error', { avoidEscape: false, prefer: 'single' }],
                 'yaml/spaced-comment': 'error',
             },
         },

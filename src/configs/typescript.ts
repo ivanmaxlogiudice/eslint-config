@@ -72,12 +72,12 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
 
                 ...(type === 'lib'
                     ? {
-                            'ts/explicit-function-return-type': ['error', {
-                                allowExpressions: true,
-                                allowHigherOrderFunctions: true,
-                                allowIIFEs: true,
-                            }],
-                        }
+                        'ts/explicit-function-return-type': ['error', {
+                            allowExpressions: true,
+                            allowHigherOrderFunctions: true,
+                            allowIIFEs: true,
+                        }],
+                    }
                     : {}
                 ),
             },
@@ -89,7 +89,7 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
                 'no-restricted-syntax': 'off',
-                // 'unused-imports/no-unused-vars': 'off',
+                'unused-imports/no-unused-vars': 'off',
             },
         },
         {
@@ -104,7 +104,6 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
             name: 'ivanmaxlogiudice/typescript/disables/cjs',
             rules: {
                 'ts/no-require-imports': 'off',
-                'ts/no-var-requires': 'off',
             },
         },
     ]

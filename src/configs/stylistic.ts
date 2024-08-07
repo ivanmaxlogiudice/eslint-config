@@ -10,6 +10,9 @@ const config = plugin.configs.customize({
     semi: false,
 })
 
+// @ts-expect-error Check Issue: https://github.com/ivanmaxlogiudice/eslint-config/issues/37
+config.rules['style/indent'][2].offsetTernaryExpressions = false
+
 export const stylistic: TypedFlatConfigItem[] = [
     {
         name: 'ivanmaxlogiudice/stylistic/rules',
@@ -24,6 +27,7 @@ export const stylistic: TypedFlatConfigItem[] = [
             'antfu/curly': 'error',
             'antfu/if-newline': 'error',
             'antfu/top-level-function': 'error',
+            'antfu/consistent-list-newline': 'error',
         },
     },
 ]

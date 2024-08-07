@@ -16,6 +16,7 @@
         "stub": "tsup --format esm",
         "dev": "config-inspector --config eslint.config.ts",
         "build": "bun run typegen && tsup --format esm --clean --dts",
+        "test": "vitest",
         "lint": "eslint . --fix",
         "typegen": "esno scripts/typegen.ts",
         "prepack": "bun run build",
@@ -71,11 +72,13 @@
     },
     "devDependencies": {
         "@eslint/config-inspector": "^0.5.2",
+        "@ivanmaxlogiudice/eslint-config": "link:@ivanmaxlogiudice/eslint-config",
         "@stylistic/eslint-plugin-migrate": "^2.6.1",
         "@types/bun": "^1.1.6",
         "@types/eslint": "^9.6.0",
         "@types/node": "^22.1.0",
         "@unocss/eslint-plugin": "^0.61.9",
+        "bun-types": "^1.1.21",
         "bundle-require": "^5.0.0",
         "eslint": "^9.8.0",
         "eslint-plugin-markdown": "^5.1.0",
@@ -87,7 +90,9 @@
         "tsup": "^8.2.4",
         "typescript": "^5.5.4",
         "unbuild": "^2.0.0",
+        "vitest": "^2.0.5",
         "vue-eslint-parser": "^9.4.3",
         "yaml-eslint-parser": "^1.2.3"
-    }
+    },
+    "workspaces": ["fixtures/*"]
 }

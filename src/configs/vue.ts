@@ -64,7 +64,7 @@ export async function vue(options: OptionsHasTypeScript = {}): Promise<TypedFlat
 
                 'node/prefer-global/process': 'off',
                 'vue/block-order': ['error', {
-                    order: ['script', 'template', 'style'],
+                    order: ['template', 'script', 'style'],
                 }],
 
                 'vue/component-name-in-template-casing': ['error', 'PascalCase'],
