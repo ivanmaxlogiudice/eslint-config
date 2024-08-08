@@ -12,10 +12,10 @@ export const jsonc: TypedFlatConfigItem[] = [
     },
     {
         name: 'ivanmaxlogiudice/jsonc/rules',
+        files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
         languageOptions: {
             parser,
         },
-        files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
         rules: {
             'jsonc/no-bigint-literals': 'error',
             'jsonc/no-binary-expression': 'error',

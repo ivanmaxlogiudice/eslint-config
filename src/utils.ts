@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-import path from 'node:path'
-import fs from 'node:fs'
-import process from 'node:process'
-import { type SpawnOptionsWithoutStdio, spawn } from 'node:child_process'
 import { Buffer } from 'node:buffer'
-import type { Linter } from 'eslint'
+import { spawn, type SpawnOptionsWithoutStdio } from 'node:child_process'
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
 import type { Awaitable } from './types'
+import type { Linter } from 'eslint'
 
 let cachePkg: undefined | Record<string, any>
 
@@ -110,8 +110,8 @@ export async function spawnAsync(command: string, args?: readonly string[], opti
         proc.on('close', code => code
             ? reject(new Error(`${command} exited with code ${code}: ${stderr}`))
             : resolve({
-                stdout: Buffer.concat(stdout).toString(),
                 stderr: Buffer.concat(stderr).toString(),
+                stdout: Buffer.concat(stdout).toString(),
             }))
     })
 }

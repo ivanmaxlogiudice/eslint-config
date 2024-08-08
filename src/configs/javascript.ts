@@ -1,11 +1,11 @@
-import globals from 'globals'
 import pluginAntfu from 'eslint-plugin-antfu'
 // @ts-expect-error missing types
 import pluginUnused from 'eslint-plugin-unused-imports'
+import globals from 'globals'
 
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 import { isInEditorEnv } from '../utils'
 import type { TypedFlatConfigItem } from '../types'
-import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 
 export const restrictedSyntaxJs = [
     'ForInStatement',
@@ -106,8 +106,8 @@ export const javascript: TypedFlatConfigItem[] = [
             'no-regex-spaces': 'error',
             'no-restricted-globals': [
                 'error',
-                { message: 'Use `globalThis` instead.', name: 'global' },
-                { message: 'Use `globalThis` instead.', name: 'self' },
+                { name: 'global', message: 'Use `globalThis` instead.' },
+                { name: 'self', message: 'Use `globalThis` instead.' },
             ],
             'no-restricted-properties': [
                 'error',

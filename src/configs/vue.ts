@@ -1,6 +1,6 @@
 import { GLOB_VUE } from '../globs'
-import type { OptionsHasTypeScript, TypedFlatConfigItem } from '../types'
 import { ensurePackages, interopDefault } from '../utils'
+import type { OptionsHasTypeScript, TypedFlatConfigItem } from '../types'
 
 export async function vue(options: OptionsHasTypeScript = {}): Promise<TypedFlatConfigItem[]> {
     await ensurePackages(['eslint-plugin-vue', 'vue-eslint-parser'])

@@ -1,6 +1,6 @@
+import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import { join } from 'node:path'
-import fs from 'node:fs'
 
 export async function copy(from: string, target: string): Promise<void> {
     const files = await fsp.readdir(from)

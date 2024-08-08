@@ -1,6 +1,6 @@
 import { GLOB_YAML } from '../globs'
-import type { TypedFlatConfigItem } from '../types'
 import { ensurePackages, interopDefault } from '../utils'
+import type { TypedFlatConfigItem } from '../types'
 
 export async function yaml(): Promise<TypedFlatConfigItem[]> {
     await ensurePackages(['eslint-plugin-yml', 'yaml-eslint-parser'])

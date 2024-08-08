@@ -1,9 +1,9 @@
-import fsp from 'node:fs/promises'
 import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { afterAll, beforeAll, it } from 'vitest'
-import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 import { spawnAsync } from '../src'
+import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 import { copy } from './utils'
 
 beforeAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))

@@ -1,7 +1,7 @@
-import type { Linter } from 'eslint'
 import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
-import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import { clearPackageCache, combine, hasSomePackage, packageExists } from './utils'
+import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
+import type { Linter } from 'eslint'
 
 export async function config(
     options: OptionsConfig = {},
@@ -11,10 +11,10 @@ export async function config(
 
     const {
         componentExts = [],
-        typescript: enableTypeScript = packageExists('typescript'),
         regexp: enableRegexp = false,
-        vue: enableVue = hasSomePackage(['vue', 'nuxt', 'vitepress', '@slidev/cli']),
+        typescript: enableTypeScript = packageExists('typescript'),
         unocss: enableUnoCSS = hasSomePackage(['unocss', '@unocss/nuxt']),
+        vue: enableVue = hasSomePackage(['vue', 'nuxt', 'vitepress', '@slidev/cli']),
     } = options
 
     const configs: Awaitable<Linter.Config[]>[] = [

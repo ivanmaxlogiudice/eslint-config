@@ -9,6 +9,22 @@ export const perfectionist: TypedFlatConfigItem[] = [
         },
         rules: {
             'perfectionist/sort-imports': ['warn', {
+                groups: [
+                    'builtin',
+                    'external',
+                    'internal',
+                    'internal-type',
+                    'parent',
+                    'parent-type',
+                    'sibling',
+                    'sibling-type',
+                    'index',
+                    'index-type',
+                    'object',
+                    'type',
+                    'side-effect',
+                    'side-effect-style',
+                ],
                 internalPattern: ['@/**'],
                 newlinesBetween: 'ignore',
             }],

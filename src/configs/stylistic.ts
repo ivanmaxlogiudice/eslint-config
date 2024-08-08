@@ -22,12 +22,12 @@ export const stylistic: TypedFlatConfigItem[] = [
         rules: {
             ...config.rules,
 
-            'style/function-call-spacing': ['error', 'never'],
+            'antfu/consistent-list-newline': 'error',
 
             'antfu/curly': 'error',
             'antfu/if-newline': 'error',
             'antfu/top-level-function': 'error',
-            'antfu/consistent-list-newline': 'error',
+            'style/function-call-spacing': ['error', 'never'],
         },
     },
 ]
