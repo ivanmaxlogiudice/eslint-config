@@ -83,8 +83,8 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
             },
         },
         {
-            files: ['**/*.d.?([cm])ts'],
             name: 'ivanmaxlogiudice/typescript/disables/dts',
+            files: ['**/*.d.?([cm])ts'],
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
@@ -93,15 +93,15 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
             },
         },
         {
-            files: ['**/*.{test,spec}.ts?(x)'],
             name: 'ivanmaxlogiudice/typescript/disables/test',
+            files: ['**/*.{test,spec}.ts?(x)'],
             rules: {
                 'no-unused-expressions': 'off',
             },
         },
         {
-            files: ['**/*.js', '**/*.cjs'],
             name: 'ivanmaxlogiudice/typescript/disables/cjs',
+            files: ['**/*.js', '**/*.cjs'],
             rules: {
                 'ts/no-require-imports': 'off',
             },
