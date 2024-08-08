@@ -1,5 +1,6 @@
 // @ts-expect-error missing types
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
+
 import { config } from './src'
 
 export default config({
@@ -8,6 +9,17 @@ export default config({
     markdown: true,
 }, {
     ignores: ['fixtures', '_fixtures'],
+}, {
+    files: ['src/**/*.ts'],
+    rules: {
+        'perfectionist/sort-objects': ['error', {
+            partitionByComment: true,
+            groups: ['top', 'unknown'],
+            customGroups: {
+                top: ['name'],
+            },
+        }],
+    },
 }, {
     files: ['src/configs/*.ts'],
     plugins: {

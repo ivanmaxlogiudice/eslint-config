@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint'
-import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
+import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import { clearPackageCache, combine, hasSomePackage, packageExists } from './utils'
 
@@ -24,6 +24,7 @@ export async function config(
         javascript,
         jsdoc,
         node,
+        perfectionist,
         stylistic,
         unicorn,
 

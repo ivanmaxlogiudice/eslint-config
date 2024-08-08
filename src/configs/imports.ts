@@ -19,7 +19,6 @@ export const imports: TypedFlatConfigItem[] = [
             'import/no-named-default': 'error',
             'import/no-self-import': 'error',
             'import/no-webpack-loader-syntax': 'error',
-            'import/order': 'error',
 
             // Stylistic
             'import/newline-after-import': ['error', { count: 1 }],
