@@ -39,10 +39,10 @@ export function hasSomePackage(names: string[]): boolean {
     return names.some(name => packageExists(name))
 }
 
-export function findPackageJson(depth: number = 3): string | null {
-    let currentPath = process.cwd()
+export function findUp(file: string, cwd = process.cwd(), depth: number = 3): string | null {
+    let currentPath = cwd
     for (let i = 0; i <= depth; i++) {
-        const pkgPath = path.join(currentPath, 'package.json')
+        const pkgPath = path.join(currentPath, file)
         if (fs.existsSync(pkgPath)) {
             return pkgPath
         }
@@ -55,7 +55,7 @@ export function findPackageJson(depth: number = 3): string | null {
 
 export function packageExists(name: string): boolean {
     if (!cachePkg) {
-        const pkgPath = findPackageJson()
+        const pkgPath = findUp('package.json')
         if (!pkgPath) {
             throw new Error('Can not found "package.json".')
         }
