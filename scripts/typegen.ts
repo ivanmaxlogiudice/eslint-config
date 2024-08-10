@@ -44,3 +44,5 @@ export type ConfigNames = ${configNames.map(i => `'${i}'`).join(' | ')}
 `
 
 await fs.writeFile('src/typegen.d.ts', dts)
+
+console.log('✅ Type definitions generated!')
