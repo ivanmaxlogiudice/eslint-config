@@ -40,7 +40,6 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
                 ...renameRules(plugin.configs.strict!.rules!, '@typescript-eslint', 'ts'),
 
                 'no-dupe-class-members': 'off',
-                'no-loss-of-precision': 'off',
                 'no-redeclare': 'off',
                 'no-use-before-define': 'off',
                 'no-useless-constructor': 'off',
@@ -59,7 +58,6 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
                 'ts/no-extraneous-class': 'off',
                 'ts/no-import-type-side-effects': 'error',
                 'ts/no-invalid-void-type': 'off',
-                'ts/no-loss-of-precision': 'error',
                 'ts/no-non-null-assertion': 'off',
                 'ts/no-redeclare': 'error',
                 'ts/no-require-imports': 'error',
