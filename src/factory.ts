@@ -1,4 +1,4 @@
-import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn, unocss, vue, yaml } from './configs'
+import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from './configs'
 import { clearPackageCache, combine, hasSomePackage, packageExists } from './utils'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import type { Linter } from 'eslint'
@@ -47,6 +47,10 @@ export async function config(
 
     if (enableRegexp) {
         configs.push(regexp())
+    }
+
+    if (options.test ?? true) {
+        configs.push(test())
     }
 
     if (enableVue) {

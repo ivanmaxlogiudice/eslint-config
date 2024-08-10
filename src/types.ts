@@ -71,6 +71,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     regexp?: boolean
 
     /**
+     * Enable test support.
+     *
+     * @default true
+     */
+    test?: boolean
+
+    /**
      * Enable Vue support.
      *
      * @default auto-detect based on the dependencies

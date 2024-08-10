@@ -1,5 +1,6 @@
 node_modules
 dist
 _fixtures
+.temp
 
 src/typegen.d.ts

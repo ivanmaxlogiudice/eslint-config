@@ -214,7 +214,7 @@ export const javascript: TypedFlatConfigItem[] = [
     },
     {
         name: 'ivanmaxlogiudice/javascript/disables/cli',
-        files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+        files: [`scripts/${GLOB_SRC}`, `**/cli/${GLOB_SRC}`],
         rules: {
             'no-console': 'off',
         },
