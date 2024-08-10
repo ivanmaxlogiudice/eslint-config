@@ -12,7 +12,7 @@ const configs = await combine(
         },
     },
     comments,
-    ignores,
+    ignores(),
     imports,
     javascript,
     jsdoc,

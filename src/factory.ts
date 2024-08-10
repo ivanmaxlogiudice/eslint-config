@@ -19,7 +19,7 @@ export async function config(
 
     const configs: Awaitable<Linter.Config[]>[] = [
         comments,
-        ignores,
+        ignores(),
         imports,
         javascript,
         jsdoc,
