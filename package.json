@@ -80,7 +80,6 @@
     },
     "devDependencies": {
         "@eslint/config-inspector": "^0.5.2",
-        "@ivanmaxlogiudice/eslint-config": "link:@ivanmaxlogiudice/eslint-config",
         "@stylistic/eslint-plugin-migrate": "^2.6.1",
         "@types/bun": "^1.1.6",
         "@types/eslint": "^9.6.0",
@@ -102,6 +101,5 @@
         "vitest": "^2.0.5",
         "vue-eslint-parser": "^9.4.3",
         "yaml-eslint-parser": "^1.2.3"
-    },
-    "workspaces": ["fixtures/*"]
+    }
 }
