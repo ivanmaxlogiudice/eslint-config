@@ -3,7 +3,7 @@ import pluginAntfu from 'eslint-plugin-antfu'
 import pluginUnused from 'eslint-plugin-unused-imports'
 import globals from 'globals'
 
-import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
+import { GLOB_SRC } from '../globs'
 import { isInEditorEnv } from '../utils'
 import type { TypedFlatConfigItem } from '../types'
 
