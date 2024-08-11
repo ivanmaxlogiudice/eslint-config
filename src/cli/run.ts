@@ -1,28 +1,29 @@
-/* eslint-disable perfectionist/sort-objects */
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import c from 'picocolors'
 import * as p from '@clack/prompts'
+import c from 'picocolors'
 
 import { extra, extraOptions, frameworkOptions, frameworks } from './constants'
+import { updateEslintFiles } from './stages/update-eslint-files'
+import { updatePackageJson } from './stages/update-package-json'
+import { updateVscodeSettings } from './stages/update-vscode-settings'
 import { isGitClean } from './utils'
 import type { ExtraLibrariesOption, FrameworkOption, PromItem, PromptResult } from './types'
-import { updatePackageJson } from './stages/update-package-json'
-import { updateEslintFiles } from './stages/update-eslint-files'
-import { updateVscodeSettings } from './stages/update-vscode-settings'
 
 export interface CliRunOptions {
     /**
      * Skip prompts and use default values
      */
     yes?: boolean
+
     /**
-     * Use the framework template for optimal customization: vue / react / svelte / astro
+     * Use the framework template for optimal customization: vue
      */
     frameworks?: string[]
+
     /**
-     * Use the extra utils: formatter / perfectionist / unocss
+     * Use the extra utils: perfectionist / unocss
      */
     extra?: string[]
 }
@@ -47,13 +48,20 @@ export async function run(options: CliRunOptions = {}): Promise<void> {
 
     if (!argSkipPrompt) {
         result = await p.group({
-            uncommittedConfirmed: () => {
-                if (argSkipPrompt || isGitClean())
-                    return Promise.resolve(true)
+            extra: ({ results }) => {
+                const isArgExtraValid = argExtra?.length && !argExtra.filter(element => !extra.includes(<ExtraLibrariesOption>element)).length
 
-                return p.confirm({
-                    initialValue: false,
-                    message: 'There are uncommitted changes in the current repository, are you sure to continue?',
+                if (!results.uncommittedConfirmed || isArgExtraValid)
+                    return
+
+                const message = !isArgExtraValid && argExtra
+                    ? `"${argExtra}" isn't a valid extra util. Please choose from below: `
+                    : 'Select a extra utils:'
+
+                return p.multiselect<PromItem<ExtraLibrariesOption>[], ExtraLibrariesOption>({
+                    message: c.reset(message),
+                    options: extraOptions,
+                    required: false,
                 })
             },
             frameworks: ({ results }) => {
@@ -72,20 +80,13 @@ export async function run(options: CliRunOptions = {}): Promise<void> {
                     required: false,
                 })
             },
-            extra: ({ results }) => {
-                const isArgExtraValid = argExtra?.length && !argExtra.filter(element => !extra.includes(<ExtraLibrariesOption>element)).length
+            uncommittedConfirmed: () => {
+                if (argSkipPrompt || isGitClean())
+                    return Promise.resolve(true)
 
-                if (!results.uncommittedConfirmed || isArgExtraValid)
-                    return
-
-                const message = !isArgExtraValid && argExtra
-                    ? `"${argExtra}" isn't a valid extra util. Please choose from below: `
-                    : 'Select a extra utils:'
-
-                return p.multiselect<PromItem<ExtraLibrariesOption>[], ExtraLibrariesOption>({
-                    message: c.reset(message),
-                    options: extraOptions,
-                    required: false,
+                return p.confirm({
+                    initialValue: false,
+                    message: 'There are uncommitted changes in the current repository, are you sure to continue?',
                 })
             },
 

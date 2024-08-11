@@ -1,8 +1,8 @@
-import path from 'node:path'
 import fsp from 'node:fs/promises'
+import path from 'node:path'
 import process from 'node:process'
-import c from 'picocolors'
 import * as p from '@clack/prompts'
+import c from 'picocolors'
 
 import { dependenciesMap, pkgJson } from '../constants'
 import type { ExtraLibrariesOption, PromptResult } from '../types'
@@ -20,22 +20,12 @@ export async function updatePackageJson(result: PromptResult): Promise<void> {
     pkg.devDependencies ??= {}
     pkg.devDependencies['@ivanmaxlogiudice/eslint-config'] = `^${pkgJson.version}`
     pkg.devDependencies.eslint ??= pkgJson.devDependencies.eslint
-        .replace('npm:eslint-ts-patch@', '')
-        .replace(/-\d+$/, '')
 
     const addedPackages: string[] = []
 
     if (result.extra.length) {
         result.extra.forEach((item: ExtraLibrariesOption) => {
             switch (item) {
-                case 'formatter':
-                    (<const>['eslint-plugin-format', result.frameworks.includes('astro') ? 'prettier-plugin-astro' : null]).forEach((f) => {
-                        if (!f)
-                            return
-                        pkg.devDependencies[f] = pkgJson.devDependencies[f]
-                        addedPackages.push(f)
-                    })
-                    break
                 case 'unocss':
                     (<const>['@unocss/eslint-plugin']).forEach((f) => {
                         pkg.devDependencies[f] = pkgJson.devDependencies[f]

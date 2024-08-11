@@ -4,9 +4,9 @@ export interface PromItem<T> {
     hint?: string
 }
 
-export type FrameworkOption = 'vue' | 'react' | 'svelte' | 'astro' | 'solid' | 'slidev'
+export type FrameworkOption = 'vue'
 
-export type ExtraLibrariesOption = 'formatter' | 'unocss'
+export type ExtraLibrariesOption = 'unocss'
 
 export interface PromptResult {
     uncommittedConfirmed: boolean

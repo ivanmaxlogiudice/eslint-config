@@ -1,8 +1,8 @@
+import fs from 'node:fs/promises'
 import { join } from 'node:path'
 import process from 'node:process'
-import { execa } from 'execa'
-import fs from 'fs-extra'
 import { afterAll, beforeEach, expect, it } from 'vitest'
+import { spawnAsync } from '../src'
 
 const CLI_PATH = join(__dirname, '../bin/index.js')
 const genPath = join(__dirname, '..', '.temp', randomStr())
@@ -15,7 +15,7 @@ async function run(params: string[] = [], env = {
     SKIP_PROMPT: '1',
     NO_COLOR: '1',
 }) {
-    return execa('node', [CLI_PATH, ...params], {
+    return await spawnAsync('bun', ['run', CLI_PATH, ...params], {
         cwd: genPath,
         env: {
             ...process.env,
@@ -26,16 +26,16 @@ async function run(params: string[] = [], env = {
 
 async function createMockDir() {
     await fs.rm(genPath, { recursive: true, force: true })
-    await fs.ensureDir(genPath)
+    await fs.mkdir(genPath, { recursive: true })
 
     await Promise.all([
-        fs.writeFile(join(genPath, 'package.json'), JSON.stringify({}, null, 2)),
+        fs.writeFile(join(genPath, 'package.json'), JSON.stringify({}, null, 4)),
         fs.writeFile(join(genPath, '.eslintrc.yml'), ''),
         fs.writeFile(join(genPath, '.eslintignore'), 'some-path\nsome-file'),
         fs.writeFile(join(genPath, '.prettierc'), ''),
         fs.writeFile(join(genPath, '.prettierignore'), 'some-path\nsome-file'),
     ])
-};
+}
 
 beforeEach(async () => await createMockDir())
 afterAll(async () => await fs.rm(genPath, { recursive: true, force: true }))
@@ -43,9 +43,10 @@ afterAll(async () => await fs.rm(genPath, { recursive: true, force: true }))
 it('package.json updated', async () => {
     const { stdout } = await run()
 
-    const pkgContent: Record<string, any> = await fs.readJSON(join(genPath, 'package.json'))
+    const pkgContent = await fs.readFile(join(genPath, 'package.json'), 'utf-8')
+    const pkg: Record<string, any> = JSON.parse(pkgContent)
 
-    expect(JSON.stringify(pkgContent.devDependencies)).toContain('@ivanmaxlogiudice/eslint-config')
+    expect(JSON.stringify(pkg.devDependencies)).toContain('@ivanmaxlogiudice/eslint-config')
     expect(stdout).toContain('Changes wrote to package.json')
 })
 
@@ -75,10 +76,10 @@ it('ignores files added in eslint.config.js', async () => {
 
     expect(stdout).toContain('Created eslint.config.mjs')
     expect(eslintConfigContent).toMatchInlineSnapshot(`
-      "import config from '@ivanmaxlogiudice/eslint-config'
+      "import { config } from '@ivanmaxlogiudice/eslint-config'
 
       export default config({
-          ignores: ["some-path","**/some-path/**","some-file","**/some-file/**"],
+        ignores: ["**/some-path","**/some-file"],
       })
       "
     `)

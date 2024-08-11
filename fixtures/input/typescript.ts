@@ -1,7 +1,6 @@
 // Define a TypeScript interface
 interface Person { 
-  name: string; 
-age: number;
+  name: string; age: number;
 }
 
 // Create an array of objects with the defined interface
@@ -78,3 +77,4 @@ var fn = (): string => {
 }
 
 log(car1, car2, favoriteFruit, numericValue, fn())
+

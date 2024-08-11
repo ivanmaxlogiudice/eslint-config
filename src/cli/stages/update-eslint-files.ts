@@ -1,12 +1,11 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
-import process from 'node:process'
 import path from 'node:path'
-import c from 'picocolors'
+import process from 'node:process'
 import * as p from '@clack/prompts'
+import { parsePath, toFlatConfig } from '@ivanmaxlogiudice/gitignore'
+import c from 'picocolors'
 
-// @ts-expect-error missing types
-import parse from 'parse-gitignore'
 import { getEslintConfigContent } from '../utils'
 import type { PromptResult } from '../types'
 
@@ -24,16 +23,9 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
     const eslintIgnores: string[] = []
     if (fs.existsSync(pathESLintIgnore)) {
         p.log.step(c.cyan(`Migrating existing .eslintignore`))
-        const content = await fsp.readFile(pathESLintIgnore, 'utf-8')
-        const parsed = parse(content)
-        const globs = parsed.globs()
 
-        for (const glob of globs) {
-            if (glob.type === 'ignore')
-                eslintIgnores.push(...glob.patterns)
-            else if (glob.type === 'unignore')
-                eslintIgnores.push(...glob.patterns.map((pattern: string) => `!${pattern}`))
-        }
+        const patterns = parsePath(pathESLintIgnore)
+        eslintIgnores.push(...toFlatConfig(patterns).ignores)
     }
 
     const configLines: string[] = []
@@ -41,16 +33,13 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
     if (eslintIgnores.length)
         configLines.push(`ignores: ${JSON.stringify(eslintIgnores)},`)
 
-    if (result.extra.includes('formatter'))
-        configLines.push(`formatters: true,`)
-
     if (result.extra.includes('unocss'))
         configLines.push(`unocss: true,`)
 
     for (const framework of result.frameworks)
         configLines.push(`${framework}: true,`)
 
-    const mainConfig = configLines.map(i => `    ${i}`).join('\n')
+    const mainConfig = configLines.map(i => `  ${i}`).join('\n')
     const additionalConfig: string[] = []
 
     const eslintConfigContent: string = getEslintConfigContent(mainConfig, additionalConfig)
@@ -58,7 +47,7 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
     await fsp.writeFile(pathFlatConfig, eslintConfigContent)
     p.log.success(c.green(`Created ${configFileName}`))
 
-    const files = fs.readdirSync(cwd)
+    const files = fs.readdirSync(cwd).sort()
     const legacyConfig: string[] = []
     files.forEach((file) => {
         if (/eslint|prettier/.test(file) && !/eslint\.config\./.test(file))

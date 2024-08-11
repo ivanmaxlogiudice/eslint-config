@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process'
 
 export function isGitClean(): boolean {
     try {
-        execSync('git diff-index --quiet HEAD', { stdio: 'ignore' })
+        execSync('git diff-index --quiet HEAD --')
         return true
     }
     catch {
@@ -15,10 +15,10 @@ export function getEslintConfigContent(
     additionalConfigs?: string[],
 ): string {
     return `
-import config from '@ivanmaxlogiudice/eslint-config'
+import { config } from '@ivanmaxlogiudice/eslint-config'
 
 export default config({
 ${mainConfig}
-}${additionalConfigs?.map(config => `, {\n${config}\n}`)})
+}${additionalConfigs?.map(config => `,{\n${config}\n}`)})
 `.trimStart()
 }

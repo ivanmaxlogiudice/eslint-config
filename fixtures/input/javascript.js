@@ -64,11 +64,11 @@ setTimeout(() => {
 // https://github.com/ivanmaxlogiudice/eslint-config/issues/37
 const example = true
     ? {
-            name: 'test',
-        }
+        name: 'test',
+    }
     : {
-            name: 'asd',
-        }
+        name: 'asd',
+    }
 
 log(`example: ${example.name}`)
 
@@ -81,4 +81,3 @@ if (a
         ) {
           foo()
         }
-
