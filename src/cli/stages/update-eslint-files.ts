@@ -47,13 +47,13 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
     await fsp.writeFile(pathFlatConfig, eslintConfigContent)
     p.log.success(c.green(`Created ${configFileName}`))
 
-    const files = fs.readdirSync(cwd)
+    const files = fs.readdirSync(cwd).sort()
     const legacyConfig: string[] = []
     files.forEach((file) => {
         if (/eslint|prettier/.test(file) && !/eslint\.config\./.test(file))
             legacyConfig.push(file)
     })
-    console.log(legacyConfig)
+
     if (legacyConfig.length)
         p.note(`${c.dim(legacyConfig.join(', '))}`, 'You can now remove those files manually')
 }
