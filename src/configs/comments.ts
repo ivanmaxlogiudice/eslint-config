@@ -1,5 +1,5 @@
 // @ts-expect-error missing types
-import plugin from 'eslint-plugin-eslint-comments'
+import plugin from '@eslint-community/eslint-plugin-eslint-comments'
 import type { TypedFlatConfigItem } from '../types'
 
 export const comments: TypedFlatConfigItem[] = [
