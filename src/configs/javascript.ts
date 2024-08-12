@@ -1,5 +1,4 @@
 import pluginAntfu from 'eslint-plugin-antfu'
-// @ts-expect-error missing types
 import pluginUnused from 'eslint-plugin-unused-imports'
 import globals from 'globals'
 
