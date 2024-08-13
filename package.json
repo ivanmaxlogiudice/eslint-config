@@ -1,8 +1,19 @@
 {
     "name": "@ivanmaxlogiudice/eslint-config",
-    "version": "2.1.0",
+    "version": "3.0.0-beta.1",
     "packageManager": "bun@1.1.21",
+    "description": "Personal ESLint config",
     "type": "module",
+    "keywords": ["eslint-config"],
+    "license": "MIT",
+    "homepage": "https://github.com/ivanmaxlogiudice/eslint-config#readme",
+    "bugs": {
+        "url": "https://github.com/ivanmaxlogiudice/eslint-config/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ivanmaxlogiudice/eslint-config.git"
+    },
     "files": ["bin", "dist"],
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -13,6 +24,9 @@
         }
     },
     "bin": "./bin/index.js",
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "stub": "tsup --format esm",
         "dev": "config-inspector --config eslint.config.ts",
