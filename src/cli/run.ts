@@ -18,7 +18,7 @@ export interface CliRunOptions {
     yes?: boolean
 
     /**
-     * Use the framework template for optimal customization: vue
+     * Use the framework template for optimal customization: vue / react / svelte / astro
      */
     frameworks?: string[]
 
