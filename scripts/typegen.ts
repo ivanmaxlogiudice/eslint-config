@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises'
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
 import { combine, comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from '../src'
@@ -43,6 +42,6 @@ dts += `
 export type ConfigNames = ${configNames.map(i => `'${i}'`).join(' | ')}
 `
 
-await fs.writeFile('src/typegen.d.ts', dts)
+await Bun.write('src/typegen.d.ts', dts)
 
 console.log('✅ Type definitions generated!')
