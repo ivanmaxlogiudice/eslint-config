@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
@@ -48,20 +49,13 @@ export async function run(options: CliRunOptions = {}): Promise<void> {
 
     if (!argSkipPrompt) {
         result = await p.group({
-            extra: ({ results }) => {
-                const isArgExtraValid = argExtra?.length && !argExtra.filter(element => !extra.includes(<ExtraLibrariesOption>element)).length
+            uncommittedConfirmed: () => {
+                if (argSkipPrompt || isGitClean())
+                    return Promise.resolve(true)
 
-                if (!results.uncommittedConfirmed || isArgExtraValid)
-                    return
-
-                const message = !isArgExtraValid && argExtra
-                    ? `"${argExtra}" isn't a valid extra util. Please choose from below: `
-                    : 'Select a extra utils:'
-
-                return p.multiselect<PromItem<ExtraLibrariesOption>[], ExtraLibrariesOption>({
-                    message: c.reset(message),
-                    options: extraOptions,
-                    required: false,
+                return p.confirm({
+                    initialValue: false,
+                    message: 'There are uncommitted changes in the current repository, are you sure to continue?',
                 })
             },
             frameworks: ({ results }) => {
@@ -80,13 +74,20 @@ export async function run(options: CliRunOptions = {}): Promise<void> {
                     required: false,
                 })
             },
-            uncommittedConfirmed: () => {
-                if (argSkipPrompt || isGitClean())
-                    return Promise.resolve(true)
+            extra: ({ results }) => {
+                const isArgExtraValid = argExtra?.length && !argExtra.filter(element => !extra.includes(<ExtraLibrariesOption>element)).length
 
-                return p.confirm({
-                    initialValue: false,
-                    message: 'There are uncommitted changes in the current repository, are you sure to continue?',
+                if (!results.uncommittedConfirmed || isArgExtraValid)
+                    return
+
+                const message = !isArgExtraValid && argExtra
+                    ? `"${argExtra}" isn't a valid extra util. Please choose from below: `
+                    : 'Select a extra utils:'
+
+                return p.multiselect<PromItem<ExtraLibrariesOption>[], ExtraLibrariesOption>({
+                    message: c.reset(message),
+                    options: extraOptions,
+                    required: false,
                 })
             },
 
