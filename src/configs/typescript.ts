@@ -2,15 +2,18 @@ import plugin from '@typescript-eslint/eslint-plugin'
 import parser from '@typescript-eslint/parser'
 import { GLOB_TS } from '../globs'
 import { renameRules } from '../utils'
-import type { OptionsComponentExts, OptionsProjectType, TypedFlatConfigItem } from '../types'
+import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, TypedFlatConfigItem } from '../types'
 
-export function typescript(options: OptionsComponentExts & OptionsProjectType = {}): TypedFlatConfigItem[] {
+export function typescript(
+    options: OptionsFiles & OptionsOverrides & OptionsComponentExts & OptionsProjectType = {},
+): TypedFlatConfigItem[] {
     const {
         componentExts = [],
+        overrides = {},
         type = 'app',
     } = options
 
-    const files = [GLOB_TS, ...componentExts.map(ext => `**/*.${ext}`)]
+    const files = options.files ?? [GLOB_TS, ...componentExts.map(ext => `**/*.${ext}`)]
 
     return [
         {
@@ -78,6 +81,8 @@ export function typescript(options: OptionsComponentExts & OptionsProjectType = 
                     }
                     : {}
                 ),
+
+                ...overrides,
             },
         },
         {

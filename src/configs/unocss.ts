@@ -4,6 +4,7 @@ import type { OptionsUnoCSS, TypedFlatConfigItem } from '../types'
 export async function unocss(options: OptionsUnoCSS = {}): Promise<TypedFlatConfigItem[]> {
     const {
         attributify = true,
+        overrides = {},
         strict = false,
     } = options
 
@@ -29,6 +30,8 @@ export async function unocss(options: OptionsUnoCSS = {}): Promise<TypedFlatConf
                 ...strict
                     ? { 'unocss/blocklist': 'error' }
                     : {},
+
+                ...overrides,
             },
         },
     ]

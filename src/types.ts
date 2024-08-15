@@ -15,6 +15,13 @@ export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>
     plugins?: Record<string, any>
 }
 
+export interface OptionsFiles {
+    /**
+     * Override the `files` option to provide custom globs.
+     */
+    files?: string[]
+}
+
 export interface OptionsComponentExts {
     /**
      * Additional extensions for components.
@@ -23,6 +30,10 @@ export interface OptionsComponentExts {
      * @default []
      */
     componentExts?: string[]
+}
+
+export interface OptionsOverrides {
+    overrides?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsProjectType {
@@ -34,7 +45,11 @@ export interface OptionsProjectType {
     type?: 'app' | 'lib'
 }
 
-export interface OptionsUnoCSS {
+export interface OptionsIsInEditor {
+    isInEditor?: boolean
+}
+
+export interface OptionsUnoCSS extends OptionsOverrides {
     /**
      * Enable attributify support.
      * @default false
@@ -54,13 +69,62 @@ export interface OptionsHasTypeScript {
 
 export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
     /**
+     * Core rules. Can't be disabled.
+     */
+    javascript?: OptionsOverrides
+
+    /**
      * Enable TypeScript support.
      *
      * Passing an object to enable TypeScript Language Server support.
      *
      * @default auto-detect based on the dependencies
      */
-    typescript?: boolean
+    typescript?: boolean | OptionsOverrides
+
+    /**
+     * Enable test support.
+     *
+     * @default true
+     */
+    test?: boolean | OptionsOverrides
+
+    /**
+     * Enable Vue support.
+     *
+     * @default auto-detect based on the dependencies
+     */
+    vue?: boolean | OptionsOverrides
+
+    /**
+     * Enable JSONC support.
+     *
+     * @default true
+     */
+    jsonc?: boolean | OptionsOverrides
+
+    /**
+     * Enable YAML support.
+     *
+     * @default false
+     */
+    yaml?: boolean | OptionsOverrides
+
+    /**
+     * Enable linting for **code snippets** in Markdown.
+     *
+     * For formatting Markdown content.
+     *
+     * @default false
+     */
+    markdown?: boolean | OptionsOverrides
+
+    /**
+     * Enable stylistic rules.
+     *
+     * @see https://eslint.style/
+     */
+    stylistic?: OptionsOverrides
 
     /**
      * Enable regexp rules.
@@ -68,21 +132,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @see https://ota-meshi.github.io/eslint-plugin-regexp/
      * @default false
      */
-    regexp?: boolean
-
-    /**
-     * Enable test support.
-     *
-     * @default true
-     */
-    test?: boolean
-
-    /**
-     * Enable Vue support.
-     *
-     * @default auto-detect based on the dependencies
-     */
-    vue?: boolean
+    regexp?: boolean | OptionsOverrides
 
     /**
      * Enable unocss rules.
@@ -95,16 +145,25 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     unocss?: boolean | OptionsUnoCSS
 
     /**
-     * Enable YAML support.
+     * Control to disable some rules in editors.
      *
-     * @default false
+     * @default auto-detect based on the process.env
      */
-    yaml?: boolean
+    isInEditor?: boolean
 
     /**
-     * Enable Markdown support.
+     * Provide overrides for rules for each integration.
      *
-     * @default false
+     * @deprecated use `overrides` option in each integration key instead
      */
-    markdown?: boolean
+    overrides?: {
+        stylistic?: TypedFlatConfigItem['rules']
+        javascript?: TypedFlatConfigItem['rules']
+        typescript?: TypedFlatConfigItem['rules']
+        test?: TypedFlatConfigItem['rules']
+        vue?: TypedFlatConfigItem['rules']
+        jsonc?: TypedFlatConfigItem['rules']
+        markdown?: TypedFlatConfigItem['rules']
+        yaml?: TypedFlatConfigItem['rules']
+    }
 }

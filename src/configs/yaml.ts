@@ -1,8 +1,13 @@
 import { GLOB_YAML } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
-import type { TypedFlatConfigItem } from '../types'
+import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
-export async function yaml(): Promise<TypedFlatConfigItem[]> {
+export async function yaml(options: OptionsFiles & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
+    const {
+        files = [GLOB_YAML],
+        overrides = {},
+    } = options
+
     await ensurePackages(['eslint-plugin-yml', 'yaml-eslint-parser'])
 
     const [plugin, parser] = await Promise.all([
@@ -19,7 +24,7 @@ export async function yaml(): Promise<TypedFlatConfigItem[]> {
         },
         {
             name: 'ivanmaxlogiudice/yaml/rules',
-            files: [GLOB_YAML],
+            files,
             languageOptions: {
                 parser,
             },
@@ -48,6 +53,8 @@ export async function yaml(): Promise<TypedFlatConfigItem[]> {
                 'yaml/no-tab-indent': 'error',
                 'yaml/quotes': ['error', { avoidEscape: false, prefer: 'single' }],
                 'yaml/spaced-comment': 'error',
+
+                ...overrides,
             },
         },
     ]

@@ -1,5 +1,5 @@
 import plugin from '@stylistic/eslint-plugin'
-import type { TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 const config = plugin.configs.customize({
     flat: true,
@@ -13,21 +13,29 @@ const config = plugin.configs.customize({
 // @ts-expect-error Check Issue: https://github.com/ivanmaxlogiudice/eslint-config/issues/37
 config.rules['style/indent'][2].offsetTernaryExpressions = false
 
-export const stylistic: TypedFlatConfigItem[] = [
-    {
-        name: 'ivanmaxlogiudice/stylistic/rules',
-        plugins: {
-            style: plugin,
-        },
-        rules: {
-            ...config.rules,
+export function stylistic(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
+    const {
+        overrides = {},
+    } = options
 
-            'antfu/consistent-list-newline': 'error',
+    return [
+        {
+            name: 'ivanmaxlogiudice/stylistic/rules',
+            plugins: {
+                style: plugin,
+            },
+            rules: {
+                ...config.rules,
 
-            'antfu/curly': 'error',
-            'antfu/if-newline': 'error',
-            'antfu/top-level-function': 'error',
-            'style/function-call-spacing': ['error', 'never'],
+                'antfu/consistent-list-newline': 'error',
+
+                'antfu/curly': 'error',
+                'antfu/if-newline': 'error',
+                'antfu/top-level-function': 'error',
+                'style/function-call-spacing': ['error', 'never'],
+
+                ...overrides,
+            },
         },
-    },
-]
+    ]
+}

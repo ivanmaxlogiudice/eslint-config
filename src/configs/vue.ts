@@ -1,8 +1,15 @@
 import { GLOB_VUE } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
-import type { OptionsHasTypeScript, TypedFlatConfigItem } from '../types'
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
-export async function vue(options: OptionsHasTypeScript = {}): Promise<TypedFlatConfigItem[]> {
+export async function vue(
+    options: OptionsFiles & OptionsOverrides & OptionsHasTypeScript = {},
+): Promise<TypedFlatConfigItem[]> {
+    const {
+        files = [GLOB_VUE],
+        overrides = {},
+    } = options
+
     await ensurePackages(['eslint-plugin-vue', 'vue-eslint-parser'])
 
     const [plugin, parser] = await Promise.all([
@@ -40,7 +47,7 @@ export async function vue(options: OptionsHasTypeScript = {}): Promise<TypedFlat
         },
         {
             name: 'ivanmaxlogiudice/vue/rules',
-            files: [GLOB_VUE],
+            files,
             languageOptions: {
                 parser,
                 parserOptions: {
@@ -139,6 +146,8 @@ export async function vue(options: OptionsHasTypeScript = {}): Promise<TypedFlat
                 'vue/quote-props': ['error', 'consistent-as-needed'],
                 'vue/space-in-parens': ['error', 'never'],
                 'vue/template-curly-spacing': 'error',
+
+                ...overrides,
             },
         },
     ]

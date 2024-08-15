@@ -1,7 +1,11 @@
 import { ensurePackages, interopDefault } from '../utils'
-import type { TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
-export async function regexp(): Promise<TypedFlatConfigItem[]> {
+export async function regexp(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
+    const {
+        overrides = {},
+    } = options
+
     await ensurePackages(['eslint-plugin-regexp'])
     const plugin = await interopDefault(import('eslint-plugin-regexp'))
 
@@ -13,6 +17,8 @@ export async function regexp(): Promise<TypedFlatConfigItem[]> {
             },
             rules: {
                 ...plugin.configs['flat/recommended'].rules,
+
+                ...overrides,
             },
         },
     ]

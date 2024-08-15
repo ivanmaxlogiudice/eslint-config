@@ -1,10 +1,12 @@
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
-import type { OptionsComponentExts, TypedFlatConfigItem } from '../types'
+import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
-export async function markdown(options: OptionsComponentExts = {}): Promise<TypedFlatConfigItem[]> {
+export async function markdown(options: OptionsFiles & OptionsOverrides & OptionsComponentExts = {}): Promise<TypedFlatConfigItem[]> {
     const {
         componentExts = [],
+        files = [GLOB_MARKDOWN],
+        overrides = {},
     } = options
 
     await ensurePackages(['eslint-plugin-markdown'])
@@ -21,7 +23,7 @@ export async function markdown(options: OptionsComponentExts = {}): Promise<Type
         },
         {
             name: 'ivanmaxlogiudice/markdown/processor',
-            files: [GLOB_MARKDOWN],
+            files,
             processor: 'markdown/markdown',
         },
         {
@@ -65,6 +67,8 @@ export async function markdown(options: OptionsComponentExts = {}): Promise<Type
                 'unicode-bom': 'off',
                 'unused-imports/no-unused-imports': 'off',
                 'unused-imports/no-unused-vars': 'off',
+
+                ...overrides,
             },
         },
     ]
