@@ -101,7 +101,7 @@ export function sortTsconfig(): TypedFlatConfigItem[] {
                     },
                     {
                         order: [
-                        /* Projects */
+                            /* Projects */
                             'incremental',
                             'composite',
                             'tsBuildInfoFile',
