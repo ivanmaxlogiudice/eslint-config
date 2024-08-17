@@ -1,5 +1,5 @@
 import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from './configs'
-import { clearPackageCache, combine, hasSomePackage, isInEditorEnv, packageExists } from './utils'
+import { combine, hasSomePackage, isInEditorEnv, isPackageInScope } from './utils'
 import type { RuleOptions } from './typegen'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import type { Linter } from 'eslint'
@@ -8,13 +8,11 @@ export async function config(
     options: OptionsConfig = {},
     ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | Linter.Config[]>[]
 ): Promise<Linter.Config[]> {
-    clearPackageCache()
-
     const {
         componentExts = [],
         isInEditor = isInEditorEnv(),
         regexp: enableRegexp = false,
-        typescript: enableTypeScript = packageExists('typescript'),
+        typescript: enableTypeScript = isPackageInScope('typescript'),
         unocss: enableUnoCSS = hasSomePackage(['unocss', '@unocss/nuxt']),
         vue: enableVue = hasSomePackage(['vue', 'nuxt', 'vitepress', '@slidev/cli']),
     } = options

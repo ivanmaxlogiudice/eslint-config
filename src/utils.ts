@@ -4,10 +4,13 @@ import { spawn, type SpawnOptionsWithoutStdio } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+import { fileURLToPath } from 'node:url'
+import { isPackageExists } from 'local-pkg'
 import type { Awaitable } from './types'
 import type { Linter } from 'eslint'
 
-let cachePkg: undefined | Record<string, any>
+const scopeUrl = fileURLToPath(new URL('.', import.meta.url))
+const isCwdInScope = isPackageExists('@ivanmaxlogiudice/eslint-config')
 
 /**
  * Combine array and non-array configs into a single array.
@@ -31,12 +34,12 @@ export function renameRules(rules: Record<string, any>, from: string, to: string
     return renamed
 }
 
-export function clearPackageCache(): void {
-    cachePkg = undefined
+export function hasSomePackage(names: string[]): boolean {
+    return names.some(name => isPackageInScope(name))
 }
 
-export function hasSomePackage(names: string[]): boolean {
-    return names.some(name => packageExists(name))
+export function isPackageInScope(name: string): boolean {
+    return isPackageExists(name, { paths: [scopeUrl] })
 }
 
 export function findUp(file: string, cwd = process.cwd(), depth: number = 3): string | null {
@@ -53,25 +56,11 @@ export function findUp(file: string, cwd = process.cwd(), depth: number = 3): st
     return null
 }
 
-export function packageExists(name: string): boolean {
-    if (!cachePkg) {
-        const pkgPath = findUp('package.json')
-        if (!pkgPath) {
-            throw new Error('Can not found "package.json".')
-        }
-
-        const pkgContent = fs.readFileSync(pkgPath, 'utf-8')
-        cachePkg = JSON.parse(pkgContent)
-    }
-
-    return cachePkg?.dependencies?.[name] !== undefined || cachePkg?.devDependencies?.[name] !== undefined
-}
-
 export async function ensurePackages(packages: string[]): Promise<void> {
-    if (process.env.CI || process.stdout.isTTY === false)
+    if (process.env.CI || process.stdout.isTTY === false || isCwdInScope === false)
         return
 
-    const missingPackages = packages.filter(i => i && !packageExists(i)) as string[]
+    const missingPackages = packages.filter(i => i && !isPackageInScope(i)) as string[]
     if (missingPackages.length === 0)
         return
 
