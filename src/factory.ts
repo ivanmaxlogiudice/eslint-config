@@ -10,12 +10,20 @@ export async function config(
 ): Promise<Linter.Config[]> {
     const {
         componentExts = [],
-        isInEditor = isInEditorEnv(),
         regexp: enableRegexp = false,
         typescript: enableTypeScript = isPackageInScope('typescript'),
         unocss: enableUnoCSS = hasSomePackage(['unocss', '@unocss/nuxt']),
         vue: enableVue = hasSomePackage(['vue', 'nuxt', 'vitepress', '@slidev/cli']),
     } = options
+
+    let isInEditor = options.isInEditor
+    if (isInEditor == null) {
+        isInEditor = isInEditorEnv()
+        if (isInEditor) {
+            // eslint-disable-next-line no-console
+            console.log('[@ivanmaxlogiudice/eslint-config] Detected running in editor, some rules are disabled.')
+        }
+    }
 
     const configs: Awaitable<Linter.Config[]>[] = [
         comments(),
