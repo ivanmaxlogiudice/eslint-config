@@ -1,4 +1,5 @@
 import type { RuleOptions } from './typegen'
+import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 
 export type Awaitable<T> = T | Promise<T>
@@ -30,6 +31,38 @@ export interface OptionsComponentExts {
      * @default []
      */
     componentExts?: string[]
+}
+
+export interface OptionsTypeScriptParserOptions {
+    /**
+     * Additional parser options for TypeScript.
+     */
+    parserOptions?: Partial<ParserOptions>
+
+    /**
+     * Glob patterns for files that should be type aware.
+     * @default ['**\/*.{ts,tsx}']
+     */
+    filesTypeAware?: string[]
+
+    /**
+     * Glob patterns for files that should not be type aware.
+     * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
+     */
+    ignoresTypeAware?: string[]
+}
+
+export interface OptionsTypeScriptWithTypes {
+    /**
+     * When this options is provided, type aware rules will be enabled.
+     * @see https://typescript-eslint.io/linting/typed-linting/
+     */
+    tsconfigPath?: string
+
+    /**
+     * Override type aware rules.
+     */
+    overridesTypeAware?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsOverrides {
@@ -150,20 +183,4 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @default auto-detect based on the process.env
      */
     isInEditor?: boolean
-
-    /**
-     * Provide overrides for rules for each integration.
-     *
-     * @deprecated use `overrides` option in each integration key instead
-     */
-    overrides?: {
-        stylistic?: TypedFlatConfigItem['rules']
-        javascript?: TypedFlatConfigItem['rules']
-        typescript?: TypedFlatConfigItem['rules']
-        test?: TypedFlatConfigItem['rules']
-        vue?: TypedFlatConfigItem['rules']
-        jsonc?: TypedFlatConfigItem['rules']
-        markdown?: TypedFlatConfigItem['rules']
-        yaml?: TypedFlatConfigItem['rules']
-    }
 }

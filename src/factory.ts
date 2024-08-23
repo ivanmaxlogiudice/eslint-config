@@ -47,6 +47,7 @@ export async function config(
 
     if (enableTypeScript) {
         configs.push(typescript({
+            ...resolveSubOptions(options, 'typescript'),
             componentExts,
             overrides: getOverrides(options, 'typescript'),
             type: options.type,
@@ -122,7 +123,6 @@ export function getOverrides<K extends keyof OptionsConfig>(
 ): Partial<Linter.RulesRecord & RuleOptions> {
     const sub = resolveSubOptions(options, key)
     return {
-        ...(options.overrides as any)?.[key],
         ...'overrides' in sub
             ? sub.overrides
             : {},
