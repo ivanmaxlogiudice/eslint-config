@@ -71,7 +71,7 @@ export async function vue(
 
                 'node/prefer-global/process': 'off',
                 'vue/block-order': ['error', {
-                    order: ['template', 'script', 'style'],
+                    order: ['script', 'template', 'style'],
                 }],
 
                 'vue/component-name-in-template-casing': ['error', 'PascalCase'],
