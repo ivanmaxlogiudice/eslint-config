@@ -72,7 +72,7 @@ it('cjs eslint.config.mjs', async () => {
 it('ignores files added in eslint.config.js', async () => {
     const { stdout } = await run()
 
-    const eslintConfigContent = (await fs.readFile(join(genPath, 'eslint.config.mjs'), 'utf-8')).replace(/\\/g, '/')
+    const eslintConfigContent = (await fs.readFile(join(genPath, 'eslint.config.mjs'), 'utf-8')).replaceAll('\\', '/')
 
     expect(stdout).toContain('Created eslint.config.mjs')
     expect(eslintConfigContent).toMatchInlineSnapshot(`

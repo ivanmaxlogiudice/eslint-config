@@ -49,10 +49,10 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
 
     const files = fs.readdirSync(cwd).sort()
     const legacyConfig: string[] = []
-    files.forEach((file) => {
+    for (const file of files) {
         if (/eslint|prettier/.test(file) && !/eslint\.config\./.test(file))
             legacyConfig.push(file)
-    })
+    }
 
     if (legacyConfig.length)
         p.note(`${c.dim(legacyConfig.join(', '))}`, 'You can now remove those files manually')

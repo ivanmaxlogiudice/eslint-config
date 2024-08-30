@@ -9,43 +9,42 @@ export function unicorn(): TypedFlatConfigItem[] {
                 unicorn: plugin,
             },
             rules: {
-                // Pass error message when throwing errors
+                'unicorn/consistent-empty-array-spread': 'error',
+                'unicorn/consistent-function-scoping': 'error',
                 'unicorn/error-message': 'error',
-
-                // Uppercase regex escapes
                 'unicorn/escape-case': 'error',
-
-                // Array.isArray instead of instanceof
+                'unicorn/new-for-builtins': 'error',
+                'unicorn/no-array-for-each': 'error',
+                'unicorn/no-array-push-push': 'error',
+                'unicorn/no-await-in-promise-methods': 'error',
                 'unicorn/no-instanceof-array': 'error',
-
-                // Ban `new Array` as `Array` constructor's params are ambiguous
+                'unicorn/no-invalid-remove-event-listener': 'error',
+                'unicorn/no-lonely-if': 'error',
+                'unicorn/no-negation-in-equality-check': 'error',
                 'unicorn/no-new-array': 'error',
-
-                // Prevent deprecated `new Buffer()`
                 'unicorn/no-new-buffer': 'error',
-
-                // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
+                'unicorn/no-unnecessary-await': 'error',
                 'unicorn/number-literal-case': 'error',
-
-                // textContent instead of innerText
+                'unicorn/prefer-array-find': 'error',
+                'unicorn/prefer-array-flat-map': 'error',
+                'unicorn/prefer-array-some': 'error',
+                'unicorn/prefer-at': 'error',
                 'unicorn/prefer-dom-node-text-content': 'error',
-
-                // includes over indexOf when checking for existence
                 'unicorn/prefer-includes': 'error',
-
-                // Prefer using the node: protocol
+                'unicorn/prefer-modern-math-apis': 'error',
+                'unicorn/prefer-negative-index': 'error',
                 'unicorn/prefer-node-protocol': 'error',
-
-                // Prefer using number properties like `Number.isNaN` rather than `isNaN`
                 'unicorn/prefer-number-properties': 'error',
-
-                // String methods startsWith/endsWith instead of more complicated stuff
+                'unicorn/prefer-prototype-methods': 'error',
+                'unicorn/prefer-query-selector': 'error',
+                'unicorn/prefer-regexp-test': 'error',
+                'unicorn/prefer-string-raw': 'error',
+                'unicorn/prefer-string-replace-all': 'error',
+                'unicorn/prefer-string-slice': 'error',
                 'unicorn/prefer-string-starts-ends-with': 'error',
-
-                // Enforce throwing type error when throwing error while checking typeof
+                'unicorn/prefer-string-trim-start-end': 'error',
+                'unicorn/prefer-structured-clone': 'error',
                 'unicorn/prefer-type-error': 'error',
-
-                // Use new when throwing error
                 'unicorn/throw-new-error': 'error',
             },
         },

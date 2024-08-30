@@ -5,7 +5,7 @@ import * as p from '@clack/prompts'
 import c from 'picocolors'
 
 import { dependenciesMap, pkgJson } from '../constants'
-import type { ExtraLibrariesOption, PromptResult } from '../types'
+import type { PromptResult } from '../types'
 
 export async function updatePackageJson(result: PromptResult): Promise<void> {
     const cwd = process.cwd()
@@ -24,25 +24,25 @@ export async function updatePackageJson(result: PromptResult): Promise<void> {
     const addedPackages: string[] = []
 
     if (result.extra.length) {
-        result.extra.forEach((item: ExtraLibrariesOption) => {
+        for (const item of result.extra) {
             switch (item) {
                 case 'unocss':
-                    (<const>['@unocss/eslint-plugin']).forEach((f) => {
+                    for (const f of (<const>['@unocss/eslint-plugin'])) {
                         pkg.devDependencies[f] = pkgJson.devDependencies[f]
                         addedPackages.push(f)
-                    })
+                    }
                     break
             }
-        })
+        }
     }
 
     for (const framework of result.frameworks) {
         const deps = dependenciesMap[framework]
         if (deps) {
-            deps.forEach((f) => {
+            for (const f of deps) {
                 pkg.devDependencies[f] = pkgJson.devDependencies[f]
                 addedPackages.push(f)
-            })
+            }
         }
     }
 
