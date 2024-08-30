@@ -123,9 +123,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 ],
                 'no-restricted-syntax': [
                     'error',
-                    'DebuggerStatement',
-                    'LabeledStatement',
-                    'WithStatement',
                     'TSEnumDeclaration[const=true]',
                     'TSExportAssignment',
                 ],
