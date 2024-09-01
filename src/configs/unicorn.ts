@@ -25,6 +25,7 @@ export function unicorn(): TypedFlatConfigItem[] {
                 'unicorn/no-new-buffer': 'error',
                 'unicorn/no-unnecessary-await': 'error',
                 'unicorn/number-literal-case': 'error',
+                'unicorn/prefer-add-event-listener': 'error',
                 'unicorn/prefer-array-find': 'error',
                 'unicorn/prefer-array-flat-map': 'error',
                 'unicorn/prefer-array-some': 'error',
