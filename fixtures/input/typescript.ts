@@ -78,3 +78,8 @@ var fn = (): string => {
 
 log(car1, car2, favoriteFruit, numericValue, fn())
 
+let num = Math
+  .floor (Math.random() * 1E+7).toString()
+    .replace(/\.\d+/ig, "")
+
+log(num)

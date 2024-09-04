@@ -82,3 +82,10 @@ function fn(): string {
 }
 
 log(car1, car2, favoriteFruit, numericValue, fn())
+
+const num = Math
+    .floor(Math.random() * 1e+7)
+    .toString()
+    .replaceAll(/\.\d+/ig, '')
+
+log(num)
