@@ -1,4 +1,4 @@
-import { comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from './configs'
+import { comments, disables, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from './configs'
 import { combine, hasSomePackage, isInEditorEnv, isPackageInScope } from './utils'
 import type { RuleOptions } from './typegen'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
@@ -103,6 +103,8 @@ export async function config(
             overrides: getOverrides(options, 'markdown'),
         }))
     }
+
+    configs.push(disables())
 
     const merged = await combine(
         ...configs,

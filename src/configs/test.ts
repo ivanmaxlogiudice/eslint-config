@@ -48,6 +48,7 @@ export async function test(options: OptionsIsInEditor & OptionsFiles & OptionsOv
                 'test/prefer-lowercase-title': 'error',
 
                 'ts/explicit-function-return-type': 'off',
+                'unicorn/consistent-function-scoping': 'off',
 
                 ...overrides,
             },

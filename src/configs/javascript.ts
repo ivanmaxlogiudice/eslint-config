@@ -1,8 +1,6 @@
 import pluginAntfu from 'eslint-plugin-antfu'
 import pluginUnused from 'eslint-plugin-unused-imports'
 import globals from 'globals'
-
-import { GLOB_SRC } from '../globs'
 import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 export const restrictedSyntaxJs = [
@@ -213,13 +211,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'yoda': ['error', 'never'],
 
                 ...overrides,
-            },
-        },
-        {
-            name: 'ivanmaxlogiudice/javascript/disables/cli',
-            files: [`scripts/${GLOB_SRC}`, `**/cli/${GLOB_SRC}`],
-            rules: {
-                'no-console': 'off',
             },
         },
     ]

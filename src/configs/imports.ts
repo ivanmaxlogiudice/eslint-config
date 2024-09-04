@@ -1,5 +1,4 @@
 import plugin from 'eslint-plugin-import-x'
-import { GLOB_SRC_EXT } from '../globs'
 import type { TypedFlatConfigItem } from '../types'
 
 export function imports(): TypedFlatConfigItem[] {
@@ -23,14 +22,6 @@ export function imports(): TypedFlatConfigItem[] {
 
                 // Stylistic
                 'import/newline-after-import': ['error', { count: 1 }],
-            },
-        },
-        {
-            name: 'ivanmaxlogiudice/imports/disables/bin',
-            files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
-            rules: {
-                'antfu/no-import-dist': 'off',
-                'antfu/no-import-node-modules-by-path': 'off',
             },
         },
     ]

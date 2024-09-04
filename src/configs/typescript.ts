@@ -104,7 +104,6 @@ export async function typescript(
                 ...renameRules(plugin.configs.strict!.rules!, '@typescript-eslint', 'ts'),
 
                 'no-dupe-class-members': 'off',
-                'no-loss-of-precision': 'off',
                 'no-redeclare': 'off',
                 'no-use-before-define': 'off',
                 'no-useless-constructor': 'off',
@@ -157,30 +156,5 @@ export async function typescript(
                 },
             }]
             : [],
-        {
-            name: 'ivanmaxlogiudice/typescript/disables/dts',
-            files: ['**/*.d.?([cm])ts'],
-            rules: {
-                'eslint-comments/no-unlimited-disable': 'off',
-                'import/no-duplicates': 'off',
-                'no-restricted-syntax': 'off',
-                'unused-imports/no-unused-vars': 'off',
-            },
-        },
-        {
-            name: 'ivanmaxlogiudice/typescript/disables/test',
-            files: ['**/*.{test,spec}.ts?(x)'],
-            rules: {
-                'no-unused-expressions': 'off',
-            },
-        },
-        {
-            name: 'ivanmaxlogiudice/typescript/disables/cjs',
-            files: ['**/*.js', '**/*.cjs'],
-            rules: {
-                'ts/no-require-imports': 'off',
-                'ts/no-var-requires': 'off',
-            },
-        },
     ]
 }
