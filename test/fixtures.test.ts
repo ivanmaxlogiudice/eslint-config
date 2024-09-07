@@ -3,8 +3,8 @@ import fsp from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { afterAll, beforeAll, it } from 'vitest'
 import { spawnAsync } from '../src'
-import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 import { copy } from './utils'
+import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 
 beforeAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
 afterAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))

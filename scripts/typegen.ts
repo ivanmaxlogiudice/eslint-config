@@ -1,5 +1,5 @@
-import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
+import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { combine, comments, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from '../src'
 
 const configs = await combine(
