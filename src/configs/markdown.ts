@@ -11,8 +11,7 @@ export async function markdown(options: OptionsFiles & OptionsOverrides & Option
 
     await ensurePackages(['eslint-plugin-markdown'])
 
-    // @ts-expect-error missing types
-    const plugin = await interopDefault(import('eslint-plugin-markdown'))
+    const plugin = await interopDefault(import('@eslint/markdown'))
 
     return [
         {
