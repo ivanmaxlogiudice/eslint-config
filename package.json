@@ -122,5 +122,8 @@
     },
     "lint-staged": {
         "*": "eslint --flag unstable_ts_config --fix"
+    },
+    "resolutions": {
+        "@types/mdast": "^4.0.4"
     }
 }
