@@ -56,6 +56,7 @@ export async function markdown(options: OptionsFiles & OptionsOverrides & Option
 
                 'style/eol-last': 'off',
                 'ts/consistent-type-imports': 'off',
+                'ts/explicit-function-return-type': 'off',
                 'ts/no-namespace': 'off',
                 'ts/no-redeclare': 'off',
                 'ts/no-require-imports': 'off',
