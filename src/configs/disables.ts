@@ -5,7 +5,7 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
     return [
         {
             name: 'ivanmaxlogiudice/disables/scripts',
-            files: [`scripts/${GLOB_SRC}`],
+            files: [`**/scripts/${GLOB_SRC}`],
             rules: {
                 'no-console': 'off',
                 'ts/explicit-function-return-type': 'off',
@@ -14,7 +14,7 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
         },
         {
             name: 'ivanmaxlogiudice/disables/cli',
-            files: [`cli/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+            files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
             rules: {
                 'no-console': 'off',
             },
