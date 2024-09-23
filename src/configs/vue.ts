@@ -69,8 +69,10 @@ export async function vue(
                 ...plugin.configs['vue3-strongly-recommended'].rules,
                 ...plugin.configs['vue3-recommended'].rules,
 
+                'antfu/no-top-level-await': 'off',
                 'node/prefer-global/process': 'off',
                 'ts/explicit-function-return-type': 'off',
+
                 'vue/block-order': ['error', {
                     order: ['script', 'template', 'style'],
                 }],
