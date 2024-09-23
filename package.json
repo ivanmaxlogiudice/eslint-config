@@ -118,7 +118,7 @@
         "yaml-eslint-parser": "^1.2.3"
     },
     "simple-git-hooks": {
-        "pre-commit": "bunx lint-staged"
+        "pre-commit": "npx lint-staged"
     },
     "lint-staged": {
         "*": "eslint --flag unstable_ts_config --fix"
