@@ -39,6 +39,7 @@ export async function markdown(options: OptionsFiles & OptionsOverrides & Option
                 },
             },
             rules: {
+                'antfu/no-top-level-await': 'off',
                 'import/newline-after-import': 'off',
 
                 'no-alert': 'off',
