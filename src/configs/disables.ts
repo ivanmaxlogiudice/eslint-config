@@ -40,14 +40,6 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
             },
         },
         {
-            name: 'ivanmaxlogiudice/disables/test',
-            files: ['**/*.{test,spec}.([tj])s?(x)'],
-            rules: {
-                'antfu/no-top-level-await': 'off',
-                'no-unused-expressions': 'off',
-            },
-        },
-        {
             name: 'ivanmaxlogiudice/disables/cjs',
             files: ['**/*.js', '**/*.cjs'],
             rules: {
