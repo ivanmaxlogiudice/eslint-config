@@ -23,6 +23,10 @@ export interface OptionsFiles {
     files?: string[]
 }
 
+export type OptionsTypescript =
+  (OptionsTypeScriptWithTypes & OptionsOverrides)
+  | (OptionsTypeScriptParserOptions & OptionsOverrides)
+
 export interface OptionsComponentExts {
     /**
      * Additional extensions for components.
@@ -113,7 +117,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      *
      * @default auto-detect based on the dependencies
      */
-    typescript?: boolean | OptionsOverrides
+    typescript?: boolean | OptionsTypescript
 
     /**
      * Enable test support.
