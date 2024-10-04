@@ -86,7 +86,7 @@
         "eslint-plugin-n": "^17.10.3",
         "eslint-plugin-no-only-tests": "^3.3.0",
         "eslint-plugin-perfectionist": "^3.8.0",
-        "eslint-plugin-unicorn": "^55.0.0",
+        "eslint-plugin-unicorn": "^56.0.0",
         "eslint-plugin-unused-imports": "^4.1.4",
         "globals": "^15.10.0",
         "jsonc-eslint-parser": "^2.4.0",
