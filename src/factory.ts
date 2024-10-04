@@ -5,7 +5,7 @@ import type { RuleOptions } from './typegen'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 
 export async function config(
-    options: OptionsConfig = {},
+    options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
     ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | Linter.Config[]>[]
 ): Promise<Linter.Config[]> {
     const {
@@ -27,7 +27,7 @@ export async function config(
 
     const configs: Awaitable<Linter.Config[]>[] = [
         comments(),
-        ignores(),
+        ignores(options.ignores),
         imports(),
         javascript({
             isInEditor,
