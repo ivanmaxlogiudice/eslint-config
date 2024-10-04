@@ -105,6 +105,7 @@ export async function vue(
                 'vue/no-restricted-v-bind': ['error', '/^v-/'],
                 'vue/no-setup-props-reactivity-loss': 'off',
                 'vue/no-sparse-arrays': 'error',
+                'vue/no-undef-components': 'error',
                 'vue/no-unused-refs': 'error',
                 'vue/no-useless-v-bind': 'error',
                 'vue/no-v-html': 'off',
