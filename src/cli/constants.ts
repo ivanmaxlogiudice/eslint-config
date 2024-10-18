@@ -38,6 +38,7 @@ export const vscodeSettingsString = `
         "vue",
         "markdown",
         "json",
+        "json5",
         "jsonc",
         "yaml"
     ]
