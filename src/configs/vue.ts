@@ -13,7 +13,6 @@ export async function vue(
     await ensurePackages(['eslint-plugin-vue', 'vue-eslint-parser'])
 
     const [plugin, parser] = await Promise.all([
-        // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-vue')),
         interopDefault(import('vue-eslint-parser')),
     ] as const)
