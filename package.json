@@ -1,29 +1,29 @@
 {
     "name": "@ivanmaxlogiudice/eslint-config",
+    "type": "module",
     "version": "3.0.6",
     "packageManager": "bun@1.1.29",
     "description": "Personal ESLint config",
-    "type": "module",
-    "keywords": ["eslint-config"],
     "license": "MIT",
     "homepage": "https://github.com/ivanmaxlogiudice/eslint-config#readme",
-    "bugs": {
-        "url": "https://github.com/ivanmaxlogiudice/eslint-config/issues"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ivanmaxlogiudice/eslint-config.git"
     },
-    "files": ["bin", "dist"],
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "bugs": {
+        "url": "https://github.com/ivanmaxlogiudice/eslint-config/issues"
+    },
+    "keywords": ["eslint-config"],
     "exports": {
         ".": {
             "require": "./dist/index.cjs",
             "import": "./dist/index.js"
         }
     },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "bin": "./bin/index.js",
+    "files": ["bin", "dist"],
     "publishConfig": {
         "access": "public"
     },
@@ -71,6 +71,7 @@
         }
     },
     "dependencies": {
+        "@antfu/install-pkg": "^0.4.1",
         "@clack/prompts": "^0.7.0",
         "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
         "@eslint/markdown": "^6.2.1",
@@ -117,13 +118,13 @@
         "vue-eslint-parser": "^9.4.3",
         "yaml-eslint-parser": "^1.2.3"
     },
+    "resolutions": {
+        "@types/mdast": "^4.0.4"
+    },
     "simple-git-hooks": {
         "pre-commit": "npx lint-staged"
     },
     "lint-staged": {
         "*": "eslint --flag unstable_ts_config --fix"
-    },
-    "resolutions": {
-        "@types/mdast": "^4.0.4"
     }
 }

@@ -66,11 +66,9 @@ export async function ensurePackages(packages: string[]): Promise<void> {
 
     console.log(`\n⚠️ Installing the required ${missingPackages.length === 1 ? 'package' : 'packages'} for this config: ${missingPackages.join(', ')}.`)
 
-    await spawnAsync('bun', ['add', '-D', ...missingPackages], {
-        stdio: 'pipe',
-    })
-
-    console.log(`✅ ${missingPackages.length === 1 ? 'Package' : 'Packages'} installed successfully.\n`)
+    await import('@antfu/install-pkg')
+        .then(i => i.installPackage(missingPackages, { dev: true }))
+        .then(() => console.log(`✅ ${missingPackages.length === 1 ? 'Package' : 'Packages'} installed successfully.\n`))
 }
 
 export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
