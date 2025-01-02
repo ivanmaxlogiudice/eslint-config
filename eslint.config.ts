@@ -15,7 +15,7 @@ export default config({
             partitionByComment: true,
             groups: ['top', 'unknown'],
             customGroups: {
-                top: ['name'],
+                top: ['^name'],
             },
         }],
     },
