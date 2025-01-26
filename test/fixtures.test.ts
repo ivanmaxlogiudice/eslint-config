@@ -74,5 +74,5 @@ export default config(
             // Bun test suite does not have "toMatchFileSnapshot" for now.
             await expect.soft(content).toMatchFileSnapshot(outputPath)
         }))
-    }, { timeout: 30_000 })
+    }, 30_000)
 }
