@@ -96,7 +96,7 @@
         "yargs": "^17.7.2"
     },
     "devDependencies": {
-        "@eslint/config-inspector": "^0.6.0",
+        "@eslint/config-inspector": "^1.0.0",
         "@stylistic/eslint-plugin-migrate": "^2.12.1",
         "@types/node": "^22.10.3",
         "@types/yargs": "^17.0.33",
