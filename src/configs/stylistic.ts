@@ -2,7 +2,6 @@ import plugin from '@stylistic/eslint-plugin'
 import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 const config = plugin.configs.customize({
-    flat: true,
     indent: 4,
     jsx: false,
     pluginName: 'style',

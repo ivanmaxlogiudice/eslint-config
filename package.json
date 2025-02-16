@@ -65,7 +65,8 @@
         "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
         "@eslint/markdown": "^6.2.2",
         "@ivanmaxlogiudice/gitignore": "^0.0.2",
-        "@stylistic/eslint-plugin": "^3.1.0",
+        "@stylistic/eslint-plugin": "^4.0.0-beta.1",
+        "@stylistic/eslint-plugin-migrate": "^4.0.0-beta.1",
         "@typescript-eslint/eslint-plugin": "^8.24.0",
         "@typescript-eslint/parser": "^8.24.0",
         "@vitest/eslint-plugin": "^1.1.31",
@@ -88,7 +89,6 @@
     },
     "devDependencies": {
         "@eslint/config-inspector": "^1.0.0",
-        "@stylistic/eslint-plugin-migrate": "^3.1.0",
         "@types/node": "^22.13.4",
         "@types/yargs": "^17.0.33",
         "@unocss/eslint-plugin": "^65.5.0",
