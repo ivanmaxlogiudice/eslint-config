@@ -91,7 +91,7 @@
         "@eslint/config-inspector": "^1.0.0",
         "@types/node": "^22.13.4",
         "@types/yargs": "^17.0.33",
-        "@unocss/eslint-plugin": "^65.5.0",
+        "@unocss/eslint-plugin": "^66.0.0",
         "bumpp": "^10.0.3",
         "bun-types": "^1.2.2",
         "eslint": "^9.20.1",
