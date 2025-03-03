@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import { Buffer } from 'node:buffer'
-import { spawn, type SpawnOptionsWithoutStdio } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { isPackageExists } from 'local-pkg'
 import type { Linter } from 'eslint'
+import type { SpawnOptionsWithoutStdio } from 'node:child_process'
 import type { Awaitable } from './types'
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url))
