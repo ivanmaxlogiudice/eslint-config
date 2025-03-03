@@ -109,7 +109,7 @@
     },
     "resolutions": {
         "@types/mdast": "^4.0.4",
-        "eslint": "^9.20.1"
+        "eslint": "^9.21.0"
     },
     "simple-git-hooks": {
         "pre-commit": "npx lint-staged"
