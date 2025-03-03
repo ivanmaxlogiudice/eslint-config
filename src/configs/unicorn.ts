@@ -9,6 +9,7 @@ export function unicorn(): TypedFlatConfigItem[] {
                 unicorn: plugin,
             },
             rules: {
+                'unicorn/consistent-date-clone': 'error',
                 'unicorn/consistent-empty-array-spread': 'error',
                 'unicorn/consistent-function-scoping': ['error', { checkArrowFunctions: false }],
                 'unicorn/error-message': 'error',
@@ -17,7 +18,6 @@ export function unicorn(): TypedFlatConfigItem[] {
                 'unicorn/no-array-for-each': 'error',
                 'unicorn/no-array-push-push': 'error',
                 'unicorn/no-await-in-promise-methods': 'error',
-                'unicorn/no-instanceof-array': 'error',
                 'unicorn/no-invalid-remove-event-listener': 'error',
                 'unicorn/no-lonely-if': 'error',
                 'unicorn/no-negation-in-equality-check': 'error',
