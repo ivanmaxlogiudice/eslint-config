@@ -18,6 +18,7 @@ export function unicorn(): TypedFlatConfigItem[] {
                 'unicorn/no-array-for-each': 'error',
                 'unicorn/no-array-push-push': 'error',
                 'unicorn/no-await-in-promise-methods': 'error',
+                'unicorn/no-instanceof-builtins': 'error',
                 'unicorn/no-invalid-remove-event-listener': 'error',
                 'unicorn/no-lonely-if': 'error',
                 'unicorn/no-negation-in-equality-check': 'error',
