@@ -40,6 +40,12 @@ import config from '@ivanmaxlogiudice/eslint-config'
 export default config()
 ```
 
+## Thanks
+
+**Based on：**
+- [Antfu's eslint-config](https://github.com/antfu/eslint-config)
+- [Sxzz's eslint-config](https://github.com/sxzz/eslint-config)
+
 ## License
 
 [MIT](./LICENSE) License © 2022-PRESENT [Iván Máximiliano, Lo Giudice](https://github.com/ivanmaxlogiudice)
