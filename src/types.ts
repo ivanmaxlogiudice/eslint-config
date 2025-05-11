@@ -120,6 +120,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     typescript?: boolean | OptionsTypescript
 
     /**
+     * Options for eslint-plugin-unicorn.
+     *
+     * @default true
+     */
+    unicorn?: boolean | OptionsOverrides
+
+    /**
      * Enable test support.
      *
      * @default true

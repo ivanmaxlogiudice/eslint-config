@@ -1,7 +1,11 @@
 import plugin from 'eslint-plugin-unicorn'
-import type { TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
-export function unicorn(): TypedFlatConfigItem[] {
+export function unicorn(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
+    const {
+        overrides = {},
+    } = options
+
     return [
         {
             name: 'ivanmaxlogiudice/unicorn/rules',
@@ -49,6 +53,8 @@ export function unicorn(): TypedFlatConfigItem[] {
                 'unicorn/prefer-structured-clone': 'error',
                 'unicorn/prefer-type-error': 'error',
                 'unicorn/throw-new-error': 'error',
+
+                ...overrides,
             },
         },
     ]

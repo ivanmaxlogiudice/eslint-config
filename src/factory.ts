@@ -12,6 +12,7 @@ export async function config(
         componentExts = [],
         regexp: enableRegexp = false,
         typescript: enableTypeScript = isPackageInScope('typescript'),
+        unicorn: enableUnicorn = true,
         unocss: enableUnoCSS = hasSomePackage(['unocss', '@unocss/nuxt']),
         vue: enableVue = hasSomePackage(['vue', 'nuxt', 'vitepress', '@slidev/cli']),
     } = options
@@ -39,7 +40,6 @@ export async function config(
         stylistic({
             overrides: getOverrides(options, 'stylistic'),
         }),
-        unicorn(),
 
         // Basic json(c) file support and sorting json keys
         jsonc({
@@ -48,6 +48,10 @@ export async function config(
         sortPackageJson(),
         sortTsconfig(),
     ]
+
+    if (enableUnicorn) {
+        configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn))
+    }
 
     if (enableVue) {
         componentExts.push('vue')
