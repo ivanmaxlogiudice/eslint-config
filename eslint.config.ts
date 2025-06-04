@@ -1,4 +1,3 @@
-import styleMigrate from '@stylistic/eslint-plugin-migrate'
 import { config } from './src'
 
 export default config({
@@ -17,13 +16,5 @@ export default config({
                 top: ['^name'],
             },
         }],
-    },
-}, {
-    files: ['src/configs/*.ts'],
-    plugins: {
-        'style-migrate': styleMigrate,
-    },
-    rules: {
-        'style-migrate/migrate': ['error', { namespaceTo: 'style' }],
     },
 })
