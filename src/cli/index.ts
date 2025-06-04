@@ -1,14 +1,14 @@
 import process from 'node:process'
 import * as p from '@clack/prompts'
+import c from 'ansis'
 import { cac } from 'cac'
-import c from 'picocolors'
 
 import { pkgJson } from './constants'
 import { run } from './run'
 
 function header(): void {
     console.log('\n')
-    p.intro(`${c.green(`@ivanmaxlogiudice/eslint-config `)}${c.dim(`v${pkgJson.version}`)}`)
+    p.intro(`${c.green`@ivanmaxlogiudice/eslint-config `}${c.dim`v${pkgJson.version}`}`)
 }
 
 const cli = cac('@ivanmaxlogiudice/eslint-config')
@@ -24,8 +24,8 @@ cli
             await run(args)
         }
         catch (error) {
-            p.log.error(c.inverse(c.red(' Failed to migrate ')))
-            p.log.error(c.red(`✘ ${String(error)}`))
+            p.log.error(c.inverse.red` Failed to migrate `)
+            p.log.error(c.red`✘ ${String(error)}`)
             process.exit(1)
         }
     })

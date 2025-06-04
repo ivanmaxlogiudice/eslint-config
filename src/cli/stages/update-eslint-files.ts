@@ -4,7 +4,7 @@ import path from 'node:path'
 import process from 'node:process'
 import * as p from '@clack/prompts'
 import { parsePath, toFlatConfig } from '@ivanmaxlogiudice/gitignore'
-import c from 'picocolors'
+import c from 'ansis'
 
 import { getEslintConfigContent } from '../utils'
 import type { PromptResult } from '../types'
@@ -22,7 +22,7 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
 
     const eslintIgnores: string[] = []
     if (fs.existsSync(pathESLintIgnore)) {
-        p.log.step(c.cyan(`Migrating existing .eslintignore`))
+        p.log.step(c.cyan`Migrating existing .eslintignore`)
 
         const patterns = parsePath(pathESLintIgnore)
         eslintIgnores.push(...toFlatConfig(patterns).ignores)
@@ -45,7 +45,7 @@ export async function updateEslintFiles(result: PromptResult): Promise<void> {
     const eslintConfigContent: string = getEslintConfigContent(mainConfig, additionalConfig)
 
     await fsp.writeFile(pathFlatConfig, eslintConfigContent)
-    p.log.success(c.green(`Created ${configFileName}`))
+    p.log.success(c.green`Created ${configFileName}`)
 
     const files = fs.readdirSync(cwd).sort()
     const legacyConfig: string[] = []
