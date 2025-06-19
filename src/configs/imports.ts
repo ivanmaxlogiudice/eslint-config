@@ -1,4 +1,4 @@
-import plugin from 'eslint-plugin-import-x'
+import plugin from 'eslint-plugin-import-lite'
 import type { TypedFlatConfigItem } from '../types'
 
 export function imports(): TypedFlatConfigItem[] {
@@ -18,8 +18,6 @@ export function imports(): TypedFlatConfigItem[] {
                 'import/no-duplicates': 'error',
                 'import/no-mutable-exports': 'error',
                 'import/no-named-default': 'error',
-                'import/no-self-import': 'error',
-                'import/no-webpack-loader-syntax': 'error',
 
                 // Stylistic
                 'import/newline-after-import': ['error', { count: 1 }],

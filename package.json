@@ -72,7 +72,7 @@
         "ansis": "^4.1.0",
         "cac": "^6.7.14",
         "eslint-plugin-antfu": "^3.1.1",
-        "eslint-plugin-import-x": "^4.15.2",
+        "eslint-plugin-import-lite": "^0.3.0",
         "eslint-plugin-jsdoc": "^51.0.3",
         "eslint-plugin-jsonc": "^2.20.1",
         "eslint-plugin-n": "^17.20.0",
