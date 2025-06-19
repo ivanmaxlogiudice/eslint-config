@@ -148,6 +148,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                     allowTaggedTemplates: true,
                     allowTernary: true,
                 }],
+                'no-unused-private-class-members': 'error',
                 'no-unused-vars': ['error', {
                     args: 'none',
                     caughtErrors: 'none',
@@ -193,6 +194,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'prefer-rest-params': 'error',
                 'prefer-spread': 'error',
                 'prefer-template': 'error',
+                'require-atomic-updates': 'error',
 
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
