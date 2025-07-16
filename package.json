@@ -2,7 +2,7 @@
     "name": "@ivanmaxlogiudice/eslint-config",
     "type": "module",
     "version": "3.1.5",
-    "packageManager": "bun@1.2.16",
+    "packageManager": "bun@1.2.18",
     "description": "Personal ESLint config",
     "license": "MIT",
     "homepage": "https://github.com/ivanmaxlogiudice/eslint-config#readme",
