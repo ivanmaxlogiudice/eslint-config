@@ -9,7 +9,7 @@ export async function markdown(options: OptionsFiles & OptionsOverrides & Option
         overrides = {},
     } = options
 
-    await ensurePackages(['eslint-plugin-markdown'])
+    await ensurePackages(['@eslint/markdown'])
 
     const plugin = await interopDefault(import('@eslint/markdown'))
 
