@@ -1,5 +1,5 @@
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
-import { ensurePackages, interopDefault } from '../utils'
+import { interopDefault } from '../utils'
 import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 export async function markdown(options: OptionsFiles & OptionsOverrides & OptionsComponentExts = {}): Promise<TypedFlatConfigItem[]> {
@@ -8,8 +8,6 @@ export async function markdown(options: OptionsFiles & OptionsOverrides & Option
         files = [GLOB_MARKDOWN],
         overrides = {},
     } = options
-
-    await ensurePackages(['@eslint/markdown'])
 
     const plugin = await interopDefault(import('@eslint/markdown'))
 
