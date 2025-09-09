@@ -1,7 +1,7 @@
 {
     "name": "@ivanmaxlogiudice/eslint-config",
     "type": "module",
-    "version": "3.1.6",
+    "version": "3.1.7",
     "packageManager": "bun@1.2.21",
     "description": "Personal ESLint config",
     "license": "MIT",
@@ -91,6 +91,7 @@
         "bumpp": "^10.2.3",
         "bun-types": "^1.2.21",
         "eslint": "^9.35.0",
+        "eslint-plugin-markdown": "^5.1.0",
         "eslint-plugin-regexp": "^2.10.0",
         "eslint-plugin-yml": "^1.18.0",
         "eslint-typegen": "^2.3.0",
