@@ -6,6 +6,9 @@ import { spawnAsync } from '../src'
 import { copy } from './utils'
 import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 
+const isWindows = process.platform === 'win32'
+const timeout = isWindows ? 300_000 : 30_000
+
 beforeAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
 afterAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
 
@@ -74,5 +77,5 @@ export default config(
             // Bun test suite does not have "toMatchFileSnapshot" for now.
             await expect.soft(content).toMatchFileSnapshot(outputPath)
         }))
-    }, 30_000)
+    }, timeout)
 }
