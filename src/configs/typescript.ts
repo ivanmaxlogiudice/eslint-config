@@ -1,10 +1,11 @@
 import process from 'node:process'
+import pluginAntfu from 'eslint-plugin-antfu'
 import { GLOB_MARKDOWN, GLOB_TS } from '../globs'
 import { interopDefault, renameRules } from '../utils'
 import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
 
 export async function typescript(
-    options: OptionsFiles & OptionsOverrides & OptionsComponentExts & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType = {},
+    options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType = {},
 ): Promise<TypedFlatConfigItem[]> {
     const {
         componentExts = [],
@@ -47,7 +48,7 @@ export async function typescript(
         'ts/unbound-method': 'error',
     }
 
-    const [plugin, parser] = await Promise.all([
+    const [pluginTs, parserTs] = await Promise.all([
         interopDefault(import('@typescript-eslint/eslint-plugin')),
         interopDefault(import('@typescript-eslint/parser')),
     ] as const)
@@ -58,7 +59,7 @@ export async function typescript(
             ...ignores ? { ignores } : {},
             name: `ivanmaxlogiudice/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
             languageOptions: {
-                parser,
+                parser: parserTs,
                 parserOptions: {
                     extraFileExtensions: componentExts.map(ext => `.${ext}`),
                     sourceType: 'module',
@@ -82,7 +83,8 @@ export async function typescript(
             // Install the plugins without globs, so they can be configured separately.
             name: 'ivanmaxlogiudice/typescript/setup',
             plugins: {
-                ts: plugin,
+                antfu: pluginAntfu,
+                ts: pluginTs as any,
             },
         },
         // assign type-aware parser for type-aware files and type-unaware parser for the rest
@@ -98,10 +100,8 @@ export async function typescript(
             name: 'ivanmaxlogiudice/typescript/rules',
             files,
             rules: {
-                // Disable eslint rules which are already handled by TypeScript.
-                ...renameRules(plugin.configs['eslint-recommended']!.overrides![0]!.rules!, '@typescript-eslint', 'ts'),
-
-                ...renameRules(plugin.configs.strict!.rules!, '@typescript-eslint', 'ts'),
+                ...renameRules(pluginTs.configs['eslint-recommended']!.overrides![0]!.rules!, '@typescript-eslint', 'ts'),
+                ...renameRules(pluginTs.configs.strict!.rules!, '@typescript-eslint', 'ts'),
 
                 'no-dupe-class-members': 'off',
                 'no-redeclare': 'off',
