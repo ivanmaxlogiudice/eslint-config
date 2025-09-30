@@ -1,4 +1,5 @@
-import plugin from 'eslint-plugin-import-lite'
+import pluginAntfu from 'eslint-plugin-antfu'
+import pluginImportLite from 'eslint-plugin-import-lite'
 import type { TypedFlatConfigItem } from '../types'
 
 export function imports(): TypedFlatConfigItem[] {
@@ -6,14 +7,15 @@ export function imports(): TypedFlatConfigItem[] {
         {
             name: 'ivanmaxlogiudice/imports/rules',
             plugins: {
-                import: plugin,
+                antfu: pluginAntfu,
+                import: pluginImportLite,
             },
             rules: {
                 'antfu/import-dedupe': 'error',
                 'antfu/no-import-dist': 'error',
                 'antfu/no-import-node-modules-by-path': 'error',
 
-                'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+                'import/consistent-type-specifier-style': ['error', 'top-level'],
                 'import/first': 'error',
                 'import/no-duplicates': 'error',
                 'import/no-mutable-exports': 'error',
