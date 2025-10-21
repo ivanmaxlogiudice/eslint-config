@@ -1,13 +1,10 @@
 /* eslint-disable no-console */
-import { Buffer } from 'node:buffer'
-import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { isPackageExists } from 'local-pkg'
 import type { Linter } from 'eslint'
-import type { SpawnOptionsWithoutStdio } from 'node:child_process'
 import type { Awaitable } from './types'
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url))
@@ -99,27 +96,4 @@ export function isInGitHooksOrLintStaged(): boolean {
         || process.env.VSCODE_GIT_COMMAND
         || process.env.npm_lifecycle_script?.startsWith('lint-staged')
     )
-}
-
-export async function spawnAsync(command: string, args?: readonly string[], options?: SpawnOptionsWithoutStdio): Promise<{ stdout: string, stderr: string }> {
-    return new Promise((resolve, reject) => {
-        const proc = spawn(command, args, {
-            ...options,
-            shell: process.platform === 'win32',
-            stdio: 'pipe',
-        })
-
-        const stderr: Buffer[] = []
-        const stdout: Buffer[] = []
-        proc.stderr.on('data', chunk => stderr.push(chunk))
-        proc.stdout.on('data', chunk => stdout.push(chunk))
-
-        proc.on('error', () => reject(new Error(`${command} exited with code -1: ${stderr}`)))
-        proc.on('close', code => code
-            ? reject(new Error(`${command} exited with code ${code}: ${stderr}`))
-            : resolve({
-                stderr: Buffer.concat(stderr).toString(),
-                stdout: Buffer.concat(stdout).toString(),
-            }))
-    })
 }

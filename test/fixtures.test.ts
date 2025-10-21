@@ -1,16 +1,10 @@
-import fs from 'node:fs'
-import fsp from 'node:fs/promises'
+import fs from 'node:fs/promises'
 import { join, resolve } from 'node:path'
-import { afterAll, beforeAll, it } from 'vitest'
-import { spawnAsync } from '../src'
-import { copy } from './utils'
+import { afterAll, beforeAll, expect, it } from 'bun:test'
 import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 
-const isWindows = process.platform === 'win32'
-const timeout = isWindows ? 300_000 : 30_000
-
-beforeAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
-afterAll(async () => await fsp.rm('_fixtures', { recursive: true, force: true }))
+beforeAll(async () => await fs.rm('_fixtures', { recursive: true, force: true }))
+afterAll(async () => await fs.rm('_fixtures', { recursive: true, force: true }))
 
 runWithConfig('js', {
     vue: false,
@@ -35,47 +29,43 @@ runWithConfig('ts-override', {
 })
 
 function runWithConfig(name: string, options: OptionsConfig, ...configs: TypedFlatConfigItem[]): void {
-    it.concurrent(name, async ({ expect }) => {
-        const from = resolve('fixtures/input')
-        const output = resolve('fixtures/output', name)
-        const target = resolve('_fixtures', name)
+    it.concurrent(name, async () => {
+        const fromDir = resolve('fixtures/input')
+        const outputDir = resolve('fixtures/output', name)
+        const targetDir = resolve('_fixtures', name)
 
-        // Copy input files and create eslint config.
-        await copy(from, target)
-
-        await fsp.writeFile(join(target, 'eslint.config.js'), `// @eslint-disable
+        await Promise.all([
+            fs.cp(fromDir, targetDir, { recursive: true }),
+            Bun.write(join(targetDir, 'eslint.config.js'), `// @eslint-disable
 import { config } from '@ivanmaxlogiudice/eslint-config'
 
 export default config(
     ${JSON.stringify(options)},
     ...${JSON.stringify(configs) ?? []},
-)`)
+)`),
+        ])
 
         // Run ESLint
-        await spawnAsync('bun', ['x', 'eslint', '.', '--fix'], {
-            cwd: target,
-        })
+        await Bun.spawn(['eslint', '.', '--fix'], { cwd: targetDir }).exited
 
         // Check files
-        const files = await fsp.readdir(target)
+        const files = await fs.readdir(targetDir)
         await Promise.all(files.map(async (file) => {
             if (file === 'eslint.config.js')
                 return
 
-            const content = await fsp.readFile(join(target, file), 'utf-8')
-            const source = await fsp.readFile(join(from, file), 'utf-8')
-            const outputPath = join(output, file)
+            const outputPath = join(outputDir, file)
+            const [content, source] = await Promise.all([
+                Bun.file(join(targetDir, file)).text(),
+                Bun.file(join(fromDir, file)).text(),
+            ])
 
             if (content === source) {
-                if (fs.existsSync(outputPath)) {
-                    await fsp.unlink(outputPath)
-                }
-
+                await fs.rm(outputPath, { force: true })
                 return
             }
 
-            // Bun test suite does not have "toMatchFileSnapshot" for now.
-            await expect.soft(content).toMatchFileSnapshot(outputPath)
+            expect(content).toMatch(await Bun.file(outputPath).text())
         }))
-    }, timeout)
+    }, { timeout: 30_000 })
 }
