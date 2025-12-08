@@ -1,10 +1,11 @@
 import fs from 'node:fs/promises'
 import { join } from 'node:path'
 import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import { afterAll, beforeEach, expect, it } from 'bun:test'
 
-const CLI_PATH = join(__dirname, '../bin/index.js')
-const genPath = join(__dirname, '..', '.temp', randomStr())
+const CLI_PATH = fileURLToPath(new URL('../bin/index.mjs', import.meta.url))
+const genPath = fileURLToPath(new URL(`../.temp/${randomStr()}`, import.meta.url))
 
 function randomStr() {
     return Math.random().toString(36).slice(2)
