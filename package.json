@@ -99,7 +99,6 @@
         "@unocss/eslint-plugin": "^66.5.10",
         "bumpp": "^10.3.2",
         "eslint": "^9.39.1",
-        "eslint-plugin-markdown": "^5.1.0",
         "eslint-plugin-regexp": "^2.10.0",
         "eslint-plugin-yml": "^1.19.0",
         "eslint-typegen": "^2.3.0",
