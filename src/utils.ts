@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
+import type { Awaitable } from './types'
+import type { Linter } from 'eslint'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { isPackageExists } from 'local-pkg'
-import type { Linter } from 'eslint'
-import type { Awaitable } from './types'
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url))
 const isCwdInScope = isPackageExists('@ivanmaxlogiudice/eslint-config')

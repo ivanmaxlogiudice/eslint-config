@@ -1,7 +1,7 @@
+import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types'
 import pluginAntfu from 'eslint-plugin-antfu'
 import pluginUnused from 'eslint-plugin-unused-imports'
 import globals from 'globals'
-import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 export const restrictedSyntaxJs = [
     'ForInStatement',

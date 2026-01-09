@@ -1,6 +1,6 @@
+import type { TypedFlatConfigItem } from '../types'
 import pluginAntfu from 'eslint-plugin-antfu'
 import pluginImportLite from 'eslint-plugin-import-lite'
-import type { TypedFlatConfigItem } from '../types'
 
 export function imports(): TypedFlatConfigItem[] {
     return [

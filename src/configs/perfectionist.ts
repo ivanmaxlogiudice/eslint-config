@@ -1,5 +1,5 @@
-import plugin from 'eslint-plugin-perfectionist'
 import type { TypedFlatConfigItem } from '../types'
+import plugin from 'eslint-plugin-perfectionist'
 
 export function perfectionist(): TypedFlatConfigItem[] {
     return [
@@ -12,14 +12,14 @@ export function perfectionist(): TypedFlatConfigItem[] {
                 'perfectionist/sort-exports': ['error', { order: 'asc', type: 'natural' }],
                 'perfectionist/sort-imports': ['error', {
                     groups: [
+                        'type',
+                        ['type-parent', 'type-sibling', 'type-index', 'type-internal'],
+
                         'builtin',
                         'external',
-                        'type',
-                        ['internal', 'internal-type'],
+                        'internal',
                         ['parent', 'sibling', 'index'],
-                        ['parent-type', 'sibling-type', 'index-type'],
                         'side-effect',
-                        'object',
                         'unknown',
                     ],
                     newlinesBetween: 'ignore',

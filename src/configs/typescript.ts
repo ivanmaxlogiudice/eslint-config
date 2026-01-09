@@ -1,8 +1,8 @@
+import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
 import process from 'node:process'
 import pluginAntfu from 'eslint-plugin-antfu'
 import { GLOB_MARKDOWN, GLOB_TS } from '../globs'
 import { interopDefault, renameRules } from '../utils'
-import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
 
 export async function typescript(
     options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType = {},

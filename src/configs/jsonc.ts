@@ -1,7 +1,7 @@
+import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 import plugin from 'eslint-plugin-jsonc'
 import * as parser from 'jsonc-eslint-parser'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
-import type { OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 export function jsonc(options: OptionsFiles & OptionsOverrides = {}): TypedFlatConfigItem[] {
     const {

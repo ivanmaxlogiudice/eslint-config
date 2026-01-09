@@ -1,6 +1,6 @@
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 import pluginStylistic from '@stylistic/eslint-plugin'
 import pluginAntfu from 'eslint-plugin-antfu'
-import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 const config = pluginStylistic.configs.customize({
     indent: 4,

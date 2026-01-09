@@ -1,5 +1,5 @@
-import plugin from 'eslint-plugin-unicorn'
 import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
+import plugin from 'eslint-plugin-unicorn'
 
 export function unicorn(options: OptionsOverrides = {}): TypedFlatConfigItem[] {
     const {

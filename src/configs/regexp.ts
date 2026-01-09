@@ -1,5 +1,5 @@
-import { ensurePackages, interopDefault } from '../utils'
 import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
+import { ensurePackages, interopDefault } from '../utils'
 
 export async function regexp(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {

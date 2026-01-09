@@ -1,5 +1,5 @@
-import plugin from 'eslint-plugin-n'
 import type { TypedFlatConfigItem } from '../types'
+import plugin from 'eslint-plugin-n'
 
 export function node(): TypedFlatConfigItem[] {
     return [

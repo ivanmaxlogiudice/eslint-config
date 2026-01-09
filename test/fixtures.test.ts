@@ -1,7 +1,7 @@
+import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 import fs from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { afterAll, beforeAll, expect, it } from 'bun:test'
-import type { OptionsConfig, TypedFlatConfigItem } from '../src/types'
 
 const isWindows = process.platform === 'win32'
 const timeout = isWindows ? 300_000 : 30_000

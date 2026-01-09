@@ -1,6 +1,6 @@
+import type { TypedFlatConfigItem } from '../types'
 // @ts-expect-error missing types
 import plugin from '@eslint-community/eslint-plugin-eslint-comments'
-import type { TypedFlatConfigItem } from '../types'
 
 export function comments(): TypedFlatConfigItem[] {
     return [

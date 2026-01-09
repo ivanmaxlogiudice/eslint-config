@@ -1,7 +1,7 @@
+import type { TypedFlatConfigItem } from '../types'
 import { dedupe, parsePath, toFlatConfig } from '@ivanmaxlogiudice/gitignore'
 import { GLOB_EXCLUDE } from '../globs'
 import { findUp } from '../utils'
-import type { TypedFlatConfigItem } from '../types'
 
 export function ignores(userIgnores: string[] = []): TypedFlatConfigItem[] {
     const path = findUp('.gitignore')

@@ -1,6 +1,6 @@
+import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
 import { interopDefault } from '../utils'
-import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 export async function markdown(options: OptionsFiles & OptionsOverrides & OptionsComponentExts = {}): Promise<TypedFlatConfigItem[]> {
     const {

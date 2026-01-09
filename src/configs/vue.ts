@@ -1,6 +1,6 @@
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, TypedFlatConfigItem } from '../types'
 import { GLOB_VUE } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
-import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 export async function vue(
     options: OptionsFiles & OptionsOverrides & OptionsHasTypeScript = {},

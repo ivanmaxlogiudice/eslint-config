@@ -12,9 +12,12 @@ export default config({
         'perfectionist/sort-objects': ['error', {
             partitionByComment: true,
             groups: ['top', 'unknown'],
-            customGroups: {
-                top: ['^name'],
-            },
+            customGroups: [
+                {
+                    groupName: 'top',
+                    elementNamePattern: '^name',
+                },
+            ],
         }],
     },
 })
