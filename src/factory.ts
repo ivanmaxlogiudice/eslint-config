@@ -1,6 +1,6 @@
+import type { Linter } from 'eslint'
 import type { RuleOptions } from './typegen'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
-import type { Linter } from 'eslint'
 import { comments, disables, ignores, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, regexp, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, unocss, vue, yaml } from './configs'
 import { combine, hasSomePackage, isInEditorEnv, isPackageInScope } from './utils'
 
