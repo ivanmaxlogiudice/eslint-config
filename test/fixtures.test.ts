@@ -68,7 +68,13 @@ export default config(
                 return
             }
 
-            expect(content).toMatch(await Bun.file(outputPath).text())
+            const outputFile = Bun.file(outputPath)
+            if (await outputFile.exists()) {
+                expect(content).toMatch(await outputFile.text())
+            }
+            else {
+                Bun.write(outputFile, content)
+            }
         }))
     }, timeout)
 }
